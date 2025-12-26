@@ -76,7 +76,7 @@ export default function Page() {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pb-10 pt-10">
+      <section className="mx-auto max-w-6xl px-6 pb-10 pt-10 hero-gold">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
