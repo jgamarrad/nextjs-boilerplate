@@ -23,6 +23,13 @@ const productos = [
     waText: "Hola, quiero el Correo Postal + Chocolate. ¿Cómo envío foto y texto?",
   },
   {
+    title: 'Choco brownie personalizado con pulseras rojas',
+    price: "Desde S/ ---",
+    tags: ["foto", "top ventas", "premium"],
+    image: "/choco-brownie-con-pulseras-rojas-san-valentin.jpg",
+    waText: 'Hola, quiero info de la Caja Retrato "Te Amo". ¿Tiempos y precio?',
+  },
+  {
     title: 'Caja Retrato “Te Amo”',
     price: "Desde S/ ---",
     tags: ["foto", "top ventas", "premium"],
