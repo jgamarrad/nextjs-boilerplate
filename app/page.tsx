@@ -45,8 +45,8 @@ const products: Product[] = [
 
 export default function Page() {
   return (
-    <main className="relative">
-      {/* Fondo “magia”: gradientes suaves para que NO sea negro plano */}
+      <main className="min-h-screen bg-red-500">
+
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl"
              style={{ background: "radial-gradient(circle, rgba(214,178,94,0.20), rgba(214,178,94,0) 60%)" }} />
