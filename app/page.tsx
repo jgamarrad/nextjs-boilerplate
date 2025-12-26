@@ -53,7 +53,7 @@ export default function Page() {
             </div>
 
             <div>
-              <div className="uppercase text-llama-muted whitespace-nowrap leading-none tracking-[0.22em] text-[13px] sm:text-sm">
+              <div className="uppercase text-llama-muted whitespace-nowrap leading-none tracking-[0.22em] text-[12px] sm:text-sm">
                 LA LLAMA DEL AMOR
               </div>
               <div className="text-sm text-llama-muted">
