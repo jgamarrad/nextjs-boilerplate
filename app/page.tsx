@@ -1,423 +1,338 @@
-// app/page.tsx
+import Image from "next/image";
+
 type Product = {
-  id: string;
   name: string;
-  price?: string;
-  short: string;
+  price: string; // Ej: "S/ 149"
+  desc: string;
   tags: string[];
-  cta: string;
+  image: string; // en /public
+  waMessage: string;
 };
 
-const WHATSAPP_NUMBER = "51984096041"; // <-- CAMBIA: 51 + tu número sin +, sin espacios
+const WHATSAPP_PHONE = "+51XXXXXXXXX"; // TODO: cambia esto
+const INSTAGRAM_URL = "https://instagram.com/lallamadelamor.pe"; // opcional
 
-// Paleta (alineada a tu Instagram: negro + dorado + blanco)
-const COLORS = {
-  bg: "#0E0E0E", // fondo principal
-  surface: "#151515", // cards / secciones
-  surface2: "rgba(255,255,255,0.06)", // barra de beneficios
-  border: "rgba(255,255,255,0.10)",
-  border2: "rgba(255,255,255,0.14)",
-  text: "#F5F5F5",
-  text2: "#B5B5B5",
-  gold: "#C9A24D",
-  gold2: "#B8963E",
-  wine: "#8C1D18",
-  rose: "#C96C86",
-  white: "#FFFFFF",
-  black: "#0B0B0B",
-};
+function waLink(message: string) {
+  const text = encodeURIComponent(message);
+  const phone = WHATSAPP_PHONE.replace(/\D/g, ""); // solo números
+  return `https://wa.me/${phone}?text=${text}`;
+}
 
-const PRODUCTS: Product[] = [
+const svProducts: Product[] = [
   {
-    id: "box-amore",
     name: "Box Amore",
     price: "S/ ---",
-    short:
-      "Chocolates premium con presentación elegante. Personalizable para parejas y ocasiones especiales.",
-    tags: ["chocolate", "pareja", "premium"],
-    cta: "Personalizar por WhatsApp",
+    desc: "Chocolates premium + detalle elegante, personalizable.",
+    tags: ["pareja", "premium", "chocolate"],
+    image: "/images/sv/box-amore.jpg", // TODO: reemplaza con tu foto
+    waMessage: "Hola, quiero pedir el Box Amore para San Valentín. ¿Qué opciones de personalización tienen?",
   },
   {
-    id: "oscar-chocolate",
     name: "Oscar de Chocolate",
     price: "S/ ---",
-    short:
-      "El premio perfecto para la mejor novia, el mejor enamorado o el mejor papá. Original, elegante y totalmente personalizable.",
-    tags: ["original", "elegante", "personalizado"],
-    cta: "Quiero sorprender",
+    desc: "El Oscar para la mejor novia / mejor enamorado / mejor papá.",
+    tags: ["original", "personalizado", "viral"],
+    image: "/images/sv/oscar-chocolate.jpg",
+    waMessage: "Hola, quiero el Oscar de Chocolate para San Valentín. ¿Me ayudas con frases y entrega en Lima?",
   },
   {
-    id: "rosas-chocolate",
-    name: "Rosas + Chocolates",
+    name: "Correo Postal (con foto)",
     price: "S/ ---",
-    short:
-      "Una combinación clásica y elegante. Ideal para sorprender con un detalle que nunca falla.",
-    tags: ["flores", "chocolate", "romántico"],
-    cta: "Pedir este regalo",
+    desc: "Un mensaje que emociona: foto + dedicatoria + chocolates.",
+    tags: ["con foto", "emocional", "top ventas"],
+    image: "/images/sv/correo-postal.jpg",
+    waMessage: "Hola, quiero el Correo Postal con foto para San Valentín. ¿Qué necesito enviarte y cuánto demora?",
   },
 ];
 
-function waLink(productName: string) {
-  const msg =
-    `Hola, quiero *${productName}*.\n\n` +
-    `Ocasión: San Valentín / Cumpleaños / Otra\n` +
-    `Dedicatoria (texto corto): "..." \n` +
-    `Fecha y hora de entrega: ...\n` +
-    `Distrito: ...\n` +
-    `¿Qué opciones de personalización tienen?`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-}
+const giftFor = [
+  { title: "Para ella", hint: "Rosas + chocolates + detalles con foto" },
+  { title: "Para él", hint: "Chocolates premium + mensaje directo" },
+  { title: "Para parejas", hint: "Personalización de nombres y fechas" },
+  { title: "Con foto", hint: "Recuerdo que se queda (no solo se come)" },
+];
 
-function scrollToId(id: string) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+const faqs = [
+  {
+    q: "¿Entregan en Lima el mismo día?",
+    a: "Sí, según disponibilidad y distrito. Escríbenos por WhatsApp para confirmar horarios y costos de delivery.",
+  },
+  {
+    q: "¿Se puede personalizar el mensaje?",
+    a: "Sí. Puedes enviarnos el texto, nombres, fecha y/o una foto. Te ayudamos con ideas si lo necesitas.",
+  },
+  {
+    q: "¿Cómo compro?",
+    a: "Elige un producto y presiona “Pedir por WhatsApp”. Te responderemos con opciones, precios y coordinación de entrega.",
+  },
+];
 
 export default function Page() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: COLORS.bg,
-        color: COLORS.text,
-        fontFamily:
-          'Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
-      }}
-    >
-      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "56px 20px 72px" }}>
-        {/* HEADER / HERO */}
-        <header>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 16,
-              flexWrap: "wrap",
-              alignItems: "center",
-            }}
-          >
+    <main className="min-h-screen">
+      {/* Top bar */}
+      <header className="mx-auto max-w-6xl px-5 pt-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            {/* Si tienes logo en blanco, colócalo en public/images/logo-white.png */}
+            <div className="relative h-9 w-9 rounded-xl border border-border bg-card shadow-soft">
+              <div className="absolute inset-0 flex items-center justify-center text-gold font-semibold">
+                LA
+              </div>
+            </div>
+            <div className="leading-tight">
+              <p className="text-xs tracking-[0.22em] text-fg/70">LA LLAMA DEL AMOR</p>
+              <p className="text-sm text-fg/90">San Valentín</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              className="hidden sm:inline-flex rounded-full border border-border bg-card px-4 py-2 text-sm text-fg/90 hover:bg-white/10"
+              rel="noreferrer"
+            >
+              Ver Instagram
+            </a>
+            <a
+              href={waLink("Hola, quiero catálogo de San Valentín. ¿Me ayudas?")}
+              className="inline-flex rounded-full bg-fg px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-90"
+            >
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-5 pt-10 pb-8">
+        <div className="rounded-3xl border border-border bg-card shadow-soft">
+          <div className="grid gap-8 p-7 md:grid-cols-[1.2fr_0.8fr] md:p-10">
             <div>
-              <div
-                style={{
-                  letterSpacing: 4,
-                  fontSize: 12,
-                  color: COLORS.text2,
-                  textTransform: "uppercase",
-                }}
-              >
-                La Llama del Amor
+              <p className="text-xs tracking-[0.22em] text-gold/90">EDICIÓN SAN VALENTÍN</p>
+              <h1 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
+                Regalos personalizados <span className="text-fg/80">que se sienten</span>
+              </h1>
+              <p className="mt-4 max-w-xl text-base text-fg/80">
+                Chocolates, detalles con foto y presentación premium para sorprender en Lima.
+                Compra rápido por WhatsApp.
+              </p>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={waLink("Hola, quiero pedir para San Valentín. ¿Qué opciones tienen hoy?")}
+                  className="inline-flex items-center justify-center rounded-2xl bg-fg px-6 py-3 text-sm font-semibold text-bg hover:opacity-90"
+                >
+                  Pedir ahora por WhatsApp
+                </a>
+                <a
+                  href="#top"
+                  className="inline-flex items-center justify-center rounded-2xl border border-border bg-card px-6 py-3 text-sm font-semibold text-fg/90 hover:bg-white/10"
+                >
+                  Ver Top Regalos
+                </a>
               </div>
 
-              <h1 style={{ fontSize: 44, lineHeight: 1.08, margin: "12px 0 10px" }}>
-                Regalos personalizados que se sienten
-              </h1>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {[
+                  "Personalización real",
+                  "Entrega en Lima",
+                  "Presentación premium",
+                  "Atención rápida por WhatsApp",
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-border bg-white/5 px-3 py-1.5 text-xs text-fg/85"
+                  >
+                    ✓ {t}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-              <p style={{ color: COLORS.text2, maxWidth: 720, lineHeight: 1.6, margin: 0 }}>
-                Chocolates, brownies y detalles premium creados para sorprender de verdad.
-                <br />
-                Personalizados para esa persona especial, en cualquier ocasión.
+            {/* Panel derecho: mini “urgencia” elegante */}
+            <div className="rounded-2xl border border-border bg-white/5 p-6">
+              <p className="text-sm font-semibold text-fg">Catálogo San Valentín</p>
+              <p className="mt-2 text-sm text-fg/75">
+                Te ayudamos a elegir según presupuesto, tiempo y tipo de sorpresa.
               </p>
-            </div>
 
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <a
-                href={waLink("Catálogo La Llama del Amor")}
-                style={{
-                  background: COLORS.white,
-                  color: COLORS.black,
-                  padding: "12px 18px",
-                  borderRadius: 14,
-                  textDecoration: "none",
-                  fontWeight: 800,
-                  whiteSpace: "nowrap",
-                  border: `1px solid ${COLORS.white}`,
-                }}
-              >
-                Pedir por WhatsApp
-              </a>
-
-              <button
-                onClick={() => scrollToId("catalogo")}
-                style={{
-                  background: "transparent",
-                  color: COLORS.text,
-                  padding: "12px 14px",
-                  borderRadius: 14,
-                  border: `1px solid ${COLORS.border2}`,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Ver catálogo
-              </button>
-            </div>
-          </div>
-
-          {/* Barra de beneficios */}
-          <div
-            style={{
-              marginTop: 26,
-              padding: 14,
-              borderRadius: 16,
-              background: COLORS.surface2,
-              border: `1px solid ${COLORS.border}`,
-              display: "flex",
-              gap: 14,
-              flexWrap: "wrap",
-              alignItems: "center",
-            }}
-          >
-            <Badge text="Personalización real" />
-            <Badge text="Entrega en Lima" />
-            <Badge text="Presentación premium" />
-            <Badge text="Atención directa por WhatsApp" />
-          </div>
-        </header>
-
-        {/* CATALOGO */}
-        <section id="catalogo" style={{ marginTop: 38 }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-            <h2 style={{ margin: 0, fontSize: 22 }}>Top Regalos</h2>
-            <span style={{ color: COLORS.text2, fontSize: 13 }}>
-              Selección destacada (puedes ampliarla a 50–100 productos luego).
-            </span>
-          </div>
-
-          <div
-            style={{
-              marginTop: 16,
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: 16,
-            }}
-          >
-            {PRODUCTS.map((p) => (
-              <article
-                key={p.id}
-                style={{
-                  background: COLORS.surface,
-                  border: `1px solid ${COLORS.border}`,
-                  borderRadius: 18,
-                  padding: 18,
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                {/* Borde sutil dorado arriba (detalle premium) */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 2,
-                    background: `linear-gradient(90deg, ${COLORS.gold}, ${COLORS.gold2})`,
-                    opacity: 0.75,
-                  }}
-                />
-
-                <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
-                  <div>
-                    <div style={{ fontSize: 18, fontWeight: 850 }}>{p.name}</div>
-                    {p.price ? <div style={{ color: COLORS.text2, marginTop: 4 }}>{p.price}</div> : null}
-                  </div>
+              <div className="mt-5 space-y-3">
+                <div className="rounded-xl border border-border bg-black/30 p-4">
+                  <p className="text-xs text-fg/70">Recomendado</p>
+                  <p className="mt-1 text-sm font-semibold text-fg">Con foto + dedicatoria</p>
+                  <p className="mt-1 text-sm text-fg/75">
+                    Se siente personal. Se comparte. Se recuerda.
+                  </p>
                 </div>
 
-                <p style={{ color: COLORS.text2, marginTop: 12, lineHeight: 1.6 }}>
-                  {p.short}
-                </p>
+                <a
+                  href={waLink("Hola, quiero una recomendación para San Valentín (con foto o personalizado). ¿Qué me sugieres?")}
+                  className="block rounded-xl bg-gold px-4 py-3 text-center text-sm font-semibold text-bg hover:opacity-90"
+                >
+                  Quiero recomendación
+                </a>
 
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
+                <p className="text-xs text-fg/60">
+                  Respuesta por WhatsApp. Coordinamos entrega y personalización.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Top products */}
+      <section id="top" className="mx-auto max-w-6xl px-5 pb-10">
+        <div className="flex items-end justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight">Top Regalos San Valentín</h2>
+            <p className="mt-1 text-sm text-fg/75">
+              Tus opciones más vendibles. Luego agregamos más sin cambiar la base.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
+          {svProducts.map((p) => (
+            <article key={p.name} className="rounded-3xl border border-border bg-card shadow-soft overflow-hidden">
+              <div className="relative aspect-[4/5] w-full bg-black/30">
+                {/* Si aún no tienes fotos, igual compila. Luego reemplazas el archivo en /public/images/sv/ */}
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  priority={p.name === "Box Amore"}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-lg font-semibold">{p.name}</p>
+                  <p className="text-sm text-fg/80">{p.price}</p>
+                </div>
+              </div>
+
+              <div className="p-5">
+                <p className="text-sm text-fg/80">{p.desc}</p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        fontSize: 12,
-                        padding: "6px 10px",
-                        borderRadius: 999,
-                        background: "rgba(255,255,255,0.06)",
-                        border: `1px solid ${COLORS.border}`,
-                        color: COLORS.text2,
-                      }}
-                    >
+                    <span key={t} className="rounded-full border border-border bg-white/5 px-3 py-1 text-xs text-fg/80">
                       {t}
                     </span>
                   ))}
                 </div>
 
                 <a
-                  href={waLink(p.name)}
-                  style={{
-                    marginTop: 16,
-                    display: "inline-block",
-                    width: "100%",
-                    textAlign: "center",
-                    background: COLORS.white,
-                    color: COLORS.black,
-                    padding: "12px 14px",
-                    borderRadius: 14,
-                    textDecoration: "none",
-                    fontWeight: 850,
-                    border: `1px solid ${COLORS.white}`,
-                  }}
+                  href={waLink(p.waMessage)}
+                  className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-fg px-5 py-3 text-sm font-semibold text-bg hover:opacity-90"
                 >
-                  {p.cta}
+                  Pedir este producto
                 </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-                <div style={{ marginTop: 10, textAlign: "center", fontSize: 12, color: COLORS.text2 }}>
-                  Respuesta rápida por WhatsApp
-                </div>
-              </article>
+      {/* Regalos para... (SV edition) */}
+      <section className="mx-auto max-w-6xl px-5 pb-10">
+        <div className="rounded-3xl border border-border bg-card shadow-soft p-7 md:p-10">
+          <h3 className="text-2xl font-semibold tracking-tight">Regalos para…</h3>
+          <p className="mt-2 text-sm text-fg/75">
+            Dime “para quién” y te recomiendo 2–3 opciones listas para coordinar por WhatsApp.
+          </p>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            {giftFor.map((g) => (
+              <a
+                key={g.title}
+                href={waLink(`Hola, quiero un regalo de San Valentín ${g.title.toLowerCase()}. Presupuesto aproximado: S/ ____. ¿Qué me recomiendas?`)}
+                className="rounded-2xl border border-border bg-white/5 p-5 hover:bg-white/10"
+              >
+                <p className="text-sm font-semibold text-fg">{g.title}</p>
+                <p className="mt-2 text-sm text-fg/75">{g.hint}</p>
+                <p className="mt-4 text-xs text-gold/90">Pedir recomendación →</p>
+              </a>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* NUEVA SECCIÓN: DIFERENCIAL */}
-        <section style={{ marginTop: 36 }}>
-          <div
-            style={{
-              background: COLORS.surface,
-              border: `1px solid ${COLORS.border}`,
-              borderRadius: 18,
-              padding: 22,
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-              <h2 style={{ margin: 0, fontSize: 22 }}>¿Por qué La Llama del Amor?</h2>
-              <span style={{ color: COLORS.text2, fontSize: 13 }}>
-                La diferencia entre “un regalo” y “un detalle inolvidable”.
-              </span>
+      {/* Mini proof / testimonials */}
+      <section className="mx-auto max-w-6xl px-5 pb-10">
+        <div className="grid gap-5 md:grid-cols-3">
+          {[
+            {
+              t: "“Se emocionó con la foto. Fue un éxito total.”",
+              s: "Pedido por WhatsApp • Lima",
+            },
+            {
+              t: "“La presentación es demasiado premium, parecía de lujo.”",
+              s: "San Valentín",
+            },
+            {
+              t: "“Rápidos y atentos. Me ayudaron con el mensaje.”",
+              s: "Personalizado",
+            },
+          ].map((x) => (
+            <div key={x.t} className="rounded-3xl border border-border bg-card shadow-soft p-6">
+              <p className="text-sm text-fg/85">{x.t}</p>
+              <p className="mt-4 text-xs text-fg/60">{x.s}</p>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <p style={{ color: COLORS.text2, lineHeight: 1.7, marginTop: 12, maxWidth: 920 }}>
-              No creemos en regalos genéricos. Cada detalle que hacemos tiene una intención, una historia y una
-              persona en mente. Personalizamos chocolates, brownies y regalos premium para que no solo se vean
-              bien, sino que se sientan especiales desde el primer momento.
-            </p>
+      {/* FAQ */}
+      <section className="mx-auto max-w-6xl px-5 pb-14">
+        <div className="rounded-3xl border border-border bg-card shadow-soft p-7 md:p-10">
+          <h3 className="text-2xl font-semibold tracking-tight">Preguntas frecuentes</h3>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {faqs.map((f) => (
+              <div key={f.q} className="rounded-2xl border border-border bg-white/5 p-5">
+                <p className="text-sm font-semibold">{f.q}</p>
+                <p className="mt-2 text-sm text-fg/75">{f.a}</p>
+              </div>
+            ))}
+          </div>
 
-            <div
-              style={{
-                marginTop: 14,
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                gap: 12,
-              }}
+          <div className="mt-7 flex flex-col items-start justify-between gap-4 rounded-2xl border border-border bg-black/30 p-6 md:flex-row md:items-center">
+            <div>
+              <p className="text-sm font-semibold">¿Listo para pedir?</p>
+              <p className="mt-1 text-sm text-fg/75">Te respondemos y coordinamos personalización + entrega.</p>
+            </div>
+            <a
+              href={waLink("Hola, quiero comprar para San Valentín. ¿Me compartes opciones y precios?")}
+              className="inline-flex rounded-2xl bg-gold px-6 py-3 text-sm font-semibold text-bg hover:opacity-90"
             >
-              <Feature
-                title="Personalización real"
-                text="Diseños creados para una persona específica (mensaje, nombre, estilo y ocasión)."
-              />
-              <Feature
-                title="Presentación premium"
-                text="Detalles cuidados: empaque elegante, acabados finos y estética coherente con tu marca."
-              />
-              <Feature
-                title="Atención directa"
-                text="Sin formularios eternos: coordinamos rápido por WhatsApp para cerrar la compra."
-              />
-              <Feature
-                title="Entrega en Lima"
-                text="Listos para sorprender: coordinamos horarios y distritos con precisión."
-              />
-            </div>
-
-            <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <a
-                href={waLink("Diseño a medida")}
-                style={{
-                  background: "transparent",
-                  color: COLORS.text,
-                  padding: "12px 14px",
-                  borderRadius: 14,
-                  border: `1px solid ${COLORS.border2}`,
-                  textDecoration: "none",
-                  fontWeight: 800,
-                }}
-              >
-                Quiero un diseño a medida
-              </a>
-
-              <a
-                href={waLink("Catálogo completo")}
-                style={{
-                  background: COLORS.white,
-                  color: COLORS.black,
-                  padding: "12px 16px",
-                  borderRadius: 14,
-                  textDecoration: "none",
-                  fontWeight: 900,
-                }}
-              >
-                Ver opciones por WhatsApp
-              </a>
-            </div>
+              Hablar por WhatsApp
+            </a>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* FOOTER */}
-        <footer style={{ marginTop: 40, color: COLORS.text2, fontSize: 13, lineHeight: 1.7 }}>
-          <div style={{ maxWidth: 920 }}>
-            <strong style={{ color: COLORS.text }}>Tip:</strong> guarda este enlace como tu{" "}
-            <span style={{ color: COLORS.gold, fontWeight: 800 }}>catálogo digital</span> para enviarlo por Instagram
-            y WhatsApp. Aquí podrás actualizar productos sin reenviar PDFs.
+      {/* Footer */}
+      <footer className="mx-auto max-w-6xl px-5 pb-10">
+        <div className="flex flex-col gap-3 border-t border-border pt-6 md:flex-row md:items-center md:justify-between">
+          <p className="text-xs text-fg/60">
+            © {new Date().getFullYear()} La Llama del Amor • San Valentín
+          </p>
+          <div className="flex gap-3">
+            <a className="text-xs text-fg/70 hover:text-fg" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+              Instagram
+            </a>
+            <a
+              className="text-xs text-fg/70 hover:text-fg"
+              href={waLink("Hola, necesito ayuda para elegir un regalo.")}
+            >
+              WhatsApp
+            </a>
           </div>
-          <div style={{ marginTop: 10 }}>
-            © {new Date().getFullYear()} La Llama del Amor — Lima, Perú
-          </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </main>
   );
 }
-
-/* ---------- Componentes simples ---------- */
-
-function Badge({ text }: { text: string }) {
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 8,
-        padding: "8px 10px",
-        borderRadius: 999,
-        border: `1px solid ${COLORS.border}`,
-        background: "rgba(255,255,255,0.04)",
-        color: COLORS.text,
-        fontSize: 13,
-      }}
-    >
-      <span
-        aria-hidden
-        style={{
-          width: 10,
-          height: 10,
-          borderRadius: 999,
-          background: COLORS.gold,
-          boxShadow: "0 0 0 3px rgba(201,162,77,0.18)",
-        }}
-      />
-      {text}
-    </span>
-  );
-}
-
-function Feature({ title, text }: { title: string; text: string }) {
-  return (
-    <div
-      style={{
-        borderRadius: 16,
-        border: `1px solid ${COLORS.border}`,
-        background: "rgba(255,255,255,0.04)",
-        padding: 14,
-      }}
-    >
-      <div style={{ fontWeight: 900, color: COLORS.text, marginBottom: 6 }}>
-        <span style={{ color: COLORS.gold }}>•</span> {title}
-      </div>
-      <div style={{ color: COLORS.text2, lineHeight: 1.6, fontSize: 13 }}>{text}</div>
-    </div>
-  );
-}
-
