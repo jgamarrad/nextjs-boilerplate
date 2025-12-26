@@ -2,24 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base */
 :root {
-  --bg: #070707;     /* negro premium */
-  --fg: #f5f1e8;     /* marfil cálido */
-  --muted: #bfb7aa;  /* texto secundario */
-  --gold: #d6b25e;   /* dorado */
+  color-scheme: dark;
 }
 
-/* Refuerzo: aunque falle algo, el fondo y texto se mantienen */
-html,
+html, body {
+  height: 100%;
+}
+
 body {
-  background: var(--bg);
-  color: var(--fg);
-}
-
-a {
-  text-decoration: none;
-}
-
-::selection {
-  background: rgba(214, 178, 94, 0.35);
+  @apply bg-brand-bg text-white antialiased;
 }
