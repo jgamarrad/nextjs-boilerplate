@@ -1,31 +1,31 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}"
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        brand: {
-          bg: "#070709",
-          card: "rgba(255,255,255,0.06)",
-          stroke: "rgba(255,255,255,0.12)",
-          gold: "#D4AF37",
-          gold2: "#B78A2A",
-          rose: "#B3122B",
-          ivory: "#F5F1E8"
-        }
+        llama: {
+          bg: "#070708",
+          panel: "rgba(255,255,255,0.06)",
+          panel2: "rgba(255,255,255,0.08)",
+          line: "rgba(255,255,255,0.10)",
+          text: "rgba(255,255,255,0.92)",
+          muted: "rgba(255,255,255,0.70)",
+          gold: "#D6B15A",
+          gold2: "#B8902E",
+          rose: "#C22C4E",
+        },
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(255,255,255,0.12), 0 24px 80px rgba(0,0,0,0.55)",
-      },
-      backgroundImage: {
-        hero:
-          "radial-gradient(1100px 520px at 10% 15%, rgba(212,175,55,0.18), transparent 55%), radial-gradient(900px 420px at 85% 25%, rgba(179,18,43,0.18), transparent 52%), radial-gradient(900px 520px at 50% 110%, rgba(255,255,255,0.06), transparent 60%)",
+        soft: "0 12px 50px rgba(0,0,0,.45)",
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;
