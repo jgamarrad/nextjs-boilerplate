@@ -67,23 +67,3 @@ body{
 .hero-gold {
   position: relative;
 }
-
-.hero-gold::before {
-  content: "";
-  position: absolute;
-  inset: -40px;
-  pointer-events: none;
-  background:
-    radial-gradient(900px 420px at 18% 20%, rgba(214, 178, 94, 0.22), transparent 60%),
-    radial-gradient(700px 420px at 70% 35%, rgba(242, 213, 138, 0.12), transparent 58%),
-    linear-gradient(120deg, rgba(168, 123, 42, 0.10), transparent 55%);
-  filter: blur(0px);
-  z-index: 0;
-}
-
-/* Asegura que el contenido quede encima del tinte */
-.hero-gold > * {
-  position: relative;
-  z-index: 1;
-}
-
