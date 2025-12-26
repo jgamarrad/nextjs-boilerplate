@@ -45,7 +45,7 @@ export default function Page() {
     <main className="bg-magia min-h-screen">
       {/* Header */}
       <header className="mx-auto max-w-6xl px-6 pt-8">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-center rounded-full border border-white/30 h-16 w-16 sm:h-12 sm:w-12">
           <div className="flex items-center gap-3">
             {/* Logo real (public/logo.png => src="/logo.png") */}
             <div className="relative h-12 w-12 sm:h-14 sm:w-14 overflow-hidden rounded-full border border-llama-line bg-llama-panel ring-1 ring-[rgba(214,178,94,0.35)] shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
@@ -54,7 +54,7 @@ export default function Page() {
                 alt="La Llama del Amor"
                 width={56}
                 height={56}
-                className="h-full w-full object-contain p-1.5"
+                className="h-14 w-14 sm:h-10 sm:w-10"
                 priority
               />
             </div>
