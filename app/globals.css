@@ -2,20 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base */
 :root {
-  --bg: #0e0e0e;
-  --fg: #f6f2ea;
-  --gold: #c9a24d;
+  /* Paleta “premium” basada en tu IG: negro, dorado, marfil, un toque cálido */
+  --bg: 222 35% 6%;
+  --fg: 0 0% 98%;
+  --card: 222 30% 10%;
+  --border: 220 18% 22%;
+  --gold: 45 90% 55%;
 }
 
-html,
-body {
+html, body {
   height: 100%;
 }
 
 body {
-  background: radial-gradient(1200px 600px at 20% 10%, rgba(201, 162, 77, 0.10), transparent 60%),
-              radial-gradient(900px 500px at 80% 20%, rgba(139, 30, 45, 0.12), transparent 60%),
-              var(--bg);
-  color: var(--fg);
+  background: hsl(var(--bg));
+  color: hsl(var(--fg));
+}
+
+/* Mejoras de legibilidad */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
