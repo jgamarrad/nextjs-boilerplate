@@ -40,19 +40,33 @@ export default function Page() {
       <header className="mx-auto max-w-6xl px-6 pt-8">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            {/* Si luego quieres poner el logo real: reemplaza este círculo por <Image src="/logo.png" .../> */}
-            <div className="h-10 w-10 rounded-full border border-llama-line bg-llama-panel" />
+            {/* Logo real (public/logo.png => src="/logo.png") */}
+            <div className="relative h-10 w-10 overflow-hidden rounded-full border border-llama-line bg-llama-panel">
+              <Image
+                src="/logo.png"
+                alt="La Llama del Amor"
+                width={40}
+                height={40}
+                className="h-full w-full object-contain p-1"
+                priority
+              />
+            </div>
+
             <div>
               <div className="text-sm tracking-[0.28em] uppercase text-llama-muted">
                 LA LLAMA DEL AMOR
               </div>
-              <div className="text-sm text-llama-muted">Edición San Valentín · Entrega en Lima</div>
+              <div className="text-sm text-llama-muted">
+                Edición San Valentín · Entrega en Lima
+              </div>
             </div>
           </div>
 
           <a
-            className="btn-secondary"
-            href={waLink("Hola, quiero hacer un pedido para San Valentín. ¿Me ayudas a elegir un regalo?")}
+            className="btn-secondary gold-border"
+            href={waLink(
+              "Hola, quiero hacer un pedido para San Valentín. ¿Me ayudas a elegir un regalo?"
+            )}
             target="_blank"
             rel="noreferrer"
           >
@@ -77,32 +91,36 @@ export default function Page() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
+              {/* Botón principal dorado */}
               <a
-                className="btn-primary"
-                href={waLink("Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito.")}
+                className="btn-primary gold-bg text-black shadow-[0_10px_30px_rgba(214,178,94,0.18)]"
+                href={waLink(
+                  "Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito."
+                )}
                 target="_blank"
                 rel="noreferrer"
               >
                 Quiero recomendación
               </a>
 
-              <a className="btn-secondary" href="#catalogo">
+              {/* Botón secundario con borde dorado */}
+              <a className="btn-secondary gold-border" href="#catalogo">
                 Ver catálogo San Valentín
               </a>
             </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <div className="pill">
-                <span className="text-llama-gold">✓</span> Personalización real
+                <span className="gold-text">✓</span> Personalización real
               </div>
               <div className="pill">
-                <span className="text-llama-gold">✓</span> Entrega en Lima
+                <span className="gold-text">✓</span> Entrega en Lima
               </div>
               <div className="pill">
-                <span className="text-llama-gold">✓</span> Presentación premium
+                <span className="gold-text">✓</span> Presentación premium
               </div>
               <div className="pill">
-                <span className="text-llama-gold">✓</span> Atención rápida
+                <span className="gold-text">✓</span> Atención rápida
               </div>
             </div>
           </div>
@@ -126,8 +144,10 @@ export default function Page() {
                 <div className="font-semibold">Con foto + dedicatoria</div>
               </div>
               <a
-                className="btn-ghost"
-                href={waLink("Hola, quiero un regalo con foto + dedicatoria. ¿Qué opciones tienes para hoy?")}
+                className="btn-ghost gold-border"
+                href={waLink(
+                  "Hola, quiero un regalo con foto + dedicatoria. ¿Qué opciones tienes para hoy?"
+                )}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -149,7 +169,7 @@ export default function Page() {
           </div>
 
           <a
-            className="btn-secondary"
+            className="btn-secondary gold-border"
             href={waLink("Hola, quiero el catálogo San Valentín con precios y disponibilidad.")}
             target="_blank"
             rel="noreferrer"
@@ -185,14 +205,19 @@ export default function Page() {
                 ))}
               </div>
 
-              <a className="btn-primary mt-4 w-full" href={waLink(p.waText)} target="_blank" rel="noreferrer">
+              <a
+                className="btn-primary gold-bg mt-4 w-full text-black shadow-[0_10px_30px_rgba(214,178,94,0.16)]"
+                href={waLink(p.waText)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Pedir este regalo
               </a>
             </article>
           ))}
         </div>
 
-        {/* Sección extra recomendada: “Regalos para…” (simple y efectiva) */}
+        {/* Sección extra recomendada */}
         <div className="mt-10 card p-6">
           <h3 className="text-xl font-semibold">Regalos para…</h3>
           <p className="mt-1 text-llama-muted">
@@ -200,25 +225,60 @@ export default function Page() {
           </p>
 
           <div className="mt-4 flex flex-wrap gap-3">
-            <a className="btn-secondary" href={waLink("Hola, quiero 3 opciones para mi novia. Presupuesto: S/__. Para cuándo: __.")}
-               target="_blank" rel="noreferrer">
+            <a
+              className="btn-secondary gold-border"
+              href={waLink(
+                "Hola, quiero 3 opciones para mi novia. Presupuesto: S/__. Para cuándo: __."
+              )}
+              target="_blank"
+              rel="noreferrer"
+            >
               Para mi novia
             </a>
-            <a className="btn-secondary" href={waLink("Hola, quiero 3 opciones para mi enamorada. Presupuesto: S/__. Para cuándo: __.")}
-               target="_blank" rel="noreferrer">
+            <a
+              className="btn-secondary gold-border"
+              href={waLink(
+                "Hola, quiero 3 opciones para mi enamorada. Presupuesto: S/__. Para cuándo: __."
+              )}
+              target="_blank"
+              rel="noreferrer"
+            >
               Para mi enamorada
             </a>
-            <a className="btn-secondary" href={waLink("Hola, quiero 3 opciones para mi esposo/enamorado. Presupuesto: S/__. Para cuándo: __.")}
-               target="_blank" rel="noreferrer">
+            <a
+              className="btn-secondary gold-border"
+              href={waLink(
+                "Hola, quiero 3 opciones para mi esposo/enamorado. Presupuesto: S/__. Para cuándo: __."
+              )}
+              target="_blank"
+              rel="noreferrer"
+            >
               Para él
             </a>
-            <a className="btn-primary" href={waLink("Hola, quiero recomendación. Presupuesto: S/__. Para cuándo: __. Y qué incluye: foto/dedicatoria/otros.")}
-               target="_blank" rel="noreferrer">
+            <a
+              className="btn-primary gold-bg text-black shadow-[0_10px_30px_rgba(214,178,94,0.16)]"
+              href={waLink(
+                "Hola, quiero recomendación. Presupuesto: S/__. Para cuándo: __. Y qué incluye: foto/dedicatoria/otros."
+              )}
+              target="_blank"
+              rel="noreferrer"
+            >
               Quiero recomendación
             </a>
           </div>
         </div>
       </section>
+
+      {/* Botón flotante WhatsApp */}
+      <a
+        href={waLink("Hola, quiero hacer un pedido. ¿Qué me recomiendas según mi presupuesto?")}
+        target="_blank"
+        rel="noreferrer"
+        className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-black gold-bg shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"
+        aria-label="Pedir por WhatsApp"
+      >
+        Pedir por WhatsApp
+      </a>
 
       {/* Footer */}
       <footer className="mx-auto max-w-6xl px-6 pb-10 text-sm text-llama-muted">
