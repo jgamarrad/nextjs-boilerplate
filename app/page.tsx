@@ -41,12 +41,12 @@ export default function Page() {
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             {/* Logo real (public/logo.png => src="/logo.png") */}
-            <div className="relative h-10 w-10 overflow-hidden rounded-full border border-llama-line bg-llama-panel">
+            <div className="relative h-12 w-12 sm:h-14 sm:w-14 overflow-hidden rounded-full border border-llama-line bg-llama-panel ring-1 ring-[rgba(214,178,94,0.35)] shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
               <Image
                 src="/logo.png"
                 alt="La Llama del Amor"
-                width={40}
-                height={40}
+                width={56}
+                height={56}
                 className="h-full w-full object-contain p-1"
                 priority
               />
@@ -76,7 +76,7 @@ export default function Page() {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pb-10 pt-10 hero-gold">
+      <section className="mx-auto max-w-6xl px-6 pb-10 pt-10">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
