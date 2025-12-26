@@ -1,52 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import "./globals.css";
+import type { Metadata } from "next";
 
-:root {
-  color-scheme: dark;
-}
+export const metadata: Metadata = {
+  title: "San Valentín | La Llama del Amor",
+  description: "Regalos personalizados premium en Lima. Chocolates, foto y dedicatoria. Compra rápida por WhatsApp.",
+};
 
-html, body {
-  height: 100%;
-}
-
-body {
-  @apply bg-llama-bg text-llama-text antialiased;
-}
-
-/* Fondo “magia” (similar a lo que te gustaba) */
-.bg-magia {
-  background:
-    radial-gradient(900px 500px at 15% 20%, rgba(214,177,90,0.22), transparent 60%),
-    radial-gradient(850px 520px at 80% 35%, rgba(194,44,78,0.18), transparent 55%),
-    radial-gradient(900px 700px at 50% 110%, rgba(255,255,255,0.06), transparent 60%),
-    linear-gradient(180deg, #060607, #09090b 45%, #060607);
-}
-
-.card {
-  @apply rounded-2xl border border-llama-line bg-llama-panel shadow-soft;
-}
-
-.pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-llama-line bg-llama-panel2 px-4 py-2 text-sm text-llama-muted;
-}
-
-.btn {
-  @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition;
-}
-
-.btn-primary {
-  @apply btn bg-llama-gold text-black hover:brightness-110;
-}
-
-.btn-secondary {
-  @apply btn border border-llama-line bg-llama-panel2 text-llama-text hover:bg-llama-panel;
-}
-
-.btn-ghost {
-  @apply btn text-llama-text hover:bg-llama-panel;
-}
-
-.section-title {
-  @apply text-2xl font-semibold tracking-tight;
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="es">
+      <body>{children}</body>
+    </html>
+  );
 }
