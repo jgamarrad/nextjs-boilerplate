@@ -2,14 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base */
 :root {
-  /* Paleta “premium” basada en tu IG: negro, dorado, marfil, un toque cálido */
-  --bg: 222 35% 6%;
-  --fg: 0 0% 98%;
-  --card: 222 30% 10%;
-  --border: 220 18% 22%;
-  --gold: 45 90% 55%;
+  --bg: #0b0b0d;
+  --fg: #f6f2ea;
 }
 
 html, body {
@@ -17,11 +12,14 @@ html, body {
 }
 
 body {
-  background: hsl(var(--bg));
-  color: hsl(var(--fg));
+  background:
+    radial-gradient(1200px 600px at 18% 8%, rgba(201, 162, 77, 0.12), transparent 60%),
+    radial-gradient(900px 500px at 82% 16%, rgba(122, 30, 43, 0.14), transparent 60%),
+    var(--bg);
+  color: var(--fg);
 }
 
-/* Mejoras de legibilidad */
+/* Mejora de legibilidad */
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
