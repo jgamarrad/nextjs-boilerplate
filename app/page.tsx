@@ -1,263 +1,259 @@
 import Image from "next/image";
 
+const WHATSAPP = "https://wa.me/51XXXXXXXXX?text=Hola%20La%20Llama%20del%20Amor%2C%20quiero%20un%20regalo%20para%20San%20Valent%C3%ADn.%20%C2%BFMe%20recomiendan%3F";
+
 type Product = {
   title: string;
-  priceFrom: string;
+  subtitle: string;
+  price: string;
   tags: string[];
-  imageSrc: string; // ruta en /public
+  image: string;
   waText: string;
-  badge?: string;
 };
-
-const WHATSAPP_NUMBER = "51999999999"; // <-- CAMBIA ESTO (formato: 51 + número, sin + ni espacios)
-
-function waLink(message: string) {
-  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
-  const text = encodeURIComponent(message);
-  return `${base}?text=${text}`;
-}
 
 const products: Product[] = [
   {
-    title: 'Miski “Feliz 14”',
-    priceFrom: "Desde S/ ---",
+    title: 'Miski "Feliz 14"',
+    subtitle: "Chocolate con mensaje, elegante y directo.",
+    price: "Desde S/ ---",
     tags: ["premium", "chocolate", "romántico"],
-    imageSrc: "/sv/miski-feliz-14-san-valentin.jpg",
-    waText: "Hola, quiero el Miski “Feliz 14”. ¿Precio y disponibilidad para entrega en Lima?",
-    badge: "Top ventas",
+    image: "/productos/caja-miski-feliz-14-san-valentin.jpg",
+    waText: "Hola! Quiero el Miski “Feliz 14” para San Valentín. ¿Precio y disponibilidad?"
   },
   {
     title: "Correo Postal + Chocolate",
-    priceFrom: "Desde S/ ---",
+    subtitle: "Foto + dedicatoria tipo carta (impacto asegurado).",
+    price: "Desde S/ ---",
     tags: ["foto", "dedicatoria", "viral"],
-    imageSrc: "/sv/correo-postal-feliz-dia-mi-amor.jpg",
-    waText: "Hola, quiero el Correo Postal + Chocolate. ¿Opciones de personalización y precio?",
-    badge: "Recomendado",
+    image: "/productos/correo-postal-feliz-dia-mi-amor.jpg",
+    waText: "Hola! Quiero el Correo Postal + Chocolate. ¿Qué opciones de personalización hay?"
   },
   {
-    title: 'Caja Retrato “Te Amo”',
-    priceFrom: "Desde S/ ---",
-    tags: ["foto", "premium", "personalizado"],
-    imageSrc: "/sv/caja-miski-choco-retrato-te-amo.jpg",
-    waText: "Hola, quiero la Caja Retrato “Te Amo”. ¿Qué foto debo enviar y cuál es el precio?",
-  },
+    title: 'Caja Retrato "Te Amo"',
+    subtitle: "Foto en chocolate + presentación premium.",
+    price: "Desde S/ ---",
+    tags: ["foto", "top ventas", "premium"],
+    image: "/productos/caja-miski-choco-retrato-te-amo.jpg",
+    waText: "Hola! Quiero la Caja Retrato “Te Amo”. ¿Cuánto cuesta y cómo envío la foto?"
+  }
 ];
+
+function waLink(text: string) {
+  return `https://wa.me/51XXXXXXXXX?text=${encodeURIComponent(text)}`;
+}
 
 export default function Page() {
   return (
-      <main className="min-h-screen bg-red-500">
-
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl"
-             style={{ background: "radial-gradient(circle, rgba(214,178,94,0.20), rgba(214,178,94,0) 60%)" }} />
-        <div className="absolute top-48 -left-40 h-[520px] w-[520px] rounded-full blur-3xl"
-             style={{ background: "radial-gradient(circle, rgba(255,59,92,0.16), rgba(255,59,92,0) 60%)" }} />
-        <div className="absolute -bottom-40 right-0 h-[520px] w-[520px] rounded-full blur-3xl"
-             style={{ background: "radial-gradient(circle, rgba(255,209,220,0.12), rgba(255,209,220,0) 60%)" }} />
-      </div>
-
-      {/* Header */}
-      <header className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-3">
-          {/* Si aún no tienes logo en /public/logo.svg, deja el texto */}
-          <div className="text-xs tracking-[0.35em] text-[#BFB7AA]">
-            LA LLAMA DEL AMOR
+    <main className="min-h-screen bg-hero">
+      {/* Top bar */}
+      <header className="mx-auto max-w-6xl px-5 pt-6">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            {/* Si tienes logo en blanco, súbelo a /public/brand/logo-blanco.png */}
+            <div className="relative h-10 w-10 overflow-hidden rounded-full border border-brand-stroke bg-brand-card">
+              <Image
+                src="/brand/logo-blanco.png"
+                alt="La Llama del Amor"
+                fill
+                className="object-contain p-2"
+                priority
+              />
+            </div>
+            <div className="leading-tight">
+              <p className="text-xs tracking-[0.25em] text-white/70">LA LLAMA DEL AMOR</p>
+              <p className="text-sm text-white/80">Edición San Valentín · Entrega en Lima</p>
+            </div>
           </div>
-        </div>
 
-        <a
-          href={waLink("Hola, quiero hacer un pedido para San Valentín. ¿Qué opciones me recomiendas?")}
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-[#F5F1E8] backdrop-blur hover:bg-white/10"
-        >
-          Pedir por WhatsApp
-        </a>
+          <a
+            href={WHATSAPP}
+            className="rounded-full border border-brand-stroke bg-white px-4 py-2 text-sm font-semibold text-black shadow-glow hover:opacity-90"
+          >
+            Pedir por WhatsApp
+          </a>
+        </div>
       </header>
 
       {/* Hero */}
-      <section className="relative mx-auto w-full max-w-6xl px-6 pb-10 pt-6">
+      <section className="mx-auto max-w-6xl px-5 pt-10 pb-10">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#BFB7AA]">
-              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "rgba(214,178,94,0.95)" }} />
-              Edición San Valentín · Entrega en Lima
-            </div>
-
-            <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
+            <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
               Regalos personalizados
-              <span className="block text-[#F5F1E8]/90">que se sienten premium.</span>
+              <span className="block text-white/90">que se sienten premium.</span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#BFB7AA] md:text-lg">
+            <p className="mt-4 max-w-xl text-base text-white/80">
               Chocolates, detalles con foto y presentación premium para sorprender en San Valentín.
               Compra rápido por WhatsApp.
             </p>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href={waLink("Hola, quiero pedir para San Valentín. ¿Me recomiendas 3 opciones según presupuesto?")}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl bg-[#D6B25E] px-5 py-3 text-sm font-bold text-black hover:opacity-95"
+                href={waLink("Hola! Quiero recomendación para un regalo de San Valentín. Presupuesto: ___. ¿Qué me sugieren?")}
+                className="rounded-full bg-brand-gold px-5 py-3 text-sm font-semibold text-black hover:opacity-90"
               >
                 Quiero recomendación
               </a>
-
               <a
                 href="#catalogo"
-                className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-[#F5F1E8] backdrop-blur hover:bg-white/10"
+                className="rounded-full border border-brand-stroke bg-brand-card px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
               >
                 Ver catálogo San Valentín
               </a>
             </div>
 
-            {/* Beneficios */}
-            <div className="mt-7 grid gap-2 sm:grid-cols-2">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:max-w-xl">
               {[
                 "Personalización real",
                 "Entrega en Lima",
                 "Presentación premium",
-                "Atención rápida",
+                "Atención rápida"
               ].map((t) => (
                 <div
                   key={t}
-                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-[#F5F1E8] backdrop-blur"
+                  className="rounded-2xl border border-brand-stroke bg-brand-card px-4 py-3 text-sm text-white/85 shadow-glow"
                 >
-                  <span className="mr-2 text-[#D6B25E]">✓</span>
+                  <span className="mr-2 text-brand-gold">✓</span>
                   {t}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Hero visual */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-            <div className="overflow-hidden rounded-xl border border-white/10 bg-black/30">
-              {/* Ajusta esta imagen a la que más represente tu campaña */}
+          {/* Hero image (vertical IG ratio 4:5) */}
+          <div className="relative">
+            <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-brand-stroke bg-brand-card shadow-glow">
               <div className="relative aspect-[4/5] w-full">
+                {/* Cambia por la foto que quieras destacar */}
                 <Image
-                  src="/sv/correo-postal-feliz-dia-mi-amor.jpg"
+                  src="/productos/correo-postal-feliz-dia-mi-amor.jpg"
                   alt="Regalo San Valentín - La Llama del Amor"
                   fill
                   className="object-cover"
                   priority
                 />
               </div>
-            </div>
-
-            <div className="mt-4 flex items-center justify-between gap-3">
-              <div>
-                <div className="text-sm font-semibold">Top de temporada</div>
-                <div className="text-xs text-[#BFB7AA]">
-                  Foto + dedicatoria + chocolate premium
-                </div>
+              <div className="p-4">
+                <p className="text-sm font-semibold">Top ventas · Foto + dedicatoria</p>
+                <p className="mt-1 text-sm text-white/75">Se siente personal. Se comparte. Se recuerda.</p>
               </div>
-
-              <a
-                href={waLink("Hola, quiero el producto top de temporada (Correo Postal + Chocolate). ¿Precio y tiempos de entrega?")}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold hover:bg-white/10"
-              >
-                Pedir ahora
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Catálogo */}
-      <section id="catalogo" className="relative mx-auto w-full max-w-6xl px-6 pb-16 pt-8">
-        <div className="mb-6 flex items-end justify-between gap-4">
+      {/* Section: regalos para... */}
+      <section className="mx-auto max-w-6xl px-5 pb-8">
+        <div className="rounded-3xl border border-brand-stroke bg-brand-card p-6 shadow-glow">
+          <h2 className="text-xl font-semibold">Regalos para…</h2>
+          <p className="mt-1 text-sm text-white/75">
+            Elige rápido y te recomendamos por WhatsApp según tu presupuesto y tiempo.
+          </p>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            {[
+              { title: "Mi pareja", desc: "Romántico y premium", msg: "Hola! Busco un regalo para mi pareja por San Valentín. Presupuesto: ___. ¿Opciones?" },
+              { title: "Con foto", desc: "Dedicatoria + recuerdo", msg: "Hola! Quiero un regalo CON FOTO para San Valentín. ¿Cómo envío la foto y qué modelos hay?" },
+              { title: "Último minuto", desc: "Entrega rápida en Lima", msg: "Hola! Estoy contra el tiempo. Necesito un regalo para San Valentín con entrega rápida en Lima. ¿Qué tienen disponible hoy/mañana?" },
+            ].map((x) => (
+              <a
+                key={x.title}
+                href={waLink(x.msg)}
+                className="group rounded-2xl border border-brand-stroke bg-black/20 p-5 hover:bg-white/5"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-base font-semibold">{x.title}</p>
+                  <span className="text-brand-gold group-hover:translate-x-0.5 transition">→</span>
+                </div>
+                <p className="mt-1 text-sm text-white/75">{x.desc}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Catalog */}
+      <section id="catalogo" className="mx-auto max-w-6xl px-5 pb-14">
+        <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-              Catálogo San Valentín
-            </h2>
-            <p className="mt-2 text-sm text-[#BFB7AA] md:text-base">
-              Te ayudamos a elegir según presupuesto, tiempo y tipo de sorpresa.
+            <h2 className="text-2xl font-semibold">Catálogo San Valentín</h2>
+            <p className="mt-1 text-sm text-white/75">
+              Productos destacados. (Luego añadimos aniversario, cumpleaños, etc.)
             </p>
           </div>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
           {products.map((p) => (
             <article
               key={p.title}
-              className="group rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur transition hover:bg-white/10"
+              className="overflow-hidden rounded-3xl border border-brand-stroke bg-brand-card shadow-glow"
             >
-              {/* Imagen 4:5 (Instagram) */}
-              <div className="overflow-hidden rounded-xl border border-white/10 bg-black/20">
-                <div className="relative aspect-[4/5] w-full">
-                  <Image
-                    src={p.imageSrc}
-                    alt={p.title}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
+              {/* Mantener formato IG: 4:5 sin recorte raro */}
+              <div className="relative aspect-[4/5] w-full bg-black/30">
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
 
-              <div className="mt-4 flex items-start justify-between gap-3">
-                <div>
-                  <h3 className="text-base font-semibold">{p.title}</h3>
-                  <div className="mt-1 text-sm text-[#BFB7AA]">{p.priceFrom}</div>
-                </div>
-
-                {p.badge ? (
-                  <span className="shrink-0 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-[#D6B25E]">
-                    {p.badge}
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-lg font-semibold">{p.title}</h3>
+                    <p className="mt-1 text-sm text-white/75">{p.subtitle}</p>
+                  </div>
+                  <span className="whitespace-nowrap rounded-full border border-brand-stroke bg-black/20 px-3 py-1 text-xs text-white/80">
+                    {p.price}
                   </span>
-                ) : null}
-              </div>
+                </div>
 
-              <div className="mt-3 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#BFB7AA]"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-brand-stroke bg-black/15 px-3 py-1 text-xs text-white/75"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
 
-              <a
-                href={waLink(p.waText)}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-[#D6B25E] px-4 py-3 text-sm font-bold text-black hover:opacity-95"
-              >
-                Pedir este regalo
-              </a>
+                <a
+                  href={waLink(p.waText)}
+                  className="mt-5 block rounded-2xl bg-white px-4 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
+                >
+                  Pedir este regalo
+                </a>
+              </div>
             </article>
           ))}
         </div>
-      </section>
 
-      {/* Footer CTA */}
-      <section className="relative border-t border-white/10 bg-black/20">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-10 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="text-base font-semibold">
-              ¿No sabes cuál elegir?
+        <div className="mt-10 rounded-3xl border border-brand-stroke bg-black/20 p-6 shadow-glow">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-base font-semibold">¿No sabes cuál elegir?</p>
+              <p className="text-sm text-white/75">Te guiamos por WhatsApp en 1 minuto.</p>
             </div>
-            <div className="text-sm text-[#BFB7AA]">
-              Te recomendamos 3 opciones según tu presupuesto y fecha de entrega.
-            </div>
+            <a
+              href={waLink("Hola! Quiero recomendación para San Valentín. ¿Qué opciones tienen según presupuesto y fecha de entrega?")}
+              className="rounded-full bg-brand-gold px-5 py-3 text-sm font-semibold text-black hover:opacity-90"
+            >
+              Quiero recomendación
+            </a>
           </div>
-
-          <a
-            href={waLink("Hola, quiero que me recomienden 3 opciones para San Valentín. Presupuesto: S/ ___. Entrega: ___.")}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold hover:bg-white/10"
-          >
-            Quiero recomendación por WhatsApp
-          </a>
         </div>
       </section>
+
+      <footer className="border-t border-white/10 bg-black/30">
+        <div className="mx-auto max-w-6xl px-5 py-8 text-sm text-white/60">
+          <p>© {new Date().getFullYear()} La Llama del Amor · Entrega en Lima · Pedidos por WhatsApp</p>
+        </div>
+      </footer>
     </main>
   );
 }
-
