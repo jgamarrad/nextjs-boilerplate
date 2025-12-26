@@ -10,6 +10,21 @@
   --gold2:#b8942f;
   --txt: #f5f5f5;
   --muted:#cfcfcf;
+  --gold: #d6b25e;        /* dorado base */
+  --gold-2: #f2d58a;      /* highlight */
+  --gold-deep: #a87b2a;   /* sombra */
+}
+
+.gold-text { color: var(--gold); }
+
+/* borde dorado sutil (premium, no “amarillo”) */
+.gold-border {
+  border-color: color-mix(in srgb, var(--gold) 55%, transparent) !important;
+}
+
+/* fondo dorado tipo “metal” */
+.gold-bg {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 55%, var(--gold-deep) 100%) !important;
 }
 
 html, body{
