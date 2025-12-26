@@ -7,7 +7,7 @@ type Product = {
   tags: string[];
 };
 
-const WHATSAPP_NUMBER = "51999999999"; // <-- CAMBIA: 51 + tu número sin +, sin espacios
+const WHATSAPP_NUMBER = "51984096041"; // <-- CAMBIA: 51 + tu número sin +, sin espacios
 
 const PRODUCTS: Product[] = [
   {
