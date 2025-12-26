@@ -26,7 +26,7 @@ const productos = [
     title: 'Choco brownie personalizado con pulseras rojas',
     price: "Desde S/ ---",
     tags: ["foto", "top ventas", "premium"],
-    image: "/choco-brownie-con-pulseras-rojas-san-valentin.jpg",
+    image: "/choco-brownie-con-pulseras-hilo-rojo-san-valentin.jpg",
     waText: 'Hola, quiero info de la Caja Retrato "Te Amo". ¿Tiempos y precio?',
   },
   {
