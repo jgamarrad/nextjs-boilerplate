@@ -1,6 +1,25 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Opcional: mejoras de render */
-html, body {
-  height: 100%;
+:root {
+  --bg: #070707;     /* negro premium */
+  --fg: #f5f1e8;     /* marfil cálido */
+  --muted: #bfb7aa;  /* texto secundario */
+  --gold: #d6b25e;   /* dorado */
+}
+
+/* Refuerzo: aunque falle algo, el fondo y texto se mantienen */
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(214, 178, 94, 0.35);
 }
