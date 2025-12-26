@@ -47,13 +47,13 @@ export default function Page() {
                 alt="La Llama del Amor"
                 width={56}
                 height={56}
-                className="h-full w-full object-contain p-1"
+                className="h-full w-full object-contain p-1.5"
                 priority
               />
             </div>
 
             <div>
-              <div className="text-sm tracking-[0.28em] uppercase text-llama-muted">
+              <div className="uppercase text-llama-muted whitespace-nowrap leading-none tracking-[0.22em] text-[11px] sm:text-sm">
                 LA LLAMA DEL AMOR
               </div>
               <div className="text-sm text-llama-muted">
