@@ -99,19 +99,27 @@ export default function Page() {
 
             {/* Aquí: Ver catálogo como botón principal dorado */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a className="btn-primary gold-bg text-black w-full sm:w-auto" href="#catalogo">
+              {/* CTA PRINCIPAL */}
+              <a
+                className="btn-primary w-full sm:w-auto"
+                href="#catalogo"
+              >
                 Ver catálogo San Valentín
               </a>
-
+            
+              {/* CTA SECUNDARIO */}
               <a
-                className="btn-secondary gold-border w-full sm:w-auto"
-                href={waLink("Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito.")}
+                className="btn-secondary w-full sm:w-auto"
+                href={waLink(
+                  "Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito."
+                )}
                 target="_blank"
                 rel="noreferrer"
               >
                 Quiero recomendación
               </a>
             </div>
+
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <div className="pill">
