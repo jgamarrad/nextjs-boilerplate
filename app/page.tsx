@@ -45,11 +45,11 @@ export default function Page() {
     <main className="min-h-screen">
       {/* Header */}
       <header className="mx-auto max-w-6xl px-6 pt-8">
+        {/* Fila principal */}
         <div className="flex items-center justify-between gap-4">
           {/* Marca */}
           <div className="flex items-center gap-3 min-w-0">
-            {/* Logo: más grande en mobile, compacto en desktop */}
-            <div className="relative h-14 w-14 sm:h-12 sm:w-12 shrink-0 overflow-hidden rounded-full border gold-border bg-white/5">
+            <div className="relative h-12 w-12 sm:h-12 sm:w-12 md:h-14 md:w-14 overflow-hidden rounded-full gold-border border bg-white/5 shrink-0">
               <Image
                 src="/logo.png"
                 alt="La Llama del Amor"
@@ -60,19 +60,19 @@ export default function Page() {
             </div>
 
             <div className="min-w-0">
-              {/* 1 sola línea en mobile */}
-              <div className="text-xs sm:text-sm tracking-[0.22em] uppercase text-llama-muted whitespace-nowrap overflow-hidden text-ellipsis">
+              {/* Mantener en 1 línea y que no se rompa */}
+              <div className="text-sm tracking-[0.22em] uppercase text-llama-muted whitespace-nowrap overflow-hidden text-ellipsis">
                 LA LLAMA DEL AMOR
               </div>
-              <div className="text-xs sm:text-sm text-llama-muted whitespace-nowrap overflow-hidden text-ellipsis">
+              <div className="text-sm text-llama-muted whitespace-nowrap overflow-hidden text-ellipsis">
                 Edición San Valentín · Entrega en Lima
               </div>
             </div>
           </div>
 
-          {/* CTA */}
+          {/* Botón en desktop (oculto en mobile) */}
           <a
-            className="btn-secondary gold-border shrink-0"
+            className="btn-secondary gold-border shrink-0 hidden sm:inline-flex"
             href={waLink("Hola, quiero hacer un pedido para San Valentín. ¿Me ayudas a elegir un regalo?")}
             target="_blank"
             rel="noreferrer"
@@ -80,64 +80,73 @@ export default function Page() {
             Pedir por WhatsApp
           </a>
         </div>
+
+        {/* Botón en mobile (debajo, ancho completo) */}
+        <a
+          className="btn-secondary gold-border mt-4 w-full sm:hidden"
+          href={waLink("Hola, quiero hacer un pedido para San Valentín. ¿Me ayudas a elegir un regalo?")}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Pedir por WhatsApp
+        </a>
       </header>
+
 
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-6 pb-10 pt-10 hero-gold">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          {/* Columna izquierda: TODO junto */}
           <div>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Regalos personalizados
-              <br />
-              <span className="text-llama-muted">que se sienten premium.</span>
+              Regalos personalizados{" "}
+              <span className="block text-llama-muted">que se sienten premium.</span>
             </h1>
 
+
             <p className="mt-4 max-w-xl text-llama-muted">
-              Chocolates, detalles con foto y presentación premium para sorprender en San Valentín.
+              Chocolates, brownies y flores con presentación premium y dedicatoria para sorprender en San Valentín.
               Compra rápida por WhatsApp.
             </p>
 
-            {/* Aquí: Ver catálogo como botón principal dorado */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              {/* CTA PRINCIPAL */}
-              <a
-                className="btn-primary w-full sm:w-auto"
-                href="#catalogo"
-              >
+              <a className="btn-primary w-full sm:w-auto" href="#catalogo">
                 Ver catálogo San Valentín
               </a>
-            
-              {/* CTA SECUNDARIO */}
-              <a
-                className="btn-secondary w-full sm:w-auto"
-                href={waLink(
-                  "Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito."
-                )}
+
+              {/* Si quieres mantener 2 CTAs, agrega el segundo aquí */}
+              {/* <a
+                className="btn-secondary gold-border w-full sm:w-auto"
+                href={waLink("Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito.")}
                 target="_blank"
                 rel="noreferrer"
               >
                 Quiero recomendación
-              </a>
+              </a> */}
             </div>
 
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <div className="pill">
-                <span className="gold-text">✓</span> Personalización real
-              </div>
-              <div className="pill">
-                <span className="gold-text">✓</span> Entrega en Lima
-              </div>
-              <div className="pill">
-                <span className="gold-text">✓</span> Presentación premium
-              </div>
-              <div className="pill">
-                <span className="gold-text">✓</span> Atención rápida
-              </div>
-            </div>
+            {/* Checks dentro de la columna izquierda */}
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2 text-sm text-white/90">
+              <li className="flex items-center gap-2">
+                <span className="gold-text">✓</span>
+                <span>Detalles personalizados</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="gold-text">✓</span>
+                <span>Entrega en Lima</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="gold-text">✓</span>
+                <span>Presentación premium</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="gold-text">✓</span>
+                <span>Atención rápida</span>
+              </li>
+            </ul>
           </div>
 
-          {/* Imagen hero */}
+          {/* Columna derecha: Imagen */}
           <div className="card relative overflow-hidden p-4">
             <div className="relative w-full overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
               <Image
@@ -168,18 +177,22 @@ export default function Page() {
         </div>
       </section>
 
+
       {/* Catálogo */}
       <section id="catalogo" className="mx-auto max-w-6xl px-6 pb-14">
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="section-title gold-text">Catálogo San Valentín</h2>
+            <h2 className="section-title gold-text whitespace-nowrap">
+              Catálogo San Valentín
+            </h2>
             <p className="mt-1 text-llama-muted">
-              Te ayudamos a elegir según presupuesto, tiempo y tipo de sorpresa.
+              Te ayudamos a elegir y personalizar tu sorpresa.
             </p>
           </div>
 
+          {/* Botón: abajo en mobile / derecha en desktop */}
           <a
-            className="btn-secondary gold-border"
+            className="btn-secondary gold-border w-full sm:w-auto"
             href={waLink("Hola, quiero el catálogo San Valentín con precios y disponibilidad.")}
             target="_blank"
             rel="noreferrer"
@@ -187,6 +200,7 @@ export default function Page() {
             Pedir catálogo por WhatsApp
           </a>
         </div>
+
 
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           {productos.map((p) => (
