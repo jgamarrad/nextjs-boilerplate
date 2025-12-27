@@ -25,9 +25,9 @@ const productos = [
   {
     title: "Choco brownie personalizado con pulseras rojas",
     price: "Desde S/ ---",
-    tags: ["top ventas", "premium", "chocolate"],
+    tags: ["top ventas", "premium"],
     image: "/choco-brownie-con-pulseras-hilo-rojo-san-valentin.jpg",
-    waText: "Hola, quiero el choco brownie con pulseras rojas. ¿Precio y disponibilidad?",
+    waText: "Hola, quiero el Choco brownie con pulseras rojas. ¿Precio y tiempos?",
   },
   {
     title: 'Caja Retrato “Te Amo”',
@@ -46,10 +46,10 @@ export default function Page() {
       {/* Header */}
       <header className="mx-auto max-w-6xl px-6 pt-8">
         <div className="flex items-center justify-between gap-4">
-          {/* Brand */}
-          <div className="flex items-center gap-3">
-            {/* Logo: más grande en mobile, un poco más compacto en pantallas mayores */}
-            <div className="relative h-14 w-14 sm:h-12 sm:w-12 overflow-hidden rounded-full border border-white/20 bg-white/5 gold-border">
+          {/* Left: logo + brand */}
+          <div className="flex items-center gap-3 min-w-0">
+            {/* Logo: grande en mobile, un poco menor desde sm */}
+            <div className="relative h-14 w-14 sm:h-12 sm:w-12 overflow-hidden rounded-full border bg-llama-panel gold-border">
               <Image
                 src="/logo.png"
                 alt="La Llama del Amor"
@@ -60,19 +60,18 @@ export default function Page() {
             </div>
 
             <div className="min-w-0">
-              {/* En mobile: que NO parta en 2 filas, baja un poco tracking y tamaño */}
-              <div className="text-xs sm:text-sm tracking-[0.18em] sm:tracking-[0.22em] uppercase text-llama-muted whitespace-nowrap">
+              <div className="uppercase tracking-[0.22em] text-llama-muted whitespace-nowrap text-xs sm:text-sm">
                 LA LLAMA DEL AMOR
               </div>
-              <div className="text-xs sm:text-sm text-llama-muted whitespace-nowrap">
+              <div className="text-llama-muted text-xs sm:text-sm truncate">
                 Edición San Valentín · Entrega en Lima
               </div>
             </div>
           </div>
 
-          {/* CTA */}
+          {/* Right: WhatsApp */}
           <a
-            className="btn btn-ghost gold-border whitespace-nowrap"
+            className="btn-secondary gold-border whitespace-nowrap"
             href={waLink("Hola, quiero hacer un pedido para San Valentín. ¿Me ayudas a elegir un regalo?")}
             target="_blank"
             rel="noreferrer"
@@ -83,18 +82,7 @@ export default function Page() {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pb-10 pt-10 relative">
-        {/* Tinte dorado sutil SOLO hero (no amarillento) */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-70"
-          style={{
-            background:
-              "radial-gradient(800px 420px at 20% 20%, rgba(214,178,94,.18), transparent 60%)," +
-              "radial-gradient(700px 420px at 80% 55%, rgba(242,213,138,.10), transparent 65%)",
-          }}
-        />
-
+      <section className="mx-auto max-w-6xl px-6 pb-10 pt-10 hero-gold">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -108,17 +96,14 @@ export default function Page() {
               Compra rápida por WhatsApp.
             </p>
 
-            {/* Botones: Catálogo como principal dorado, Recomendación como secundario */}
+            {/* Botones: catálogo principal (dorado), recomendación secundario */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a
-                className="btn btn-gold w-full sm:w-auto shadow-[0_10px_30px_rgba(214,178,94,0.18)]"
-                href="#catalogo"
-              >
+              <a className="btn-primary w-full sm:w-auto" href="#catalogo">
                 Ver catálogo San Valentín
               </a>
 
               <a
-                className="btn btn-ghost gold-border w-full sm:w-auto"
+                className="btn-secondary gold-border w-full sm:w-auto"
                 href={waLink("Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito.")}
                 target="_blank"
                 rel="noreferrer"
@@ -128,24 +113,24 @@ export default function Page() {
             </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <div className="chip">
+              <div className="pill">
                 <span className="gold-text">✓</span> Personalización real
               </div>
-              <div className="chip">
+              <div className="pill">
                 <span className="gold-text">✓</span> Entrega en Lima
               </div>
-              <div className="chip">
+              <div className="pill">
                 <span className="gold-text">✓</span> Presentación premium
               </div>
-              <div className="chip">
+              <div className="pill">
                 <span className="gold-text">✓</span> Atención rápida
               </div>
             </div>
           </div>
 
-          {/* Imagen hero vertical (4:5 Instagram) sin cortar */}
+          {/* Hero image 4:5 Instagram sin cortar */}
           <div className="card relative overflow-hidden p-4">
-            <div className="relative w-full overflow-hidden rounded-xl border border-white/10 bg-black/20 aspect-[4/5]">
+            <div className="relative w-full overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
               <Image
                 src={heroImg}
                 alt="Regalo San Valentín - La Llama del Amor"
@@ -162,7 +147,7 @@ export default function Page() {
                 <div className="font-semibold">Con foto + dedicatoria</div>
               </div>
               <a
-                className="btn btn-ghost gold-border"
+                className="btn-ghost gold-border"
                 href={waLink("Hola, quiero un regalo con foto + dedicatoria. ¿Qué opciones tienes para hoy?")}
                 target="_blank"
                 rel="noreferrer"
@@ -185,7 +170,7 @@ export default function Page() {
           </div>
 
           <a
-            className="btn btn-ghost gold-border"
+            className="btn-secondary gold-border"
             href={waLink("Hola, quiero el catálogo San Valentín con precios y disponibilidad.")}
             target="_blank"
             rel="noreferrer"
@@ -197,7 +182,7 @@ export default function Page() {
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           {productos.map((p) => (
             <article key={p.title} className="card p-4">
-              <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black/20 aspect-[4/5]">
+              <div className="relative overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
                 <Image
                   src={p.image}
                   alt={p.title}
@@ -209,19 +194,19 @@ export default function Page() {
 
               <div className="mt-4 flex items-start justify-between gap-3">
                 <h3 className="text-lg font-semibold leading-snug">{p.title}</h3>
-                <span className="chip whitespace-nowrap">{p.price}</span>
+                <span className="pill whitespace-nowrap">{p.price}</span>
               </div>
 
               <div className="mt-3 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span key={t} className="chip px-3 py-1 text-xs">
+                  <span key={t} className="pill px-3 py-1 text-xs">
                     {t}
                   </span>
                 ))}
               </div>
 
               <a
-                className="btn btn-gold mt-4 w-full shadow-[0_10px_30px_rgba(214,178,94,0.16)]"
+                className="btn-primary mt-4 w-full"
                 href={waLink(p.waText)}
                 target="_blank"
                 rel="noreferrer"
@@ -232,6 +217,7 @@ export default function Page() {
           ))}
         </div>
 
+        {/* Sección extra */}
         <div className="mt-10 card p-6">
           <h3 className="text-xl font-semibold">Regalos para…</h3>
           <p className="mt-1 text-llama-muted">
@@ -239,16 +225,36 @@ export default function Page() {
           </p>
 
           <div className="mt-4 flex flex-wrap gap-3">
-            <a className="btn btn-ghost gold-border" href={waLink("Hola, quiero 3 opciones para mi novia. Presupuesto: S/__. Para cuándo: __.")} target="_blank" rel="noreferrer">
+            <a
+              className="btn-secondary gold-border"
+              href={waLink("Hola, quiero 3 opciones para mi novia. Presupuesto: S/__. Para cuándo: __.")}
+              target="_blank"
+              rel="noreferrer"
+            >
               Para mi novia
             </a>
-            <a className="btn btn-ghost gold-border" href={waLink("Hola, quiero 3 opciones para mi enamorada. Presupuesto: S/__. Para cuándo: __.")} target="_blank" rel="noreferrer">
+            <a
+              className="btn-secondary gold-border"
+              href={waLink("Hola, quiero 3 opciones para mi enamorada. Presupuesto: S/__. Para cuándo: __.")}
+              target="_blank"
+              rel="noreferrer"
+            >
               Para mi enamorada
             </a>
-            <a className="btn btn-ghost gold-border" href={waLink("Hola, quiero 3 opciones para mi esposo/enamorado. Presupuesto: S/__. Para cuándo: __.")} target="_blank" rel="noreferrer">
+            <a
+              className="btn-secondary gold-border"
+              href={waLink("Hola, quiero 3 opciones para mi esposo/enamorado. Presupuesto: S/__. Para cuándo: __.")}
+              target="_blank"
+              rel="noreferrer"
+            >
               Para él
             </a>
-            <a className="btn btn-gold shadow-[0_10px_30px_rgba(214,178,94,0.16)]" href={waLink("Hola, quiero recomendación. Presupuesto: S/__. Para cuándo: __. Y qué incluye: foto/dedicatoria/otros.")} target="_blank" rel="noreferrer">
+            <a
+              className="btn-primary"
+              href={waLink("Hola, quiero recomendación. Presupuesto: S/__. Para cuándo: __. Incluye: foto/dedicatoria/otros.")}
+              target="_blank"
+              rel="noreferrer"
+            >
               Quiero recomendación
             </a>
           </div>
@@ -260,7 +266,7 @@ export default function Page() {
         href={waLink("Hola, quiero hacer un pedido. ¿Qué me recomiendas según mi presupuesto?")}
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-6 right-6 z-50 btn btn-gold shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"
+        className="fixed bottom-6 right-6 z-50 btn-primary"
         aria-label="Pedir por WhatsApp"
       >
         Pedir por WhatsApp
@@ -268,7 +274,7 @@ export default function Page() {
 
       {/* Footer */}
       <footer className="mx-auto max-w-6xl px-6 pb-10 text-sm text-llama-muted">
-        <div className="flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 border-t border-llama-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <div>© {new Date().getFullYear()} La Llama del Amor</div>
           <div>Entrega en Lima · Atención por WhatsApp</div>
         </div>
