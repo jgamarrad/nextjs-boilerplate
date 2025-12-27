@@ -47,20 +47,18 @@ export default function Page() {
       <header className="mx-auto max-w-6xl px-6 pt-8">
         <div className="flex items-center justify-center rounded-full border border-white/30 h-16 w-16 sm:h-12 sm:w-12">
           <div className="flex items-center gap-3">
-            {/* Logo real (public/logo.png => src="/logo.png") */}
-            <div className="relative h-12 w-12 sm:h-14 sm:w-14 overflow-hidden rounded-full border border-llama-line bg-llama-panel ring-1 ring-[rgba(214,178,94,0.35)] shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
+            <div className="relative h-14 w-14 sm:h-10 sm:w-10 overflow-hidden rounded-full gold-border border bg-white/5">
               <Image
                 src="/logo.png"
                 alt="La Llama del Amor"
-                width={56}
-                height={56}
-                className="h-14 w-14 sm:h-10 sm:w-10"
+                fill
+                className="object-contain p-1"
                 priority
               />
             </div>
-
+          
             <div>
-              <div className="uppercase text-llama-muted whitespace-nowrap leading-none tracking-[0.22em] text-[12px] sm:text-sm">
+              <div className="text-sm tracking-[0.22em] uppercase text-llama-muted whitespace-nowrap">
                 LA LLAMA DEL AMOR
               </div>
               <div className="text-sm text-llama-muted">
@@ -68,6 +66,7 @@ export default function Page() {
               </div>
             </div>
           </div>
+
 
           <a
             className="btn-secondary gold-border"
