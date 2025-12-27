@@ -27,7 +27,7 @@ const productos = [
     price: "Desde S/ ---",
     tags: ["top ventas", "premium"],
     image: "/choco-brownie-con-pulseras-hilo-rojo-san-valentin.jpg",
-    waText: "Hola, quiero el Choco brownie con pulseras rojas. ¿Precio y tiempos?",
+    waText: "Hola, quiero info del Choco brownie con pulseras rojas. ¿Tiempos y precio?",
   },
   {
     title: 'Caja Retrato “Te Amo”',
@@ -42,14 +42,14 @@ export default function Page() {
   const heroImg = "/correo-postal-feliz-dia-mi-amor.jpg";
 
   return (
-    <main className="bg-magia min-h-screen">
+    <main className="min-h-screen">
       {/* Header */}
       <header className="mx-auto max-w-6xl px-6 pt-8">
         <div className="flex items-center justify-between gap-4">
-          {/* Left: logo + brand */}
+          {/* Marca */}
           <div className="flex items-center gap-3 min-w-0">
-            {/* Logo: grande en mobile, un poco menor desde sm */}
-            <div className="relative h-14 w-14 sm:h-12 sm:w-12 overflow-hidden rounded-full border bg-llama-panel gold-border">
+            {/* Logo: más grande en mobile, compacto en desktop */}
+            <div className="relative h-14 w-14 sm:h-12 sm:w-12 shrink-0 overflow-hidden rounded-full border gold-border bg-white/5">
               <Image
                 src="/logo.png"
                 alt="La Llama del Amor"
@@ -60,18 +60,19 @@ export default function Page() {
             </div>
 
             <div className="min-w-0">
-              <div className="uppercase tracking-[0.22em] text-llama-muted whitespace-nowrap text-xs sm:text-sm">
+              {/* 1 sola línea en mobile */}
+              <div className="text-xs sm:text-sm tracking-[0.22em] uppercase text-llama-muted whitespace-nowrap overflow-hidden text-ellipsis">
                 LA LLAMA DEL AMOR
               </div>
-              <div className="text-llama-muted text-xs sm:text-sm truncate">
+              <div className="text-xs sm:text-sm text-llama-muted whitespace-nowrap overflow-hidden text-ellipsis">
                 Edición San Valentín · Entrega en Lima
               </div>
             </div>
           </div>
 
-          {/* Right: WhatsApp */}
+          {/* CTA */}
           <a
-            className="btn-secondary gold-border whitespace-nowrap"
+            className="btn-secondary gold-border shrink-0"
             href={waLink("Hola, quiero hacer un pedido para San Valentín. ¿Me ayudas a elegir un regalo?")}
             target="_blank"
             rel="noreferrer"
@@ -96,9 +97,9 @@ export default function Page() {
               Compra rápida por WhatsApp.
             </p>
 
-            {/* Botones: catálogo principal (dorado), recomendación secundario */}
+            {/* Aquí: Ver catálogo como botón principal dorado */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a className="btn-primary w-full sm:w-auto" href="#catalogo">
+              <a className="btn-primary gold-bg text-black w-full sm:w-auto" href="#catalogo">
                 Ver catálogo San Valentín
               </a>
 
@@ -128,7 +129,7 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Hero image 4:5 Instagram sin cortar */}
+          {/* Imagen hero */}
           <div className="card relative overflow-hidden p-4">
             <div className="relative w-full overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
               <Image
@@ -206,7 +207,7 @@ export default function Page() {
               </div>
 
               <a
-                className="btn-primary mt-4 w-full"
+                className="btn-primary gold-bg mt-4 w-full text-black"
                 href={waLink(p.waText)}
                 target="_blank"
                 rel="noreferrer"
@@ -216,58 +217,14 @@ export default function Page() {
             </article>
           ))}
         </div>
-
-        {/* Sección extra */}
-        <div className="mt-10 card p-6">
-          <h3 className="text-xl font-semibold">Regalos para…</h3>
-          <p className="mt-1 text-llama-muted">
-            Dime para quién es y tu presupuesto, y te mando 3 opciones cerradas por WhatsApp.
-          </p>
-
-          <div className="mt-4 flex flex-wrap gap-3">
-            <a
-              className="btn-secondary gold-border"
-              href={waLink("Hola, quiero 3 opciones para mi novia. Presupuesto: S/__. Para cuándo: __.")}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Para mi novia
-            </a>
-            <a
-              className="btn-secondary gold-border"
-              href={waLink("Hola, quiero 3 opciones para mi enamorada. Presupuesto: S/__. Para cuándo: __.")}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Para mi enamorada
-            </a>
-            <a
-              className="btn-secondary gold-border"
-              href={waLink("Hola, quiero 3 opciones para mi esposo/enamorado. Presupuesto: S/__. Para cuándo: __.")}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Para él
-            </a>
-            <a
-              className="btn-primary"
-              href={waLink("Hola, quiero recomendación. Presupuesto: S/__. Para cuándo: __. Incluye: foto/dedicatoria/otros.")}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Quiero recomendación
-            </a>
-          </div>
-        </div>
       </section>
 
-      {/* Botón flotante WhatsApp */}
+      {/* Botón flotante */}
       <a
         href={waLink("Hola, quiero hacer un pedido. ¿Qué me recomiendas según mi presupuesto?")}
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-6 right-6 z-50 btn-primary"
-        aria-label="Pedir por WhatsApp"
+        className="fixed bottom-6 right-6 z-50 btn-primary gold-bg text-black shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"
       >
         Pedir por WhatsApp
       </a>
