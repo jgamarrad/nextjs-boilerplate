@@ -98,3 +98,27 @@ body{
   z-index: 1;
 }
 
+
+@layer components{
+  /* Alias para que tu page.tsx funcione tal cual */
+  .btn-primary { @apply btn; }
+  .btn-secondary { @apply btn; }
+
+  /* “primary” por defecto como ghost, y tú lo pintas con gold-bg cuando quieras */
+  .btn-secondary { @apply border border-white/20 text-white hover:bg-white/10; }
+
+  /* pill = chip (tu diseño premium) */
+  .pill { @apply chip; }
+
+  /* títulos */
+  .section-title { @apply text-2xl font-semibold; }
+
+  /* “tokens” que usas en TSX pero no existían */
+  .text-llama-muted { color: var(--muted); }
+  .text-llama-gold { color: var(--gold); }
+  .border-llama-line { border-color: color-mix(in srgb, white 12%, transparent); }
+  .bg-llama-panel { background: rgba(255,255,255,.06); }
+  .bg-magia { background: transparent; } /* tu body ya pinta el fondo */
+}
+
+
