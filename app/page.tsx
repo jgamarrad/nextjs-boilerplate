@@ -172,7 +172,7 @@ export default function Page() {
       <section id="catalogo" className="mx-auto max-w-6xl px-6 pb-14">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="section-title">Catálogo San Valentín</h2>
+            <h2 className="section-title gold-text">Catálogo San Valentín</h2>
             <p className="mt-1 text-llama-muted">
               Te ayudamos a elegir según presupuesto, tiempo y tipo de sorpresa.
             </p>
