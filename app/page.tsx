@@ -98,9 +98,17 @@ export default function Page() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              {/* Botón principal dorado */}
+              {/* Botón principal dorado → Catálogo */}
               <a
                 className="btn-primary gold-bg text-black shadow-[0_10px_30px_rgba(214,178,94,0.18)]"
+                href="#catalogo"
+              >
+                Ver catálogo San Valentín
+              </a>
+            
+              {/* Botón secundario → Recomendación (WhatsApp) */}
+              <a
+                className="btn-secondary gold-border"
                 href={waLink(
                   "Hola, quiero recomendación. Presupuesto, para quién es y para cuándo lo necesito."
                 )}
@@ -109,12 +117,8 @@ export default function Page() {
               >
                 Quiero recomendación
               </a>
-
-              {/* Botón secundario con borde dorado */}
-              <a className="btn-secondary gold-border" href="#catalogo">
-                Ver catálogo San Valentín
-              </a>
             </div>
+
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <div className="pill">
