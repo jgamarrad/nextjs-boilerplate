@@ -7,34 +7,152 @@ function waLink(text: string) {
   return `${WA_BASE}?text=${encodeURIComponent(text)}`;
 }
 
+const SITE_URL = "https://sv.lallamadelamor.pe";
+
+function productLink(slug: string) {
+  return `${SITE_URL}/#${slug}`;
+}
+
+function waProductText(p: {
+  id: string;
+  title: string;
+  slug: string;
+}) {
+  return `Hola!
+Quiero el producto ${p.id} – ${p.title}
+
+Detalle del producto: 
+Presupuesto:
+¿Se puede personalizar?:
+¿Qué incluye el producto?:`;
+}
+
 const productos = [
   {
-    title: 'Miski “Feliz 14”',
-    price: "Desde S/ ---",
+    id: "SV01",
+    slug: "caja-miski-feliz-14",
+    title: 'Caja Miski “Feliz 14 ❤️”',
+    price: "S/60",
     tags: ["premium", "chocolate", "romántico"],
     image: "/caja-miski-feliz-14-san-valentin.jpg",
-    waText: 'Hola, quiero info del regalo "Miski Feliz 14". ¿Opciones y precio?',
+    waText: 'Hola, quiero info del regalo "Caja Miski Feliz 14 ❤️". ¿Opciones y precio?',
   },
   {
-    title: "Correo Postal + Chocolate",
-    price: "Desde S/ ---",
-    tags: ["foto", "dedicatoria", "viral"],
+    id: "SV02",
+    slug: "correo-postal-feliz-dia-mi-amor",
+    title: "Correo Postal de Chocolate",
+    price: "S/85",
+    tags: ["foto", "chocolate", "dedicatoria", "viral"],
     image: "/correo-postal-feliz-dia-mi-amor.jpg",
-    waText: "Hola, quiero el Correo Postal + Chocolate. ¿Cómo envío foto y texto?",
+    waText: "Hola, quiero el Correo Postal con el mensaje 'Feliz día mi amor'. ¿Me das más detalle del producto?",
   },
   {
+    id: "SV03",
+    slug: "choco-brownie-con-pulseras",
     title: "Choco brownie personalizado con pulseras rojas",
-    price: "Desde S/ ---",
-    tags: ["top ventas", "premium"],
+    price: "Desde S/65",
+    tags: ["top ventas", "premium", "brownie"],
     image: "/choco-brownie-con-pulseras-hilo-rojo-san-valentin.jpg",
-    waText: "Hola, quiero info del Choco brownie con pulseras rojas. ¿Tiempos y precio?",
+    waText: "Hola, quiero info del Choco brownie con pulseras rojas. ¿Detalles y precio?",
+  },
+    {
+    id: "SV04",
+    slug: "caja-miski-te-amo",
+    title: 'Caja Miski “❤️Te Amo❤️”',
+    price: "S/60",
+    tags: ["top ventas", "chocolate", "premium"],
+    image: "/caja-miski-chocolate-te-amo.jpg",
+    waText: 'Hola, quiero info de la Caja Choco Retrato "❤️Te Amo❤️". ¿Detalles y precio?',
   },
   {
-    title: 'Caja Retrato “Te Amo”',
-    price: "Desde S/ ---",
-    tags: ["foto", "top ventas", "premium"],
-    image: "/caja-miski-choco-retrato-te-amo.jpg",
-    waText: 'Hola, quiero info de la Caja Retrato "Te Amo". ¿Tiempos y precio?',
+    id: "SV05",
+    slug: "caja-miski-choco-retrato",
+    title: 'Choco retrato “Te Amo”',
+    price: "S/70",
+    tags: ["foto", "chocolate", "brownie", "premium"],
+    image: "/caja-miski-chocolate-te-amo-brownie-retrato.jpg",
+    waText: 'Hola, quiero info de la Caja Choco Retrato "Te Amo". ¿Detalles y precio?',
+  },
+  {
+    id: "SV06",
+    slug: "box-sweet-love",
+    title: 'Box Sweet Love 🍫🌹',
+    price: "S/197",
+    tags: ["premium", "chocolate", "rosas"],
+    image: "/box-sweet-love-rosas-chocolate-churra.jpg",
+    waText: 'Hola, quiero info del regalo "Box Sweet Love 🍫🌹". ¿Opciones y precio?',
+  },
+  {
+    id: "SV07",
+    slug: "correo-postal-diploma",
+    title: "Correo Postal de Chocolate - Diploma",
+    price: "S/85",
+    tags: ["foto", "chocolate", "dedicatoria", "viral"],
+    image: "/correo-postal-chocolate-la-mejor-enamorada-del-mundo.jpg",
+    waText: "Hola, quiero el Correo Postal 'La mejor Enamorad@'. ¿Me das más detalle del producto?",
+  },
+   {
+    id: "SV08",
+    slug: "caja-acrilica-oso-3d-chocolate",
+    title: "Oso 3D de Chocolate",
+    price: "S/85",
+    tags: ["premium", "chocolate", "viral"],
+    image: "/caja-acrilica-oso-3d-chocolate-te-amo.jpg",
+    waText: "Hola, quiero la 'Caja Acrílica con el Oso 3D en chocolate'. ¿Me das más detalle del producto?",
+  },
+  {
+    id: "SV09",
+    slug: "choco-brownie-san-valentin-capibara",
+    title: "Choco brownie San Valentín",
+    price: "S/65",
+    tags: ["chocolate", "premium", "brownie"],
+    image: "/choco-brownie-san-valentin-capibara.jpg",
+    waText: "Hola, quiero info del 'Choco brownie Capibara'. ¿Detalles y precio?",
+  },
+    {
+    id: "SV10",
+    slug: "box-chocolate-peluche-llamita",
+    title: 'Box Choco Llamita 🍫🦙 ',
+    price: "S/125",
+    tags: ["premium", "chocolate", "peluche"],
+    image: "/box-chocolate-peluche-llamita.jpg",
+    waText: 'Hola, quiero info del regalo "Box Choco Llamita 🍫🦙". ¿Opciones y precio?',
+  },
+  {
+    id: "SV11",
+    slug: "box-sweet-love-1",
+    title: 'Box Sweet Love 1 🍫🌹',
+    price: "S/197",
+    tags: ["premium", "chocolate", "rosas"],
+    image: "/box-sweet-love-rosas-chocolate-te-amo.jpg",
+    waText: 'Hola, quiero info del regalo "Box Sweet Love 1 🍫🌹". ¿Opciones y precio?',
+  },
+   {
+    id: "SV12",
+    slug: "choco-rosas-con-amor",
+    title: 'Choco rosas con amor”',
+    price: "Desde S/50",
+    tags: ["premium", "chocolate", "romántico"],
+    image: "/Caja-rosas-de-chocolate-con-amor.jpg",
+    waText: 'Hola, quiero info del regalo "Choco rosas con amor". ¿Opciones y precio?',
+  },
+   {
+    id: "SV13",
+    slug: "caja-miski-te-quiero",
+    title: 'Caja Miski “Te Quiero ❤️”',
+    price: "S/60",
+    tags: ["premium", "chocolate", "romántico"],
+    image: "/caja-miski-chocolates-te-quiero.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Te Quiero ❤️". ¿Opciones y precio?',
+  },
+    {
+    id: "SV14",
+    slug: "caja-miski-te-amo-oso-corazon",
+    title: 'Caja Miski “Te Amo ❤️🧸”',
+    price: "S/60",
+    tags: ["premium", "chocolate", "romántico"],
+    image: "/caja-miski-chocolate-te-amo-corazon-oso.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Te Amo ❤️🧸". ¿Opciones y precio?',
   },
 ];
 
@@ -215,10 +333,19 @@ export default function Page() {
                 />
               </div>
 
-              <div className="mt-4 flex items-start justify-between gap-3">
+              <div className="mt-4">
                 <h3 className="text-lg font-semibold leading-snug">{p.title}</h3>
-                <span className="pill whitespace-nowrap">{p.price}</span>
+
+                <div className="mt-1">
+                  <div className="text-base font-semibold">
+                    {p.price}
+                  </div>
+                  <div className="text-xs text-white/70">
+                    Incluye personalización · Delivery según zona
+                  </div>
+                </div>
               </div>
+
 
               <div className="mt-3 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
@@ -230,7 +357,7 @@ export default function Page() {
 
               <a
                 className="btn-primary gold-bg mt-4 w-full text-black"
-                href={waLink(p.waText)}
+                href={waLink(waProductText(p))}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -243,7 +370,7 @@ export default function Page() {
 
       {/* Botón flotante */}
       <a
-        href={waLink("Hola, quiero hacer un pedido. ¿Qué me recomiendas según mi presupuesto?")}
+        href={waLink("Hola, quiero hacer un pedido. ¿Qué me recomiendas?")}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 btn-primary gold-bg text-black shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"

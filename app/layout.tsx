@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://sv.llamadelamor.pe";
+const siteUrl = "https://sv.lallamadelamor.pe";
 const ogImage = `${siteUrl}/og.jpg`;
 
 export const metadata: Metadata = {
