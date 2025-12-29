@@ -35,7 +35,7 @@ const productos = [
     price: "S/60",
     tags: ["premium", "chocolate", "romántico"],
     image: "/caja-miski-feliz-14-san-valentin.jpg",
-    waText: 'Hola, quiero info del regalo "Caja Miski Feliz 14 ❤️". ¿Opciones y precio?',
+    waText: 'Hola, quiero info del regalo "Caja Miski Feliz 14❤️". ¿Opciones y precio?',
   },
   {
     id: "SV02",
