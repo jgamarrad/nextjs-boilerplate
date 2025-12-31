@@ -105,7 +105,7 @@ const productos: Product[] = [
     tags: ["premium", "chocolate", "romántico"],
     image: "/caja-miski-feliz-14-san-valentin.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski Feliz 14❤️". ¿Opciones y precio?',
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["san_valentin", "aniversario"],
   },
   {
     id: "LLA-002",
@@ -125,7 +125,7 @@ const productos: Product[] = [
     tags: ["top ventas", "premium", "brownie"],
     image: "/choco-brownie-con-pulseras-hilo-rojo-san-valentin.jpg",
     waText: "Hola, quiero info del Choco brownie con pulseras rojas. ¿Detalles y precio?",
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["san_valentin", "aniversario"],
   },
   {
     id: "LLA-004",
@@ -165,7 +165,7 @@ const productos: Product[] = [
     tags: ["foto", "chocolate", "dedicatoria", "viral"],
     image: "/correo-postal-chocolate-la-mejor-enamorada-del-mundo.jpg",
     waText: "Hola, quiero el Correo Postal 'La mejor Enamorad@'. ¿Me das más detalle del producto?",
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["san_valentin", "aniversario"],
   },
   {
     id: "LLA-008",
@@ -185,7 +185,7 @@ const productos: Product[] = [
     tags: ["chocolate", "premium", "brownie"],
     image: "/choco-brownie-san-valentin-capibara.jpg",
     waText: "Hola, quiero info del 'Choco brownie Capibara'. ¿Detalles y precio?",
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["san_valentin"],
   },
   {
     id: "LLA-010",
@@ -279,7 +279,7 @@ const productos: Product[] = [
     image: "/correo-postal-chocolate-cumple.jpg",
     waText: "Hola, quiero el Correo Postal de 'Feliz Cumpleaños'. ¿Me das más detalle del producto?",
     occasions: ["cumpleanos"],
-    priority: { cumpleanos: 85 }
+    priority: { cumpleanos: 25 }
   },
     {
     id: "LLA-019",
@@ -302,6 +302,219 @@ const productos: Product[] = [
     waText: 'Hola, quiero info del regalo "Caja Miski de Aniversario - Mesario". ¿Opciones y precio?',
     occasions: ["aniversario"],
     priority: { aniversario: 80 }
+  },
+      {
+    id: "LLA-021",
+    slug: "caja-miski-chocolate-preciosa",
+    title: 'Caja Miski Preciosa',
+    price: "S/60",
+    tags: ["premium", "chocolate", "romántico"],
+    image: "/caja-miski-chocolate-preciosa.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski con el mensaje Preciosa". ¿Opciones y precio?',
+    occasions: ["ocasion_especial"],
+    priority: { ocasion_especial: 70 }
+  },
+    {
+    id: "LLA-022",
+    slug: "tableta-chocolate-3d",
+    title: 'Tableta Chocolate Cumpleaños',
+    price: "S/55",
+    tags: ["premium", "chocolate"],
+    image: "/tableta-chocolate-personalizada-cumple.jpg",
+    waText: 'Hola, quiero info del regalo "Tableta de Chocolate Personalizada". ¿Opciones y precio?',
+    occasions: ["cumpleanos"],
+    priority: { cumpleanos: 75 }
+  },
+    {
+    id: "LLA-023",
+    slug: "box-brownie-peluche-llamita",
+    title: "Pack Choco Brownie y Llamita 🍫🦙 ",
+    price: "S/130",
+    tags: ["premium", "brownie", "peluche"],
+    image: "/pack-choco-brownie-cumple-peluche-llamita.jpg",
+    waText: 'Hola, quiero info del regalo "Pack Choco Brownie y peluche de Llamita 🍫🦙". ¿Opciones y precio?',
+    occasions: ["cumpleanos"],
+    priority: { cumpleanos: 74 }
+  },
+    {
+    id: "LLA-024",
+    slug: "choco-brownie-aniversario-ocasion-especial",
+    title: "Choco brownie Personalizado",
+    price: "S/65",
+    tags: ["chocolate", "premium", "brownie"],
+    image: "/choco-brownie-personalizado-toto.jpg",
+    waText: "Hola, quiero info del 'Choco brownie Personalizado'. ¿Detalles y precio?",
+    occasions: ["aniversario", "ocasion_especial"],
+    priority: { aniversario: 60, ocasion_especial:70 }
+   },
+      {
+    id: "LLA-025",
+    slug: "caja-miski-chocolate-aniversario-4-años",
+    title: 'Caja Miski Aniversario Año',
+    price: "S/60",
+    tags: ["premium", "chocolate", "viral"],
+    image: "/caja-miski-chocolate-aniversario-4a.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski de Aniversario - Años". ¿Opciones y precio?',
+    occasions: ["aniversario"],
+    priority: { aniversario: 60 }
+  },
+    {
+    id: "LLA-026",
+    slug: "box-sweet-love-2",
+    title: "Box Sweet Love 2 🍫🌹",
+    price: "S/197",
+    tags: ["premium", "chocolate", "rosas"],
+    image: "/caja-rosas-chocolate-cumple-miski-mama.jpg",
+    waText: 'Hola, quiero info del regalo "Box Sweet Love 🍫🌹". ¿Opciones y precio?',
+    occasions: ["cumpleanos", "ocasion_especial"],
+    priority: { cumpleanos: 50, ocasion_especial:50 }
+  },
+        {
+    id: "LLA-027",
+    slug: "caja-miski-chocolate-te-quiero-amor",
+    title: 'Caja Miski TKM AMOR',
+    price: "S/60",
+    tags: ["premium", "chocolate", "viral"],
+    image: "/caja-miski-chocolate-tqm-amor.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski TKM AMOR". ¿Opciones y precio?',
+    occasions: ["aniversario", "ocasion_especial"],
+  },
+    {
+    id: "LLA-028",
+    slug: "choco-brownie-cumple-pack",
+    title: "Choco brownie Cumple Pack",
+    price: "S/65",
+    tags: ["viral", "premium", "brownie"],
+    image: "/choco-brownie-personalizado-cumple-pack.jpg",
+    waText: "Hola, quiero info del 'Choco brownie de Cumple Pack'. ¿Detalles y precio?",
+    occasions: ["cumpleanos"],
+   },
+     {
+    id: "LLA-029",
+    slug: "caja-acrilica-oso-3d-chocolate",
+    title: "Oso 3D de Chocolate con nombre",
+    price: "S/85",
+    tags: ["premium", "chocolate", "viral"],
+    image: "/oso-3d-chocolate-personalizado-nombre.jpg",
+    waText: "Hola, quiero la 'Caja Acrílica con el Oso 3D en chocolate'. ¿Me das más detalle del producto?",
+    occasions: ["san_valentin", "cumpleanos", "aniversario", "ocasion_especial"],
+    priority: { cumpleanos: 40, ocasion_especial:40 }
+  },
+    {
+    id: "LLA-030",
+    slug: "caja-miski-chocolate-yo-amo-papa",
+    title: 'Caja Miski YO❤️PAPA',
+    price: "S/60",
+    tags: ["premium", "chocolate", "familia"],
+    image: "/caja-miski-chocolate-yo-amo-papa.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski YO❤️PAPA". ¿Opciones y precio?',
+    occasions: ["ocasion_especial"],
+  },
+    {
+    id: "LLA-031",
+    slug: "caja-miski-chocolate-futbol-universitario",
+    title: 'Caja Miski PAPA CREMA',
+    price: "S/70",
+    tags: ["premium", "chocolate", "YdaleU"],
+    image: "/caja-miski-chocolate-papa-y-dale-u-crema-universitario-futbol.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski PAPA CREMA". ¿Opciones y precio?',
+    occasions: ["ocasion_especial"],
+  },
+    {
+    id: "LLA-032",
+    slug: "caja-miski-chocolate-futbol-alianza-lima",
+    title: 'Caja Miski PAPA INTIMO',
+    price: "S/70",
+    tags: ["premium", "chocolate", "Intimo"],
+    image: "/caja-miski-chocolate-papa-alianza-lima-intimo-futbol.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski PAPA INTIMO". ¿Opciones y precio?',
+    occasions: ["ocasion_especial"],
+  },
+      {
+    id: "LLA-033",
+    slug: "caja-miski-chocolate-dia-especial-estrella",
+    title: 'Caja Miski Día Especial',
+    price: "S/60",
+    tags: ["premium", "chocolate", "especial"],
+    image: "/caja-miski-chocolate-dia-especial-estrella.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Día Especial". ¿Opciones y precio?',
+    occasions: ["ocasion_especial"],
+    priority: {ocasion_especial:45 }
+  },
+        {
+    id: "LLA-033",
+    slug: "caja-miski-chocolate-anivesario-meses",
+    title: 'Caja Miski Mesario',
+    price: "S/60",
+    tags: ["premium", "chocolate", "top-ventas"],
+    image: "/caja-miski-chocolate-aniversario-14-meses.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Cumple Mes". ¿Opciones y precio?',
+    occasions: ["aniversario"],
+    priority: {aniversario:35 }
+  },
+    {
+    id: "LLA-034",
+    slug: "choco-brownie-aniversario-cumple-mes",
+    title: "Choco brownie Aniversario Mes",
+    price: "S/65",
+    tags: ["chocolate", "premium", "brownie"],
+    image: "/choco-brownie-anivesario-cumple-mes.jpg",
+    waText: "Hola, quiero info del 'Choco brownie de Anivesario para Cumple Mes'. ¿Detalles y precio?",
+    occasions: [ "aniversario"],
+    priority: {aniversario:55 }
+  },
+   {
+    id: "LLA-035",
+    slug: "choco-brownie-aniversario-amor",
+    title: "Choco brownie Aniversario Amor",
+    price: "S/65",
+    tags: ["chocolate", "premium", "brownie"],
+    image: "/choco-brownie-aniversario-amor.jpg",
+    waText: "Hola, quiero info del 'Choco brownie de Anivesario Amor'. ¿Detalles y precio?",
+    occasions: [ "aniversario"],
+    priority: {aniversario:25 }
+  },
+    {
+    id: "LLA-036",
+    slug: "caja-miski-chocolate-fecha-especial",
+    title: 'Caja Miski Fecha Especial',
+    price: "S/60",
+    tags: ["premium", "chocolate", "top-ventas"],
+    image: "/caja-miski-chocolate-fecha-especial.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Fecha Especial". ¿Opciones y precio?',
+    occasions: ["aniversario", "ocasion_especial"],
+    priority: {aniversario:25, ocasion_especial:25 }
+  },
+    {
+    id: "LLA-037",
+    slug: "correo-postal-chocolate-san-valentin",
+    title: "Correo Postal de San Valentín",
+    price: "S/85",
+    tags: ["foto", "chocolate", "dedicatoria", "viral"],
+    image: "/correo-postal-chocolate-san-valentin.jpg",
+    waText: "Hola, quiero el Correo Postal de San Valentín. ¿Me das más detalle del producto?",
+    occasions: ["san_valentin"],
+  },
+    {
+    id: "LLA-038",
+    slug: "correo-postal-chocolate-cumple",
+    title: "Correo Postal de Cumpleaños 🎈",
+    price: "S/85",
+    tags: ["foto", "chocolate", "dedicatoria", "viral"],
+    image: "/correo-postal-chocolate-personalizado-cumple.jpg",
+    waText: "Hola, quiero el Correo Postal de Cumpleaños ¿Me das más detalle del producto?",
+    occasions: ["cumpleanos"],
+    priority: { cumpleanos: 60}
+  },
+     {
+    id: "LLA-039",
+    slug: "choco-brownie-personalizado-san-valentin",
+    title: "Choco brownie San Valentín ❤️",
+    price: "S/65",
+    tags: ["chocolate", "premium", "brownie"],
+    image: "/choco-brownie-personalizado-san-valentin-1.jpg",
+    waText: "Hola, quiero info del 'Choco brownie San Valentín ❤️'. ¿Detalles y precio?",
+    occasions: [ "san_valentin","aniversario"],
   },
 ];
 
@@ -348,7 +561,7 @@ export default function Page() {
                 LA LLAMA DEL AMOR
               </div>
               <div className="text-sm text-llama-muted whitespace-nowrap overflow-hidden text-ellipsis">
-                Catálogo anual · Entrega en Lima
+                Catálogo · Entrega en Lima
               </div>
             </div>
           </div>
