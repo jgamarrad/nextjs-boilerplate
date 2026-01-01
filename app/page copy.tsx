@@ -438,6 +438,18 @@ const productos: Product[] = [
     occasions: ["ocasion_especial"],
     priority: { ocasion_especial: 45 },
   },
+  // OJO: aquí en tu data original hay otro LLA-033 (duplicado). Ideal cambiarlo a LLA-034.
+  {
+    id: "LLA-033",
+    slug: "caja-miski-chocolate-anivesario-meses",
+    title: "Caja Miski Mesario",
+    price: "S/60",
+    tags: ["premium", "chocolate", "top-ventas"],
+    image: "/caja-miski-chocolate-aniversario-14-meses.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Cumple Mes". ¿Opciones y precio?',
+    occasions: ["aniversario"],
+    priority: { aniversario: 35 },
+  },
   {
     id: "LLA-034",
     slug: "choco-brownie-aniversario-cumple-mes",
@@ -502,18 +514,6 @@ const productos: Product[] = [
     waText: "Hola, quiero info del 'Choco brownie San Valentín ❤️'. ¿Detalles y precio?",
     occasions: ["san_valentin", "aniversario"],
   },
-  {
-    id: "LLA-040",
-    slug: "caja-miski-chocolate-anivesario-meses",
-    title: "Caja Miski Mesario",
-    price: "S/60",
-    tags: ["premium", "chocolate", "top-ventas"],
-    image: "/caja-miski-chocolate-aniversario-14-meses.jpg",
-    waText: 'Hola, quiero info del regalo "Caja Miski Cumple Mes". ¿Opciones y precio?',
-    occasions: ["aniversario"],
-    priority: { aniversario: 35 },
-  },
-
 ];
 
 export default function Page() {
