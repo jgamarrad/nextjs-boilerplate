@@ -513,7 +513,16 @@ const productos: Product[] = [
     occasions: ["aniversario"],
     priority: { aniversario: 35 },
   },
-
+ {
+    id: "LLA-041",
+    slug: "choco-brownie-personalizado-san-valentin",
+    title: "Choco brownie San Valentín ❤️❤️",
+    price: "S/65",
+    tags: ["chocolate", "premium", "brownie"],
+    image: "/choco-brownie-personalizado-san-valentin-2.jpg",
+    waText: "Hola, quiero info del 'Choco brownie San Valentín ❤️'. ¿Detalles y precio?",
+    occasions: ["san_valentin", "aniversario"],
+  },
 ];
 
 export default function Page() {
