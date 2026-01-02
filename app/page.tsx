@@ -1,24 +1,13 @@
 // app/page.tsx
 import type { Metadata } from "next";
 import PageClient from "./PageClient";
+import { normalizeOccasion, type OccasionKey } from "@/lib/catalog";
 
 export const dynamic = "force-dynamic";
 
 const SITE_URL = "https://sv.lallamadelamor.pe";
 
-type OccasionKey = "san_valentin" | "cumpleanos" | "aniversario" | "ocasion_especial";
-
-const OCC_KEYS: OccasionKey[] = ["san_valentin", "cumpleanos", "aniversario", "ocasion_especial"];
-
-function normalizeOccasion(v: unknown): OccasionKey {
-  if (typeof v !== "string") return "san_valentin";
-  return OCC_KEYS.includes(v as OccasionKey) ? (v as OccasionKey) : "san_valentin";
-}
-
-const OG_BY_OCCASION: Record<
-  OccasionKey,
-  { title: string; description: string; imagePath: string }
-> = {
+const OG_BY_OCCASION: Record<OccasionKey, { title: string; description: string; imagePath: string }> = {
   san_valentin: {
     title: "Regalos San Valentín | La Llama del Amor",
     description: "Regalos personalizados premium. Entrega en Lima.",
@@ -49,23 +38,32 @@ export async function generateMetadata({
   const occasion = normalizeOccasion(searchParams?.ocasion);
   const og = OG_BY_OCCASION[occasion];
 
+  const pageUrl = `${SITE_URL}/?ocasion=${occasion}`;
+  const imageUrl = og.imagePath.startsWith("http") ? og.imagePath : `${SITE_URL}${og.imagePath}`;
+
   return {
     metadataBase: new URL(SITE_URL),
     title: og.title,
     description: og.description,
+
+    alternates: {
+      canonical: pageUrl,
+    },
+
     openGraph: {
       title: og.title,
       description: og.description,
-      url: `/?ocasion=${occasion}`,
+      url: pageUrl,
       siteName: "La Llama del Amor",
       type: "website",
-      images: [{ url: og.imagePath, width: 1200, height: 630 }],
+      images: [{ url: imageUrl, width: 1200, height: 630 }],
     },
+
     twitter: {
       card: "summary_large_image",
       title: og.title,
       description: og.description,
-      images: [og.imagePath],
+      images: [imageUrl],
     },
   };
 }
