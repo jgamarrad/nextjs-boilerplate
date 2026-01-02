@@ -2,20 +2,19 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import type { OccasionKey } from "@/lib/types";
 
 import {
   OCCASIONS,
   productos,
   sortByOccasionPriority,
-  type OccasionKey,
   type Product,
 } from "@/lib/catalog";
 
 const WHATSAPP_NUMBER = "51984096041";
 const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
-
 
 function waLink(text: string) {
   return `${WA_BASE}?text=${encodeURIComponent(text)}`;
@@ -25,38 +24,26 @@ function waProductText(p: Pick<Product, "id" | "title" | "slug">) {
   return `Hola!
 Quiero el producto ${p.id} – ${p.title}
 
-Detalle del producto: 
+Detalle del producto:
 Presupuesto:
 ¿Se puede personalizar?:
 ¿Qué incluye el producto?:`;
 }
 
-function isOccasionKey(v: string | null): v is OccasionKey {
-  return !!v && v in OCCASIONS;
-}
-
-
-export default function PageClient({ initialOccasion }: { initialOccasion: OccasionKey }) {
+export default function PageClient({
+  initialOccasion,
+}: {
+  initialOccasion: OccasionKey;
+}) {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const [occasion, setOccasion] = useState<OccasionKey>(initialOccasion);
   const [visible, setVisible] = useState(12);
 
-  // Si el usuario cambia el query en el navegador, sincroniza
-  useEffect(() => {
-    const q = searchParams.get("ocasion") as OccasionKey | null;
-    if (q && q !== occasion) {
-      setOccasion(q);
-      setVisible(12);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
-
   const onSelectOccasion = (key: OccasionKey) => {
     setOccasion(key);
     setVisible(12);
-    router.replace(`/?ocasion=${key}`, { scroll: false });
+    router.push(`/${key}`);
   };
 
   const current = OCCASIONS[occasion];
@@ -67,7 +54,7 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
       .slice()
       .sort((a, b) => sortByOccasionPriority(a, b, occasion));
 
-    // Si quieres “sin fallback”, deja MIN_ITEMS en 0
+    // Si quieres “sin fallback”, déjalo en 0
     const MIN_ITEMS = 0;
     if (filtered.length >= MIN_ITEMS) return filtered;
 
@@ -80,8 +67,15 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
     return [...filtered, ...extras];
   }, [occasion]);
 
-  const productosVisibles = useMemo(() => productosMostrar.slice(0, visible), [productosMostrar, visible]);
-  const chips = useMemo(() => Object.keys(OCCASIONS) as OccasionKey[], []);
+  const productosVisibles = useMemo(
+    () => productosMostrar.slice(0, visible),
+    [productosMostrar, visible]
+  );
+
+  const chips = useMemo(
+    () => Object.keys(OCCASIONS) as OccasionKey[],
+    []
+  );
 
   return (
     <main className="min-h-screen">
@@ -90,7 +84,14 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
             <div className="relative h-12 w-12 sm:h-12 sm:w-12 md:h-14 md:w-14 overflow-hidden rounded-full gold-border border bg-white/5 shrink-0">
-              <Image src="/logo.png" alt="La Llama del Amor" fill className="object-contain p-1" priority />
+              <Image
+                src="/logo.png"
+                alt="La Llama del Amor"
+                fill
+                className="object-contain p-1"
+                priority
+                sizes="56px"
+              />
             </div>
 
             <div className="min-w-0">
@@ -105,7 +106,9 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
 
           <a
             className="btn-secondary gold-border shrink-0 hidden sm:inline-flex"
-            href={waLink(`Hola, quiero hacer un pedido para ${current.label}. ¿Me ayudas a elegir un regalo?`)}
+            href={waLink(
+              `Hola, quiero hacer un pedido para ${current.label}. ¿Me ayudas a elegir un regalo?`
+            )}
             target="_blank"
             rel="noreferrer"
           >
@@ -115,7 +118,9 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
 
         <a
           className="btn-secondary gold-border mt-4 w-full sm:hidden"
-          href={waLink(`Hola, quiero hacer un pedido para ${current.label}. ¿Me ayudas a elegir un regalo?`)}
+          href={waLink(
+            `Hola, quiero hacer un pedido para ${current.label}. ¿Me ayudas a elegir un regalo?`
+          )}
           target="_blank"
           rel="noreferrer"
         >
@@ -128,11 +133,14 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
         <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Regalos personalizados <span className="block text-llama-muted">para todo el año.</span>
+              Regalos personalizados{" "}
+              <span className="block text-llama-muted">para todo el año.</span>
             </h1>
 
             <p className="mt-4 max-w-xl text-llama-muted">
-              Chocolates, brownies y detalles premium para cumpleaños, aniversarios y ocasiones especiales. Compra rápida por WhatsApp. Entrega en Lima.
+              Chocolates, brownies y detalles premium para cumpleaños,
+              aniversarios y ocasiones especiales. Compra rápida por WhatsApp.
+              Entrega en Lima.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -140,7 +148,9 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
                 <button
                   key={key}
                   onClick={() => onSelectOccasion(key)}
-                  className={`pill transition ${occasion === key ? "gold-bg text-black" : ""}`}
+                  className={`pill transition ${
+                    occasion === key ? "gold-bg text-black" : ""
+                  }`}
                 >
                   {OCCASIONS[key].chip}
                 </button>
@@ -152,7 +162,12 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
                 Explorar regalos
               </a>
 
-              <a className="btn-secondary gold-border w-full sm:w-auto" href={waLink(current.waText)} target="_blank" rel="noreferrer">
+              <a
+                className="btn-secondary gold-border w-full sm:w-auto"
+                href={waLink(current.waText)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {current.ctaText}
               </a>
             </div>
@@ -177,15 +192,20 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
       <section id="catalogo" className="mx-auto max-w-6xl px-6 pb-14">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="section-title gold-text">Catálogo de {current.label}</h2>
+            <h2 className="section-title gold-text">
+              Catálogo de {current.label}
+            </h2>
             <p className="mt-1 text-llama-muted">
-              Regalos seleccionados especialmente para {current.label.toLowerCase()}.
+              Regalos seleccionados especialmente para{" "}
+              {current.label.toLowerCase()}.
             </p>
           </div>
 
           <a
             className="btn-secondary gold-border w-full sm:w-auto"
-            href={waLink(`Hola, quiero cotizar un regalo para ${current.label}. ¿Me ayudas con precios y opciones?`)}
+            href={waLink(
+              `Hola, quiero cotizar un regalo para ${current.label}. ¿Me ayudas con precios y opciones?`
+            )}
             target="_blank"
             rel="noreferrer"
           >
@@ -203,7 +223,7 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 100vw, 360px"
-                  quality={65}
+                  quality={75}
                   loading={idx < 3 ? "eager" : "lazy"}
                   priority={idx < 3}
                 />
@@ -213,7 +233,9 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
                 <h3 className="text-lg font-semibold leading-snug">{p.title}</h3>
                 <div className="mt-1">
                   <div className="text-base font-semibold">{p.price}</div>
-                  <div className="text-xs text-white/70">Incluye personalización · Delivery según zona</div>
+                  <div className="text-xs text-white/70">
+                    Incluye personalización · Delivery según zona
+                  </div>
                 </div>
               </div>
 
@@ -225,7 +247,12 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
                 ))}
               </div>
 
-              <a className="btn-primary gold-bg mt-4 w-full text-black" href={waLink(waProductText(p))} target="_blank" rel="noreferrer">
+              <a
+                className="btn-primary gold-bg mt-4 w-full text-black"
+                href={waLink(waProductText(p))}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Pedir este regalo
               </a>
             </article>
@@ -234,11 +261,15 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
 
         {visible < productosMostrar.length && (
           <div className="mt-8">
-            <button className="btn-secondary gold-border w-full" onClick={() => setVisible((v) => v + 12)}>
+            <button
+              className="btn-secondary gold-border w-full"
+              onClick={() => setVisible((v) => v + 12)}
+            >
               Ver más
             </button>
             <div className="mt-2 text-center text-xs text-white/60">
-              Mostrando {Math.min(visible, productosMostrar.length)} de {productosMostrar.length}
+              Mostrando {Math.min(visible, productosMostrar.length)} de{" "}
+              {productosMostrar.length}
             </div>
           </div>
         )}
@@ -246,7 +277,9 @@ export default function PageClient({ initialOccasion }: { initialOccasion: Occas
 
       {/* Botón flotante */}
       <a
-        href={waLink(`Hola, quiero hacer un pedido para ${current.label}. ¿Qué me recomiendas?`)}
+        href={waLink(
+          `Hola, quiero hacer un pedido para ${current.label}. ¿Qué me recomiendas?`
+        )}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 btn-primary gold-bg text-black shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"

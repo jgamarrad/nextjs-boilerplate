@@ -147,7 +147,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-008",
-    slug: "caja-acrilica-oso-3d-chocolate",
+    slug: "caja-acrilica-oso-3d-chocolate-1",
     title: "Oso 3D de Chocolate",
     price: "S/85",
     tags: ["premium", "chocolate", "viral"],
@@ -475,7 +475,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-039",
-    slug: "choco-brownie-personalizado-san-valentin",
+    slug: "choco-brownie-personalizado-san-valentin-1",
     title: "Choco brownie San Valentín ❤️",
     price: "S/65",
     tags: ["chocolate", "premium", "brownie"],
