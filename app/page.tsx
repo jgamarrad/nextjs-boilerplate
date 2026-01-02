@@ -1,11 +1,14 @@
 // app/page.tsx
 import type { Metadata } from "next";
 import PageClient from "./PageClient";
-import { normalizeOccasion, type OccasionKey } from "@/lib/catalog";
+import type { OccasionKey } from "@/lib/types";
+
 
 export const dynamic = "force-dynamic";
 
+
 const SITE_URL = "https://sv.lallamadelamor.pe";
+
 
 const OG_BY_OCCASION: Record<OccasionKey, { title: string; description: string; imagePath: string }> = {
   san_valentin: {
@@ -30,26 +33,26 @@ const OG_BY_OCCASION: Record<OccasionKey, { title: string; description: string; 
   },
 };
 
+function normalizeOccasion(v: unknown): OccasionKey {
+  if (v === "cumpleanos" || v === "aniversario" || v === "ocasion_especial" || v === "san_valentin") return v;
+  return "san_valentin";
+}
+
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { ocasion?: string };
+  searchParams?: { ocasion?: string };
 }): Promise<Metadata> {
   const occasion = normalizeOccasion(searchParams?.ocasion);
   const og = OG_BY_OCCASION[occasion];
 
   const pageUrl = `${SITE_URL}/?ocasion=${occasion}`;
-  const imageUrl = og.imagePath.startsWith("http") ? og.imagePath : `${SITE_URL}${og.imagePath}`;
+  const imageUrl = `${SITE_URL}${og.imagePath}`;
 
   return {
     metadataBase: new URL(SITE_URL),
     title: og.title,
     description: og.description,
-
-    alternates: {
-      canonical: pageUrl,
-    },
-
     openGraph: {
       title: og.title,
       description: og.description,
@@ -58,16 +61,21 @@ export async function generateMetadata({
       type: "website",
       images: [{ url: imageUrl, width: 1200, height: 630 }],
     },
-
     twitter: {
       card: "summary_large_image",
       title: og.title,
       description: og.description,
       images: [imageUrl],
     },
+    alternates: { canonical: pageUrl },
   };
 }
 
-export default function Page() {
-  return <PageClient />;
+export default function Page({
+  searchParams,
+}: {
+  searchParams?: { ocasion?: string };
+}) {
+  const occasion = normalizeOccasion(searchParams?.ocasion);
+  return <PageClient initialOccasion={occasion} />;
 }

@@ -16,6 +16,7 @@ import {
 const WHATSAPP_NUMBER = "51984096041";
 const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 
+
 function waLink(text: string) {
   return `${WA_BASE}?text=${encodeURIComponent(text)}`;
 }
@@ -34,22 +35,24 @@ function isOccasionKey(v: string | null): v is OccasionKey {
   return !!v && v in OCCASIONS;
 }
 
-export default function PageClient() {
+
+export default function PageClient({ initialOccasion }: { initialOccasion: OccasionKey }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [occasion, setOccasion] = useState<OccasionKey>("san_valentin");
+  const [occasion, setOccasion] = useState<OccasionKey>(initialOccasion);
   const [visible, setVisible] = useState(12);
 
-  // Al abrir link con ?ocasion=..., inicia filtrado automáticamente
+  // Si el usuario cambia el query en el navegador, sincroniza
   useEffect(() => {
-    const q = searchParams.get("ocasion");
-    if (!isOccasionKey(q)) return;
-    setOccasion(q);
-    setVisible(12);
+    const q = searchParams.get("ocasion") as OccasionKey | null;
+    if (q && q !== occasion) {
+      setOccasion(q);
+      setVisible(12);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  // Al seleccionar chips, actualiza estado + URL (link compartible)
   const onSelectOccasion = (key: OccasionKey) => {
     setOccasion(key);
     setVisible(12);
