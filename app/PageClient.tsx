@@ -231,6 +231,11 @@ export default function PageClient({
 
               <div className="mt-4">
                 <h3 className="text-lg font-semibold leading-snug">{p.title}</h3>
+                  {p.subtitle && (
+                    <p className="mt-1 text-sm text-white/70 leading-snug">
+                      {p.subtitle}
+                    </p>
+                  )}
                 <div className="mt-1">
                   <div className="text-base font-semibold">{p.price}</div>
                   <div className="text-xs text-white/70">
