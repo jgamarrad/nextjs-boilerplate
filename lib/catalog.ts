@@ -86,6 +86,7 @@ export const productos: Product[] = [
     image: "/caja-miski-feliz-14-san-valentin.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski Feliz 14❤️". ¿Opciones y precio?',
     occasions: ["san_valentin", "aniversario"],
+    priority: { san_valentin: 95 },
   },
   {
     id: "LLA-002",
@@ -97,7 +98,7 @@ export const productos: Product[] = [
     image: "/correo-postal-feliz-dia-mi-amor.jpg",
     waText: "Hola, quiero el Correo Postal con el mensaje 'Feliz día mi amor'. ¿Me das más detalle del producto?",
     occasions: ["san_valentin", "cumpleanos", "aniversario", "ocasion_especial"],
-    priority: { aniversario: 75 },
+    priority: { aniversario: 75, san_valentin: 90 },
   },
   {
     id: "LLA-003",
@@ -109,6 +110,7 @@ export const productos: Product[] = [
     image: "/choco-brownie-con-pulseras-hilo-rojo-san-valentin.jpg",
     waText: "Hola, quiero info del Choco brownie con pulseras rojas. ¿Detalles y precio?",
     occasions: ["san_valentin", "aniversario"],
+    priority: { san_valentin: 85 },
   },
   {
     id: "LLA-004",
@@ -495,6 +497,7 @@ export const productos: Product[] = [
     image: "/correo-postal-chocolate-san-valentin.jpg",
     waText: "Hola, quiero el Correo Postal de San Valentín. ¿Me das más detalle del producto?",
     occasions: ["san_valentin"],
+    priority: { san_valentin: 80 },
   },
   {
     id: "LLA-038",
@@ -518,6 +521,7 @@ export const productos: Product[] = [
     image: "/choco-brownie-personalizado-san-valentin-1.jpg",
     waText: "Hola, quiero info del 'Choco brownie San Valentín ❤️'. ¿Detalles y precio?",
     occasions: ["san_valentin", "aniversario"],
+     priority: { san_valentin: 60 },
   },
   {
     id: "LLA-040",
