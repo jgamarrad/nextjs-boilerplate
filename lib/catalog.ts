@@ -1,29 +1,38 @@
 // lib/catalog.ts
 
-export type OccasionKey = "san_valentin" | "cumpleanos" | "aniversario" | "ocasion_especial";
+export type OccasionKey = "inicio" | "cumpleanos" | "aniversario" | "ocasion_especial" | "san_valentin" | "mama" ;
 
 export const OCC_KEYS: OccasionKey[] = [
-  "san_valentin",
+  "inicio",
   "cumpleanos",
   "aniversario",
   "ocasion_especial",
+  "san_valentin",
+  "mama",
 ];
 
 export function normalizeOccasion(v: unknown): OccasionKey {
-  if (typeof v !== "string") return "san_valentin";
-  return OCC_KEYS.includes(v as OccasionKey) ? (v as OccasionKey) : "san_valentin";
+  if (typeof v !== "string") return "inicio";
+  return OCC_KEYS.includes(v as OccasionKey) ? (v as OccasionKey) : "inicio";
 }
 
 export const OCCASIONS: Record<
   OccasionKey,
   { label: string; chip: string; heroImg: string; waText: string; ctaText: string }
 > = {
-  san_valentin: {
-    label: "San Valentín",
-    chip: "❤️ San Valentín",
-    heroImg: "/correo-postal-feliz-dia-mi-amor.jpg",
+   inicio: {
+    label: "Inicio",
+    chip: "⭐ Inicio",
+    heroImg: "/pack-chocolates-aniversario-5-anos-peluche.jpg",
     ctaText: "Pedir por WhatsApp",
-    waText: "Hola, quiero ver el catálogo de San Valentín y personalizar un regalo.",
+    waText: "Hola, quiero ver el catálogo de Regalos- ¿Me ayudas?",
+  },
+  mama: {
+    label: "Mamá",
+    chip: "🌷 Mamá",
+    heroImg: "/regalos-para-mama.jpg",
+    ctaText: "Pedir por WhatsApp",
+    waText: "Hola, quiero ver el catálogo de Día de la Madre y personalizar un regalo.",
   },
   cumpleanos: {
     label: "Cumpleaños",
@@ -45,6 +54,13 @@ export const OCCASIONS: Record<
     heroImg: "/box-chocolate-peluche-llamita.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, busco un regalo para una ocasión especial. ¿Qué opciones tienes?",
+  },
+    san_valentin: {
+    label: "San Valentín",
+    chip: "❤️ San Valentín",
+    heroImg: "/correo-postal-chocolate-san-valentin.jpg",
+    ctaText: "Pedir por WhatsApp",
+    waText: "Hola, quiero ver el catálogo de San Valentín y personalizar un regalo.",
   },
 };
 
@@ -97,8 +113,8 @@ export const productos: Product[] = [
     tags: ["foto", "chocolate", "dedicatoria", "viral"],
     image: "/correo-postal-feliz-dia-mi-amor.jpg",
     waText: "Hola, quiero el Correo Postal con el mensaje 'Feliz día mi amor'. ¿Me das más detalle del producto?",
-    occasions: ["san_valentin", "cumpleanos", "aniversario", "ocasion_especial"],
-    priority: { aniversario: 75, san_valentin: 90 },
+    occasions: ["inicio","san_valentin", "cumpleanos", "aniversario", "ocasion_especial"],
+    priority: { inicio:60, aniversario: 75, san_valentin: 90 },
   },
   {
     id: "LLA-003",
@@ -109,7 +125,7 @@ export const productos: Product[] = [
     tags: ["top ventas", "premium", "brownie"],
     image: "/choco-brownie-con-pulseras-hilo-rojo-san-valentin.jpg",
     waText: "Hola, quiero info del Choco brownie con pulseras rojas. ¿Detalles y precio?",
-    occasions: ["san_valentin", "aniversario"],
+    occasions: ["inicio", "san_valentin", "aniversario"],
     priority: { san_valentin: 85 },
   },
   {
@@ -121,7 +137,8 @@ export const productos: Product[] = [
     tags: ["top ventas", "chocolate", "premium"],
     image: "/caja-miski-chocolate-te-amo.jpg",
     waText: 'Hola, quiero info de la Caja Choco Retrato "❤️Te Amo❤️". ¿Detalles y precio?',
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["inicio", "san_valentin", "aniversario", "ocasion_especial"],
+    priority: { inicio: 40 },
   },
   {
     id: "LLA-005",
@@ -132,7 +149,7 @@ export const productos: Product[] = [
     tags: ["foto", "chocolate", "brownie", "premium"],
     image: "/caja-miski-chocolate-te-amo-brownie-retrato.jpg",
     waText: 'Hola, quiero info de la Caja Choco Retrato "Te Amo". ¿Detalles y precio?',
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["inicio", "mama", "san_valentin", "aniversario", "ocasion_especial"],
   },
   {
     id: "LLA-006",
@@ -154,7 +171,7 @@ export const productos: Product[] = [
     tags: ["foto", "chocolate", "dedicatoria", "viral"],
     image: "/correo-postal-chocolate-la-mejor-enamorada-del-mundo.jpg",
     waText: "Hola, quiero el Correo Postal 'La mejor Enamorad@'. ¿Me das más detalle del producto?",
-    occasions: ["san_valentin", "aniversario"],
+    occasions: ["inicio", "san_valentin", "aniversario"],
   },
   {
     id: "LLA-008",
@@ -165,7 +182,7 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "viral"],
     image: "/caja-acrilica-oso-3d-chocolate-te-amo.jpg",
     waText: "Hola, quiero la 'Caja Acrílica con el Oso 3D en chocolate'. ¿Me das más detalle del producto?",
-    occasions: ["san_valentin", "cumpleanos", "aniversario", "ocasion_especial"],
+    occasions: ["inicio","san_valentin", "cumpleanos", "aniversario", "ocasion_especial"],
   },
   {
     id: "LLA-009",
@@ -209,7 +226,7 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "romántico"],
     image: "/Caja-rosas-de-chocolate-con-amor.jpg",
     waText: 'Hola, quiero info del regalo "Choco rosas con amor". ¿Opciones y precio?',
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["mama", "san_valentin", "aniversario", "ocasion_especial"],
   },
   {
     id: "LLA-013",
@@ -220,7 +237,7 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "romántico"],
     image: "/caja-miski-chocolates-te-quiero.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski Te Quiero ❤️". ¿Opciones y precio?',
-    occasions: ["san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["inicio", "san_valentin", "aniversario", "ocasion_especial"],
   },
   {
     id: "LLA-014",
@@ -254,8 +271,8 @@ export const productos: Product[] = [
     tags: ["chocolate", "premium", "brownie"],
     image: "/choco-brownie-personalizado-cumple.jpg",
     waText: "Hola, quiero info del 'Choco brownie de Cumpleaños'. ¿Detalles y precio?",
-    occasions: ["cumpleanos"],
-    priority: { cumpleanos: 90 },
+    occasions: ["inicio", "cumpleanos"],
+    priority: { inicio:50, cumpleanos: 90 },
   },
   {
     id: "LLA-017",
@@ -266,7 +283,7 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "top-ventas"],
     image: "/caja-miski-chocolate-cumple-hb-amor.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski de Cumpleaños HB❤️AMOR". ¿Opciones y precio?',
-    occasions: ["cumpleanos"],
+    occasions: ["inicio", "cumpleanos"],
     priority: { cumpleanos: 80 },
   },
   {
@@ -314,7 +331,7 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "romántico"],
     image: "/caja-miski-chocolate-preciosa.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski con el mensaje Preciosa". ¿Opciones y precio?',
-    occasions: ["ocasion_especial"],
+    occasions: ["inicio", "ocasion_especial"],
     priority: { ocasion_especial: 70 },
   },
   {
@@ -326,7 +343,7 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate"],
     image: "/tableta-chocolate-personalizada-cumple.jpg",
     waText: 'Hola, quiero info del regalo "Tableta de Chocolate Personalizada". ¿Opciones y precio?',
-    occasions: ["cumpleanos"],
+    occasions: ["inicio", "cumpleanos"],
     priority: { cumpleanos: 75 },
   },
   {
@@ -372,8 +389,8 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "rosas"],
     image: "/caja-rosas-chocolate-cumple-miski-mama.jpg",
     waText: 'Hola, quiero info del regalo "Box Sweet Love 🍫🌹". ¿Opciones y precio?',
-    occasions: ["cumpleanos", "ocasion_especial"],
-    priority: { cumpleanos: 50, ocasion_especial: 50 },
+    occasions: ["mama", "cumpleanos", "ocasion_especial"],
+    priority: { mama: 60, cumpleanos: 50, ocasion_especial: 50 },
   },
   {
     id: "LLA-027",
@@ -508,7 +525,7 @@ export const productos: Product[] = [
     tags: ["foto", "chocolate", "dedicatoria", "viral"],
     image: "/correo-postal-chocolate-personalizado-cumple.jpg",
     waText: "Hola, quiero el Correo Postal de Cumpleaños ¿Me das más detalle del producto?",
-    occasions: ["cumpleanos"],
+    occasions: ["inicio", "cumpleanos"],
     priority: { cumpleanos: 60 },
   },
   {
@@ -532,7 +549,7 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "top-ventas"],
     image: "/caja-miski-chocolate-aniversario-14-meses.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski Cumple Mes". ¿Opciones y precio?',
-    occasions: ["aniversario"],
+    occasions: ["inicio", "aniversario"],
     priority: { aniversario: 35 },
   },
  {
@@ -555,7 +572,7 @@ export const productos: Product[] = [
     tags: ["chocolate", "premium", "aniversario"],
     image: "/pack-chocolates-aniversario-5-anos-peluche.jpg",
     waText: "Hola, quiero info del 'Choco brownie San Valentín ❤️'. ¿Detalles y precio?",
-    occasions: ["san_valentin", "aniversario"],
+    occasions: ["inicio", "san_valentin", "aniversario"],
     priority: { aniversario: 65 },
   },
   {
@@ -567,7 +584,7 @@ export const productos: Product[] = [
     tags: ["premium", "video", "recuerdos"],
     image: "/caja-de-video-rosas-regalo-personalizado.jpg",
     waText: 'Hola, quiero info del regalo "Caja Video Amor❤️". ¿Opciones y precio?',
-    occasions: ["san_valentin", "aniversario", "cumpleanos", "ocasion_especial"],
+    occasions: ["inicio", "san_valentin", "aniversario", "cumpleanos", "ocasion_especial"],
     priority: { aniversario: 45, san_valentin: 35 },
   },
     {
@@ -581,6 +598,53 @@ export const productos: Product[] = [
     waText: 'Hola, quiero info del regalo "Box Romance Deluxe🌹". ¿Opciones y precio?',
     occasions: ["cumpleanos", "san_valentin", "aniversario", "ocasion_especial"],
     priority: { aniversario: 35, san_valentin: 15 },
+  },
+    {
+    id: "LLA-045",
+    slug: "caja-miski-choco-retrato",
+    title: 'Choco retrato para “MAMA”',
+    subtitle: "Letras de chocolate personalizadas, porción de brownie y foto personalizada",
+    price: "S/75",
+    tags: ["foto", "chocolate", "brownie", "premium"],
+    image: "/choco-retrato-mama.jpg",
+    waText: 'Hola, quiero info de la Caja Choco Retrato para "Mamá". ¿Detalles y precio?',
+    occasions: ["mama"],
+    priority: { mama: 90},
+  },
+    {
+    id: "LLA-046",
+    slug: "tableta-chocolate-3d",
+    title: "Tableta Chocolate para Mamá",
+    subtitle: "Tableta rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
+    price: "S/55",
+    tags: ["premium", "chocolate"],
+    image: "/tableta-de-chocolate-mama.jpg",
+    waText: 'Hola, quiero info del regalo "Tableta de Chocolate Personalizada". ¿Opciones y precio?',
+    occasions: ["mama"],
+  },
+    {
+    id: "LLA-047",
+    slug: "choco-brownie-para-mama",
+    title: "Choco brownie Mamá eres increíble",
+    subtitle: "Caja con cuatro porciones de brownie, cubierta por tabletas de chocolate personalizadas",
+    price: "Desde S/65",
+    tags: ["top ventas", "premium", "brownie"],
+    image: "/choco-brownie-mama-increible.jpg",
+    waText: "Hola, quiero info del Choco brownie Mamá eres incréible. ¿Detalles y precio?",
+    occasions: ["mama"],
+    priority: { mama: 60},
+  },
+      {
+    id: "LLA-048",
+    slug: "choco-brownie-para-mama",
+    title: "Choco brownie Mamá eres mi mayor tesoro",
+    subtitle: "Caja con cuatro porciones de brownie, cubierta por tabletas de chocolate personalizadas",
+    price: "Desde S/65",
+    tags: ["top ventas", "premium", "brownie"],
+    image: "/choco-brownie-mama-eres-mi-mayor-tesoro.jpg",
+    waText: "Hola, quiero info del Choco brownie Mamá eres mi mayo tesoro. ¿Detalles y precio?",
+    occasions: ["mama"],
+    priority: { mama: 40},
   },
 ];
 

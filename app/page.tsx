@@ -2,5 +2,5 @@
 import { redirect } from "next/navigation";
 
 export default function Home() {
-  redirect("/san_valentin");
+  redirect("/inicio");
 }
