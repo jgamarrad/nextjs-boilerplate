@@ -646,6 +646,17 @@ export const productos: Product[] = [
     occasions: ["mama"],
     priority: { mama: 40},
   },
+    {
+    id: "LLA-049",
+    slug: "correo-postal-mama-eres-mi-reina",
+    title: "Correo Postal Mamá Eres Mi Reina",
+    subtitle: "Caja con mensaje en chocolate. También se puede personalizar foto y texto de la tapa interna",
+    price: "S/85",
+    tags: ["foto", "chocolate", "dedicatoria", "viral"],
+    image: "/correo-chocolate-mama-tu-eres-mi-reina.jpg",
+    waText: "Hola, quiero el Correo Postal con el mensaje 'Mamá tú eres mi reina'. ¿Me das más detalle del producto?",
+    occasions: ["mama"],
+  },
 ];
 
 // ===== SANITY CHECK (solo en DEV) =====
