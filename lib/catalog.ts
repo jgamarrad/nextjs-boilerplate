@@ -727,7 +727,7 @@ export const productos: Product[] = [
     image: "/box-recuerdos-de-mama.jpg",
     waText: 'Hola, quiero info del regalo "Box Recuerdos de Mamá". ¿Detalles y precio?',
     occasions: ["mama"],
-    priority: { mama: 100 },
+    priority: { mama: 69 },
   },
 ];
 
