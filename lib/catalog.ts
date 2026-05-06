@@ -30,7 +30,7 @@ export const OCCASIONS: Record<
   mama: {
     label: "Mamá",
     chip: "🌷 Mamá",
-    heroImg: "/regalos-para-mama.jpg",
+    heroImg: "/regalos-para-mama-1.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de Día de la Madre y personalizar un regalo.",
   },
@@ -609,7 +609,7 @@ export const productos: Product[] = [
     image: "/choco-retrato-mama.jpg",
     waText: 'Hola, quiero info de la Caja Choco Retrato para "Mamá". ¿Detalles y precio?',
     occasions: ["mama"],
-    priority: { mama: 90},
+    priority: { mama: 60},
   },
     {
     id: "LLA-046",
@@ -621,6 +621,7 @@ export const productos: Product[] = [
     image: "/tableta-de-chocolate-mama.jpg",
     waText: 'Hola, quiero info del regalo "Tableta de Chocolate Personalizada". ¿Opciones y precio?',
     occasions: ["mama"],
+    priority: { mama: 25},
   },
     {
     id: "LLA-047",
@@ -632,7 +633,7 @@ export const productos: Product[] = [
     image: "/choco-brownie-mama-increible.jpg",
     waText: "Hola, quiero info del Choco brownie Mamá eres incréible. ¿Detalles y precio?",
     occasions: ["mama"],
-    priority: { mama: 60},
+    priority: { mama: 20},
   },
       {
     id: "LLA-048",
@@ -644,7 +645,7 @@ export const productos: Product[] = [
     image: "/choco-brownie-mama-eres-mi-mayor-tesoro.jpg",
     waText: "Hola, quiero info del Choco brownie Mamá eres mi mayo tesoro. ¿Detalles y precio?",
     occasions: ["mama"],
-    priority: { mama: 40},
+    priority: { mama: 59},
   },
     {
     id: "LLA-049",
@@ -667,7 +668,7 @@ export const productos: Product[] = [
     image: "/caja-miski-mama-chocolate.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski para Mamá". ¿Opciones y precio?',
     occasions: ["mama"],
-    priority: { mama: 60},
+    priority: { mama: 10},
   },
       {
     id: "LLA-051",
@@ -679,7 +680,7 @@ export const productos: Product[] = [
     image: "/correo-postal-chocolate-feliz-dia-mama.jpg",
     waText: "Hola, quiero el Correo Postal con el mensaje 'Feliz Día Mamá'. ¿Me das más detalle del producto?",
     occasions: ["mama"],
-    priority: { mama: 70},
+    priority: { mama: 5},
   },
   {
     id: "LLA-052",
@@ -715,6 +716,18 @@ export const productos: Product[] = [
     waText: 'Hola, quiero info del regalo "Tableta de Chocolate Personalizada". ¿Opciones y precio?',
     occasions: ["mama"],
     priority: { mama: 72 },
+  },
+     {
+    id: "LLA-055",
+    slug: "box-video-mama",
+    title: "Box Recuerdos de Mamá",
+    subtitle: "Tableta de chocolate rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
+    price: "320",
+    tags: ["premium", "video", "experiencia"],
+    image: "/box-recuerdos-de-mama.jpg",
+    waText: 'Hola, quiero info del regalo "Box Recuerdos de Mamá". ¿Detalles y precio?',
+    occasions: ["mama"],
+    priority: { mama: 100 },
   },
 ];
 
