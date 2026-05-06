@@ -722,7 +722,7 @@ export const productos: Product[] = [
     slug: "box-video-mama",
     title: "Box Recuerdos de Mamá",
     subtitle: "Tableta de chocolate rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
-    price: "320",
+    price: "S/.320",
     tags: ["premium", "video", "experiencia"],
     image: "/box-recuerdos-de-mama.jpg",
     waText: 'Hola, quiero info del regalo "Box Recuerdos de Mamá". ¿Detalles y precio?',
