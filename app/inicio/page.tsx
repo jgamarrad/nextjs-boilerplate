@@ -16,14 +16,14 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    title: "Regalos para toda coasión | La Llama del Amor",
+    title: "Regalos para toda ocasión | La Llama del Amor",
     description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
     url: "/inicio",
     siteName: "La Llama del Amor",
     locale: "es_PE",
     images: [
       {
-        url: "/og-inicio.jpg",
+        url: "/og-inicio-1.jpg",
         width: 1200,
         height: 630,
         alt: "Regalos para toda ocasión | La Llama del Amor",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Regalos para toda ocasión | La Llama del Amor",
     description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
-    images: ["/og-inicio.jpg"],
+    images: ["/og-inicio-1.jpg"],
   },
 
   // Opcional: elimina warnings de Meta si tienes App ID

@@ -142,7 +142,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-005",
-    slug: "caja-miski-choco-retrato",
+    slug: "caja-miski-choco-retrato-detalle",
     title: 'Choco retrato “Te Amo”',
     subtitle: "Letras de chocolate personalizadas, porción de brownie y foto personalizada",
     price: "S/75",
@@ -336,7 +336,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-022",
-    slug: "tableta-chocolate-3d",
+    slug: "tableta-chocolate-3d-cumple",
     title: "Tableta Chocolate Cumpleaños",
     subtitle: "Tableta rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
     price: "S/55",
@@ -601,7 +601,7 @@ export const productos: Product[] = [
   },
     {
     id: "LLA-045",
-    slug: "caja-miski-choco-retrato",
+    slug: "caja-miski-choco-retrato-mama",
     title: 'Choco retrato para “MAMA”',
     subtitle: "Letras de chocolate personalizadas, porción de brownie y foto personalizada",
     price: "S/75",
@@ -613,7 +613,7 @@ export const productos: Product[] = [
   },
     {
     id: "LLA-046",
-    slug: "tableta-chocolate-3d",
+    slug: "tableta-chocolate-3d-mama-1",
     title: "Tableta Chocolate para Mamá",
     subtitle: "Tableta rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
     price: "S/55",
@@ -625,7 +625,7 @@ export const productos: Product[] = [
   },
     {
     id: "LLA-047",
-    slug: "choco-brownie-para-mama",
+    slug: "choco-brownie-para-mama-detalle",
     title: "Choco brownie Mamá eres increíble",
     subtitle: "Caja con cuatro porciones de brownie, cubierta por tabletas de chocolate personalizadas",
     price: "Desde S/65",
@@ -684,7 +684,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-052",
-    slug: "correo-postal-diploma",
+    slug: "correo-postal-diploma-mama",
     title: "Correo Postal de Chocolate - Diploma para Mamá",
     subtitle: "Caja con mensaje en chocolate. Personaliza la tapa interna como diploma según la ocasión",
     price: "S/85",
@@ -707,7 +707,7 @@ export const productos: Product[] = [
   },
    {
     id: "LLA-054",
-    slug: "tableta-chocolate-3d",
+    slug: "tableta-chocolate-3d-mama",
     title: "Tableta Chocolate para Mamá",
     subtitle: "Tableta de chocolate rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
     price: "Desde S/55",
