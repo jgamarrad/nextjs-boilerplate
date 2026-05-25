@@ -1,6 +1,6 @@
 // lib/catalog.ts
 
-export type OccasionKey = "inicio" | "cumpleanos" | "aniversario" | "ocasion_especial" | "san_valentin" | "mama" ;
+export type OccasionKey = "inicio" | "papa" | "cumpleanos" | "aniversario" | "ocasion_especial" | "san_valentin" | "mama" ;
 
 export const OCC_KEYS: OccasionKey[] = [
   "inicio",
@@ -9,6 +9,7 @@ export const OCC_KEYS: OccasionKey[] = [
   "ocasion_especial",
   "san_valentin",
   "mama",
+  "papa",
 ];
 
 export function normalizeOccasion(v: unknown): OccasionKey {
@@ -27,12 +28,12 @@ export const OCCASIONS: Record<
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de Regalos- ¿Me ayudas?",
   },
-  mama: {
-    label: "Mamá",
-    chip: "🌷 Mamá",
-    heroImg: "/regalos-para-mama-1.jpg",
+  papa: {
+    label: "Papá",
+    chip: "🏆 Papá",
+    heroImg: "/caja-miski-chocolate-yo-amo-papa.jpg",
     ctaText: "Pedir por WhatsApp",
-    waText: "Hola, quiero ver el catálogo de Día de la Madre y personalizar un regalo.",
+    waText: "Hola, quiero ver el catálogo de Día del Padre y personalizar un regalo.",
   },
   cumpleanos: {
     label: "Cumpleaños",
@@ -61,6 +62,13 @@ export const OCCASIONS: Record<
     heroImg: "/correo-postal-chocolate-san-valentin.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de San Valentín y personalizar un regalo.",
+  },
+    mama: {
+    label: "Mamá",
+    chip: "🌷 Mamá",
+    heroImg: "/regalos-para-mama-1.jpg",
+    ctaText: "Pedir por WhatsApp",
+    waText: "Hola, quiero ver el catálogo de Día de la Madre y personalizar un regalo.",
   },
 };
 
@@ -430,11 +438,13 @@ export const productos: Product[] = [
     id: "LLA-030",
     slug: "caja-miski-chocolate-yo-amo-papa",
     title: "Caja Miski YO❤️PAPA",
+    subtitle: "Letras de chocolate personalizadas",
     price: "S/60",
     tags: ["premium", "chocolate", "familia"],
     image: "/caja-miski-chocolate-yo-amo-papa.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski YO❤️PAPA". ¿Opciones y precio?',
-    occasions: ["ocasion_especial"],
+    occasions: ["papa","ocasion_especial"],
+    priority: { papa: 45 },
   },
   {
     id: "LLA-031",
@@ -728,6 +738,30 @@ export const productos: Product[] = [
     waText: 'Hola, quiero info del regalo "Box Recuerdos de Mamá". ¿Detalles y precio?',
     occasions: ["mama"],
     priority: { mama: 69 },
+  },
+      {
+    id: "LLA-056",
+    slug: "caja-miski-choco-retrato-papa",
+    title: 'Choco retrato para "PAPA”',
+    subtitle: "Letras de chocolate personalizadas, porción de brownie y foto personalizada",
+    price: "S/75",
+    tags: ["foto", "chocolate", "brownie", "premium"],
+    image: "/choco-retrato-para-papa.jpg",
+    waText: 'Hola, quiero info de la Caja Choco Retrato para "Papá". ¿Detalles y precio?',
+    occasions: ["papa"],
+    priority: { papa: 30},
+  },
+        {
+    id: "LLA-057",
+    slug: "caja-miski-choco-retrato-papa-negro",
+    title: 'Choco retrato para mi "PAPA”',
+    subtitle: "Letras de chocolate personalizadas, porción de brownie y foto personalizada",
+    price: "S/75",
+    tags: ["foto", "chocolate", "brownie", "premium"],
+    image: "/choco-retrato-para-papa-negro.jpg",
+    waText: 'Hola, quiero info de la Caja Choco Retrato para "Papá". ¿Detalles y precio?',
+    occasions: ["papa"],
+    priority: { papa: 25},
   },
 ];
 
