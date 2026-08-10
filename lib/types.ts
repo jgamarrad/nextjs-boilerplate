@@ -1,1 +1,1 @@
-export type OccasionKey = "inicio" | "papa" | "cumpleanos" | "aniversario" | "ocasion_especial" | "san_valentin" | "mama"  ;
+export type OccasionKey = "inicio" | "cumpleanos" | "aniversario" | "ocasion_especial" | "san_valentin" | "mama" | "papa"  ;

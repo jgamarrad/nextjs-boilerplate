@@ -1,6 +1,6 @@
 // lib/catalog.ts
 
-export type OccasionKey = "inicio" | "papa" | "cumpleanos" | "aniversario" | "ocasion_especial" | "san_valentin" | "mama" ;
+export type OccasionKey = "inicio" | "cumpleanos" | "aniversario" | "ocasion_especial" | "san_valentin" | "mama" | "papa"  ;
 
 export const OCC_KEYS: OccasionKey[] = [
   "inicio",
@@ -27,13 +27,6 @@ export const OCCASIONS: Record<
     heroImg: "/pack-chocolates-aniversario-5-anos-peluche.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de Regalos- ¿Me ayudas?",
-  },
-  papa: {
-    label: "Papá",
-    chip: "🏆 Papá",
-    heroImg: "/caja-miski-chocolate-yo-amo-papa.jpg",
-    ctaText: "Pedir por WhatsApp",
-    waText: "Hola, quiero ver el catálogo de Día del Padre y personalizar un regalo.",
   },
   cumpleanos: {
     label: "Cumpleaños",
@@ -69,6 +62,13 @@ export const OCCASIONS: Record<
     heroImg: "/regalos-para-mama-1.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de Día de la Madre y personalizar un regalo.",
+  },
+  papa: {
+    label: "Papá",
+    chip: "🏆 Papá",
+    heroImg: "/caja-miski-chocolate-yo-amo-papa.jpg",
+    ctaText: "Pedir por WhatsApp",
+    waText: "Hola, quiero ver el catálogo de Día del Padre y personalizar un regalo.",
   },
 };
 
@@ -157,7 +157,7 @@ export const productos: Product[] = [
     tags: ["foto", "chocolate", "brownie", "premium"],
     image: "/caja-miski-chocolate-te-amo-brownie-retrato.jpg",
     waText: 'Hola, quiero info de la Caja Choco Retrato "Te Amo". ¿Detalles y precio?',
-    occasions: ["inicio", "mama", "san_valentin", "aniversario", "ocasion_especial"],
+    occasions: ["mama", "san_valentin", "aniversario", "ocasion_especial"],
   },
   {
     id: "LLA-006",
@@ -268,7 +268,6 @@ export const productos: Product[] = [
     image: "/caja-miski-cumple-hb-gamer.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski de Cumpleaños Gamer". ¿Opciones y precio?',
     occasions: ["cumpleanos"],
-    priority: { cumpleanos: 70 },
   },
   {
     id: "LLA-016",
@@ -292,7 +291,7 @@ export const productos: Product[] = [
     image: "/caja-miski-chocolate-cumple-hb-amor.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski de Cumpleaños HB❤️AMOR". ¿Opciones y precio?',
     occasions: ["inicio", "cumpleanos"],
-    priority: { cumpleanos: 80 },
+    priority: { cumpleanos: 30 },
   },
   {
     id: "LLA-018",
@@ -316,7 +315,6 @@ export const productos: Product[] = [
     image: "/caja-miski-chocolate-cumple-hb-guapo.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski de Cumpleaños HB❤️GUAPO". ¿Opciones y precio?',
     occasions: ["cumpleanos"],
-    priority: { cumpleanos: 80 },
   },
   {
     id: "LLA-020",
@@ -352,7 +350,7 @@ export const productos: Product[] = [
     image: "/tableta-chocolate-personalizada-cumple.jpg",
     waText: 'Hola, quiero info del regalo "Tableta de Chocolate Personalizada". ¿Opciones y precio?',
     occasions: ["inicio", "cumpleanos"],
-    priority: { cumpleanos: 75 },
+    priority: { cumpleanos: 45 },
   },
   {
     id: "LLA-023",
@@ -363,7 +361,7 @@ export const productos: Product[] = [
     image: "/pack-choco-brownie-cumple-peluche-llamita.jpg",
     waText: 'Hola, quiero info del regalo "Pack Choco Brownie y peluche de Llamita 🍫🦙". ¿Opciones y precio?',
     occasions: ["cumpleanos"],
-    priority: { cumpleanos: 74 },
+    priority: { cumpleanos: 20 },
   },
   {
     id: "LLA-024",
@@ -397,8 +395,8 @@ export const productos: Product[] = [
     tags: ["premium", "chocolate", "rosas"],
     image: "/caja-rosas-chocolate-cumple-miski-mama.jpg",
     waText: 'Hola, quiero info del regalo "Box Sweet Love 🍫🌹". ¿Opciones y precio?',
-    occasions: ["mama", "cumpleanos", "ocasion_especial"],
-    priority: { cumpleanos: 50, ocasion_especial: 50 },
+    occasions: ["mama", "ocasion_especial"],
+    priority: { ocasion_especial: 50 },
   },
   {
     id: "LLA-027",
@@ -858,6 +856,76 @@ export const productos: Product[] = [
     image: "/tableta-de-chocolate-papa-padre-garabato.jpg",
     waText: 'Hola, quiero info del regalo "Tableta de Chocolate del Lugar Preferido de Papá". ¿Detalles y precio?',
     occasions: ["papa"],
+  },
+        {
+    id: "LLA-066",
+    slug: "caja-miski-hb-cumple-torta",
+    title: "Caja Miski Happy Birthday",
+    subtitle: "Letras de chocolate personalizadas",
+    price: "S/60",
+    tags: ["premium", "chocolate"],
+    image: "/caja-miski-hb-cumple-torta.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Happy Birthday". ¿Detalles y precio?',
+    occasions: ["cumpleanos"],
+    priority: { cumpleanos: 80},
+  },
+    {
+    id: "LLA-067",
+    slug: "box-miski-letras-chocolate-peluche-oso-cumple",
+    title: "Box Cumpleañero - Letras en chocolate y peluche 🍫🧸🎂 ",
+    price: "S/112",
+    tags: ["premium", "chocolate", "peluche"],
+    image: "/box-chocolate-oso-hb-cumple.jpg",
+    waText: 'Hola, quiero info del regalo "Box Cumpleañero - Letras en chocolate y peluche 🍫🧸🎂". ¿Detalles?',
+    occasions: ["inicio", "cumpleanos"],
+    priority: { inicio: 60, cumpleanos: 75 },
+  },
+          {
+    id: "LLA-068",
+    slug: "caja-miski-feliz-dia-torta",
+    title: "Caja Miski Feliz Día",
+    subtitle: "Letras de chocolate personalizadas",
+    price: "S/60",
+    tags: ["premium", "chocolate"],
+    image: "/caja-miski-feliz-dia-torta.jpg",
+    waText: 'Hola, quiero info del regalo "Caja Miski Feliz Día". ¿Detalles y precio?',
+    occasions: ["cumpleanos"],
+    priority: { cumpleanos: 40},
+  },
+    {
+    id: "LLA-069",
+    slug: "choco-brownie-cumple-regalo-ay-no",
+    title: "Choco brownie Cumpleañero",
+    subtitle: "Caja con cuatro porciones de brownie, cubierta por tabletas de chocolate personalizadas",
+    price: "S/65",
+    tags: ["top ventas", "premium", "brownie"],
+    image: "/choco-brownie-cumple-regalo-ay-no.jpg",
+    waText: "Hola, quiero info del Choco brownie Cumpleañero. ¿Detalles y precio?",
+    occasions: ["cumpleanos"],
+    priority: { cumpleanos: 40},
+  },
+     {
+    id: "LLA-070",
+    slug: "choco-brownie-cumple-regalo-meme",
+    title: "Choco brownie Cumpleaños",
+    subtitle: "Caja con cuatro porciones de brownie, cubierta por tabletas de chocolate personalizadas",
+    price: "S/65",
+    tags: ["top ventas", "premium", "brownie"],
+    image: "/choco-brownie-cumple-meme.jpg",
+    waText: "Hola, quiero info del Choco brownie Cumpleaños. ¿Detalles y precio?",
+    occasions: ["inicio", "cumpleanos"],
+    priority: { cumpleanos: 70},
+  },
+    {
+    id: "LLA-071",
+    slug: "box-choco-brownie-peluche-llama-meme",
+    title: "Pack Choco Brownie y Llamita 🍫🦙 ",
+    price: "S/130",
+    tags: ["premium", "brownie", "peluche"],
+    image: "/box-choco-brownie-peluche-llama-meme.jpg",
+    waText: 'Hola, quiero info del regalo "Pack Choco Brownie y peluche de Llamita 🍫🦙". ¿Opciones y precio?',
+    occasions: ["cumpleanos"],
+    priority: { cumpleanos: 54 },
   },
 ];
 
