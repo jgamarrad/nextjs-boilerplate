@@ -31,14 +31,14 @@ export const OCCASIONS: Record<
   cumpleanos: {
     label: "Cumpleaños",
     chip: "🎂 Cumpleaños",
-    heroImg: "/caja-miski-cumple-hb-gamer.jpg",
+    heroImg: "/box-chocolate-oso-hb-cumple.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver opciones de regalos para Cumpleaños. ¿Me ayudas?",
   },
   aniversario: {
     label: "Aniversario",
     chip: "💍 Aniversario",
-    heroImg: "/box-sweet-love-rosas-chocolate-te-amo.jpg",
+    heroImg: "/caja-miski-chocolates-te-amo-aniversario.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver opciones para Aniversario y personalizar un regalo.",
   },
@@ -878,7 +878,7 @@ export const productos: Product[] = [
     image: "/box-chocolate-oso-hb-cumple.jpg",
     waText: 'Hola, quiero info del regalo "Box Cumpleañero - Letras en chocolate y peluche 🍫🧸🎂". ¿Detalles?',
     occasions: ["inicio", "cumpleanos"],
-    priority: { inicio: 60, cumpleanos: 75 },
+    priority: { inicio: 60, cumpleanos: 40 },
   },
           {
     id: "LLA-068",
@@ -890,7 +890,7 @@ export const productos: Product[] = [
     image: "/caja-miski-feliz-dia-torta.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski Feliz Día". ¿Detalles y precio?',
     occasions: ["cumpleanos"],
-    priority: { cumpleanos: 40},
+    priority: { cumpleanos: 54},
   },
     {
     id: "LLA-069",
@@ -925,7 +925,7 @@ export const productos: Product[] = [
     image: "/box-choco-brownie-peluche-llama-meme.jpg",
     waText: 'Hola, quiero info del regalo "Pack Choco Brownie y peluche de Llamita 🍫🦙". ¿Opciones y precio?',
     occasions: ["cumpleanos"],
-    priority: { cumpleanos: 54 },
+    priority: { cumpleanos: 40 },
   },
 ];
 
