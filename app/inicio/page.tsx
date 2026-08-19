@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: "Regalos para toda ocasión | La Llama del Amor",
-  description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+  description: "Chocolates, brownies y detalles personalizados con tu foto y mensaje. Catálogo completo con delivery en Lima. Cotiza por WhatsApp.",
 
   alternates: {
     canonical: "/inicio",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Regalos para toda ocasión | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Chocolates, brownies y detalles personalizados con tu foto y mensaje. Catálogo completo con delivery en Lima. Cotiza por WhatsApp.",
     url: "/inicio",
     siteName: "La Llama del Amor",
     locale: "es_PE",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Regalos para toda ocasión | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Chocolates, brownies y detalles personalizados con tu foto y mensaje. Catálogo completo con delivery en Lima. Cotiza por WhatsApp.",
     images: ["/og-inicio-1.jpg"],
   },
 

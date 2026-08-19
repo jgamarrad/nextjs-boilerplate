@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: "Regalos para Papá | La Llama del Amor",
-  description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+  description: "Regalos para papá con diseño personalizado: chocolates temáticos, tabletas y correos postales. Delivery a domicilio en Lima.",
 
   alternates: {
     canonical: "/papa",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Regalos para Papá | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Regalos para papá con diseño personalizado: chocolates temáticos, tabletas y correos postales. Delivery a domicilio en Lima.",
     url: "/papa",
     siteName: "La Llama del Amor",
     locale: "es_PE",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Regalos para Papá | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Regalos para papá con diseño personalizado: chocolates temáticos, tabletas y correos postales. Delivery a domicilio en Lima.",
     images: ["/og-papa.jpg"],
   },
 

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: "Regalos de Ocasión Especial | La Llama del Amor",
-  description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+  description: "Regalos personalizados para graduaciones, agradecimientos y momentos únicos. Chocolate y brownies con tu mensaje. Delivery en Lima.",
 
   alternates: {
     canonical: "/ocasion_especial",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Regalos de Ocasión Especial | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Regalos personalizados para graduaciones, agradecimientos y momentos únicos. Chocolate y brownies con tu mensaje. Delivery en Lima.",
     url: "/ocasion_especial",
     siteName: "La Llama del Amor",
     locale: "es_PE",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Regalos de Ocasión Especial | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Regalos personalizados para graduaciones, agradecimientos y momentos únicos. Chocolate y brownies con tu mensaje. Delivery en Lima.",
     images: ["/og-ocasion-especial.jpg"],
   },
 

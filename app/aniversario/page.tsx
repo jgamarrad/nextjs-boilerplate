@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: "Regalos de Aniversario | La Llama del Amor",
-  description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+  description: "Regalos de aniversario personalizados: chocolates con foto, rosas y combos románticos. Ideal para celebrar meses o años juntos. Delivery en Lima.",
 
   alternates: {
     canonical: "/aniversario",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Regalos de Aniversario | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Regalos de aniversario personalizados: chocolates con foto, rosas y combos románticos. Ideal para celebrar meses o años juntos. Delivery en Lima.",
     url: "/aniversario",
     siteName: "La Llama del Amor",
     locale: "es_PE",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Regalos de Aniversario | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Regalos de aniversario personalizados: chocolates con foto, rosas y combos románticos. Ideal para celebrar meses o años juntos. Delivery en Lima.",
     images: ["/og-aniversario.jpg"],
   },
 

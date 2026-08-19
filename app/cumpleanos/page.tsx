@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: "Regalos de Cumpleaños | La Llama del Amor",
-  description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+  description: "Cajas de chocolate, brownies y osos 3D personalizados para cumpleaños. Letras con nombre y mensaje. Entrega el mismo día en Lima.",
 
   alternates: {
     canonical: "/cumpleanos",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Regalos de Cumpleaños | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Cajas de chocolate, brownies y osos 3D personalizados para cumpleaños. Letras con nombre y mensaje. Entrega el mismo día en Lima.",
     url: "/cumpleanos",
     siteName: "La Llama del Amor",
     locale: "es_PE",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Regalos de Cumpleaños | La Llama del Amor",
-    description: "Sorprende con regalos personalizados premium. Entrega en Lima.",
+    description: "Cajas de chocolate, brownies y osos 3D personalizados para cumpleaños. Letras con nombre y mensaje. Entrega el mismo día en Lima.",
     images: ["/og-cumpleanos.jpg"],
   },
 
