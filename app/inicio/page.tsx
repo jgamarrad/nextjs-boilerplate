@@ -1,6 +1,7 @@
 // app/inicio/page.tsx
 import type { Metadata } from "next";
 import PageClient from "@/app/PageClient";
+import { buildProductListJsonLd } from "@/lib/catalog";
 
 const SITE_URL = "https://sv.lallamadelamor.pe";
 
@@ -45,5 +46,16 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <PageClient initialOccasion="inicio" />;
+  const productListJsonLd = buildProductListJsonLd("inicio", SITE_URL);
+
+  return (
+    <>
+      {/* Schema.org ItemList/Product — permite a Google entender el catálogo de esta categoría */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
+      />
+      <PageClient initialOccasion="inicio" />
+    </>
+  );
 }

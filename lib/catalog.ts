@@ -97,6 +97,59 @@ export function sortByOccasionPriority(a: Product, b: Product, occ: OccasionKey)
   return a.id.localeCompare(b.id);
 }
 
+// Misma lógica que usa PageClient.tsx para decidir qué productos mostrar en cada ocasión.
+// Se usa también en el servidor (page.tsx) para generar el schema.org Product/ItemList
+// con exactamente los mismos productos que ve el usuario.
+export function getProductsForOccasion(occ: OccasionKey): Product[] {
+  return productos
+    .filter((p) => p.occasions.includes(occ))
+    .slice()
+    .sort((a, b) => sortByOccasionPriority(a, b, occ));
+}
+
+// Extrae el precio numérico de strings como "S/60" o "Desde S/65"
+function parsePrice(price: string): string | null {
+  const match = price.match(/(\d+(?:[.,]\d+)?)/);
+  return match ? match[1].replace(",", ".") : null;
+}
+
+// Genera el JSON-LD (schema.org ItemList de Products) para una ocasión.
+// Se inyecta directamente en el HTML server-rendered de cada página.
+export function buildProductListJsonLd(occ: OccasionKey, siteUrl: string) {
+  const items = getProductsForOccasion(occ);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((p, idx) => {
+      const numericPrice = parsePrice(p.price);
+      return {
+        "@type": "ListItem",
+        position: idx + 1,
+        item: {
+          "@type": "Product",
+          "@id": `${siteUrl}/${occ}#${encodeURIComponent(p.slug)}`,
+          name: p.title,
+          description: p.subtitle ?? p.title,
+          image: `${siteUrl}${p.image}`,
+          sku: p.id,
+          ...(numericPrice
+            ? {
+                offers: {
+                  "@type": "Offer",
+                  price: numericPrice,
+                  priceCurrency: "PEN",
+                  availability: "https://schema.org/InStock",
+                  url: `${siteUrl}/${occ}`,
+                },
+              }
+            : {}),
+        },
+      };
+    }),
+  };
+}
+
 // ===== PRODUCTOS =====
 // Pega aquí tu lista COMPLETA tal cual.
 export const productos: Product[] = [
