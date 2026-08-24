@@ -36,6 +36,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GA_MEASUREMENT_ID}');
+
+            // Rastrea cualquier clic en un enlace de WhatsApp como evento "whatsapp_click"
+            document.addEventListener('click', function (e) {
+              var link = e.target.closest('a[href*="api.whatsapp.com"], a[href*="wa.me"]');
+              if (link) {
+                gtag('event', 'whatsapp_click', {
+                  link_url: link.href,
+                  page_path: window.location.pathname,
+                });
+              }
+            });
           `}
         </Script>
       </body>
