@@ -830,7 +830,7 @@ export const productos: Product[] = [
     id: "LLA-055",
     slug: "box-video-mama",
     title: "Box Recuerdos de Mamá",
-    subtitle: "Tableta de chocolate rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
+    subtitle: "Caja con pantalla de video personalizada para revivir los mejores recuerdos juntos. Incluye 2 choco brownies personalizados, un ramo de flores secas y una pulsera.",
     price: "S/320",
     tags: ["premium", "video", "experiencia"],
     image: "/box-recuerdos-de-mama.jpg",
