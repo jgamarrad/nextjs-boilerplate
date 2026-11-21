@@ -12,16 +12,66 @@ export function waLink(text: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
 
-// "S/60" -> "de S/60" · "Desde S/65" -> "desde S/65"
-function pricePhrase(price: string) {
+// ===== Mensajes de WhatsApp =====
+// Formato de WhatsApp: *texto* = negrita. Evitar "_" (WhatsApp lo usa para cursiva).
+
+// "S/60" -> "S/60" · "Desde S/65" -> "desde S/65"
+function priceLabel(price: string) {
   const p = price.trim();
-  return /^desde/i.test(p) ? `desde ${p.replace(/^desde\s*/i, "")}` : `de ${p}`;
+  return /^desde/i.test(p) ? `desde ${p.replace(/^desde\s*/i, "")}` : p;
 }
 
-export function waProductText(p: Pick<Product, "id" | "title" | "price">) {
-  return `Hola, me interesa el regalo ${p.title} (${p.id}) ${pricePhrase(
-    p.price
-  )}. ¿Está disponible para el día ___?`;
+// Mensaje de un producto. Incluye el link a su ficha para que WhatsApp
+// muestre la foto del producto en el chat.
+export function waProductText(p: Pick<Product, "id" | "title" | "price" | "slug">) {
+  return [
+    "¡Hola! 🦙💛 Me encantó este regalo de su catálogo:",
+    `*${p.title.trim()}* (${p.id} · ${priceLabel(p.price)})`,
+    `${SITE_URL}/regalo/${p.slug}`,
+    "",
+    "📅 Lo necesito para el:",
+    "📍 Distrito de entrega:",
+  ].join("\n");
+}
+
+// Pedido general (botones "Pedir por WhatsApp"). ocasion = "de cumpleaños", "para mamá"...; null en /inicio
+export function waGeneralText(ocasion: string | null) {
+  return [
+    `¡Hola! 🦙💛 Estoy buscando un regalo${ocasion ? ` ${ocasion}` : ""} y me gustaría que me ayuden a elegir.`,
+    "",
+    "📅 Lo necesito para el:",
+    "📍 Distrito de entrega:",
+  ].join("\n");
+}
+
+// Botón "Cotizar por WhatsApp"
+export function waCotizarText(ocasion: string | null) {
+  return [
+    `¡Hola! 🦙💛 Quiero cotizar un regalo${ocasion ? ` ${ocasion}` : ""}.`,
+    "",
+    "💰 Mi presupuesto es de:",
+    "📅 Lo necesito para el:",
+  ].join("\n");
+}
+
+// Respuesta desde un link de selección
+export function waSeleccionText(codigos: string) {
+  return codigos
+    ? `¡Hola! 🦙💛 Vi las opciones que me enviaron (${codigos}).\n\nMe gustó:`
+    : waGeneralText(null);
+}
+
+// Recordatorio de fechas
+export function waRecordatorioText(para: string, ocasion: string, fecha: string) {
+  return [
+    "¡Hola! 🦙💛 Quiero que me recuerden una fecha especial:",
+    "",
+    `👤 Para: ${para}`,
+    `🎉 Ocasión: ${ocasion}`,
+    `📅 Fecha: ${fecha}`,
+    "",
+    "Escríbanme una semana antes con ideas de regalo 🎁",
+  ].join("\n");
 }
 
 // Precio numérico de "S/60", "Desde S/65", "S/320"
@@ -50,7 +100,7 @@ export const ENVIOS: { precio: string; distritos: string[] }[] = [
 ];
 export const ENVIO_DESDE = "S/12";
 export const WA_CONSULTA_ENVIO =
-  "Hola, ¿cuánto cuesta el envío a mi distrito? Es a: ___";
+  "¡Hola! 🦙 Quisiera saber cuánto cuesta el envío a mi distrito.\n\n📍 Distrito:";
 
 // ===== Cómo comprar =====
 export const PASOS_COMPRA = [
