@@ -3,53 +3,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { OccasionKey } from "@/lib/types";
 
+import { OCCASIONS, productos, sortByOccasionPriority } from "@/lib/catalog";
 import {
-  OCCASIONS,
-  productos,
-  sortByOccasionPriority,
-  type Product,
-} from "@/lib/catalog";
-
-const WHATSAPP_NUMBER = "51984096041";
-const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
-
-function waLink(text: string) {
-  return `${WA_BASE}?text=${encodeURIComponent(text)}`;
-}
-
-// "S/60" -> "de S/60" · "Desde S/65" -> "desde S/65"
-function pricePhrase(price: string) {
-  const p = price.trim();
-  return /^desde/i.test(p) ? `desde ${p.replace(/^desde\s*/i, "")}` : `de ${p}`;
-}
-
-function waProductText(p: Pick<Product, "id" | "title" | "price">) {
-  return `Hola, me interesa el regalo ${p.title} (${p.id}) ${pricePhrase(
-    p.price
-  )}. ¿Está disponible para el día ___?`;
-}
-
-const PASOS_COMPRA = [
-  {
-    titulo: "Elige tu regalo",
-    texto: "Escríbenos por WhatsApp con el código del producto.",
-  },
-  {
-    titulo: "Personalízalo",
-    texto: "Nombre, mensaje, foto o colores. Te confirmamos el diseño antes de producir.",
-  },
-  {
-    titulo: "Reserva con el 50%",
-    texto: "El otro 50% se paga cuando tu regalo está listo, antes del envío.",
-  },
-  {
-    titulo: "Recibe o recoge",
-    texto: "Delivery a tu distrito o recojo en Miraflores, previa coordinación.",
-  },
-];
+  PRICE_FILTERS,
+  priceNumber,
+  waLink,
+  type PriceFilterKey,
+} from "@/lib/site";
+import ProductCard from "@/app/components/ProductCard";
+import { Faq, HowToBuy, SiteFooter } from "@/app/components/InfoSections";
 
 export default function PageClient({
   initialOccasion,
@@ -63,16 +28,36 @@ export default function PageClient({
   // En /inicio no se menciona la ocasión en los mensajes de WhatsApp
   const paraOcasion = occasion === "inicio" ? "" : ` para ${current.label}`;
 
-  // Se muestran todos los productos de la ocasión (sin "Ver más"), para que
-  // Google y el cliente vean el catálogo completo. Las imágenes después de las
-  // 3 primeras se cargan a medida que se hace scroll.
-  const productosMostrar = useMemo(
+  const [priceFilter, setPriceFilter] = useState<PriceFilterKey>("todos");
+
+  // Todos los productos de la ocasión (sin "Ver más"). Google ve el catálogo
+  // completo porque el filtro de precio solo actúa en el navegador.
+  const productosOcasion = useMemo(
     () =>
       productos
         .filter((p) => p.occasions.includes(occasion))
         .slice()
         .sort((a, b) => sortByOccasionPriority(a, b, occasion)),
     [occasion]
+  );
+
+  // Solo se muestran los filtros que tienen productos en esta ocasión
+  const filtrosDisponibles = useMemo(
+    () =>
+      PRICE_FILTERS.filter(
+        (f) =>
+          f.key === "todos" ||
+          productosOcasion.some((p) => f.test(priceNumber(p.price)))
+      ),
+    [productosOcasion]
+  );
+
+  const filtroActivo =
+    PRICE_FILTERS.find((f) => f.key === priceFilter) ?? PRICE_FILTERS[0];
+
+  const productosMostrar = useMemo(
+    () => productosOcasion.filter((p) => filtroActivo.test(priceNumber(p.price))),
+    [productosOcasion, filtroActivo]
   );
 
   const chips = Object.keys(OCCASIONS) as OccasionKey[];
@@ -210,108 +195,56 @@ export default function PageClient({
           </a>
         </div>
 
+        {/* Filtro por precio */}
+        {filtrosDisponibles.length > 2 && (
+          <div
+            className="mt-6 flex flex-wrap gap-2"
+            role="group"
+            aria-label="Filtrar por precio"
+          >
+            {filtrosDisponibles.map((f) => (
+              <button
+                key={f.key}
+                type="button"
+                onClick={() => setPriceFilter(f.key)}
+                aria-pressed={priceFilter === f.key}
+                className={`pill px-4 py-1.5 text-sm transition ${
+                  priceFilter === f.key ? "gold-bg text-black" : ""
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           {productosMostrar.map((p, idx) => (
-            <article key={p.id} className="card p-4">
-              <div className="relative overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
-                <Image
-                  src={p.image}
-                  alt={p.title}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 360px"
-                  quality={75}
-                  loading={idx < 3 ? "eager" : "lazy"}
-                  priority={idx < 3}
-                />
-              </div>
-
-              <div className="mt-4">
-                <h3 className="text-lg font-semibold leading-snug">{p.title}</h3>
-                  {p.subtitle && (
-                    <p className="mt-1 text-sm text-white/70 leading-snug">
-                      {p.subtitle}
-                    </p>
-                  )}
-                <div className="mt-1">
-                  <div className="text-base font-semibold">{p.price}</div>
-                  <div className="text-xs text-white/70">
-                    Incluye personalización · Delivery según zona
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-3 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span key={t} className="pill px-3 py-1 text-xs">
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <a
-                className="btn-primary gold-bg mt-4 w-full text-black"
-                href={waLink(waProductText(p))}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Pedir este regalo
-              </a>
-            </article>
+            <ProductCard key={p.id} p={p} eager={idx < 3} />
           ))}
         </div>
+
+        {priceFilter !== "todos" && (
+          <p className="mt-4 text-center text-xs text-white/60">
+            Mostrando {productosMostrar.length} de {productosOcasion.length} regalos ·{" "}
+            <button
+              type="button"
+              className="underline"
+              onClick={() => setPriceFilter("todos")}
+            >
+              ver todos
+            </button>
+          </p>
+        )}
       </section>
 
-      {/* Cómo comprar */}
-      <section
-        id="como-comprar"
-        className="mx-auto max-w-6xl px-6 pb-24"
-        aria-labelledby="como-comprar-titulo"
-      >
-        <h2 id="como-comprar-titulo" className="section-title gold-text">
-          Cómo comprar
-        </h2>
-
-        <ol className="mt-6 grid gap-4 md:grid-cols-4">
-          {PASOS_COMPRA.map((paso, i) => (
-            <li key={paso.titulo} className="card p-4">
-              <div className="text-xs tracking-[0.18em] uppercase text-llama-muted">
-                Paso {i + 1}
-              </div>
-              <h3 className="mt-1 text-lg font-semibold leading-snug">
-                {paso.titulo}
-              </h3>
-              <p className="mt-1 text-sm text-white/70 leading-snug">
-                {paso.texto}
-              </p>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <div className="card p-4">
-            <h3 className="text-base font-semibold">Plazos</h3>
-            <p className="mt-1 text-sm text-white/70 leading-snug">
-              Pide con al menos 1 día de anticipación. ¿Lo necesitas hoy?
-              Escríbenos: hacemos entregas el mismo día según disponibilidad.
-            </p>
-          </div>
-          <div className="card p-4">
-            <h3 className="text-base font-semibold">Medios de pago</h3>
-            <p className="mt-1 text-sm text-white/70 leading-snug">
-              Yape, Plin, transferencia bancaria o tarjeta de crédito (te
-              enviamos un link seguro de Mercado Pago). No trabajamos con pago
-              contra entrega. El costo de envío depende del distrito.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HowToBuy />
+      <Faq />
+      <SiteFooter />
 
       {/* Botón flotante */}
       <a
-        href={waLink(
-          `Hola, quiero hacer un pedido${paraOcasion}. ¿Qué me recomiendas?`
-        )}
+        href={waLink(`Hola, quiero hacer un pedido${paraOcasion}. ¿Qué me recomiendas?`)}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 btn-primary gold-bg text-black shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"
