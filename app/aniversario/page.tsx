@@ -8,7 +8,7 @@ const SITE_URL = "https://sv.lallamadelamor.pe";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: "Regalos de Aniversario | La Llama del Amor",
+  title: "Regalos de Aniversario",
   description: "Regalos de aniversario personalizados: chocolates con foto, rosas y combos románticos. Ideal para celebrar meses o años juntos. Delivery en Lima.",
 
   alternates: {

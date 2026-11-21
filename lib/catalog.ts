@@ -17,16 +17,31 @@ export function normalizeOccasion(v: unknown): OccasionKey {
   return OCC_KEYS.includes(v as OccasionKey) ? (v as OccasionKey) : "inicio";
 }
 
-export const OCCASIONS: Record<
-  OccasionKey,
-  { label: string; chip: string; heroImg: string; waText: string; ctaText: string }
-> = {
+export type OccasionInfo = {
+  label: string;
+  chip: string;
+  heroImg: string;
+  waText: string;
+  ctaText: string;
+  // Textos propios de cada página (H1, intro y título del catálogo)
+  h1: string;
+  h1Accent: string;
+  intro: string;
+  listTitle: string;
+};
+
+export const OCCASIONS: Record<OccasionKey, OccasionInfo> = {
    inicio: {
     label: "Inicio",
     chip: "⭐ Inicio",
     heroImg: "/pack-chocolates-aniversario-5-anos-peluche.jpg",
     ctaText: "Pedir por WhatsApp",
-    waText: "Hola, quiero ver el catálogo de Regalos- ¿Me ayudas?",
+    waText: "Hola, quiero ver opciones de regalo. ¿Me ayudas a elegir?",
+    h1: "Regalos personalizados",
+    h1Accent: "con delivery en Lima.",
+    intro:
+      "Chocolates, brownies y detalles con nombre, foto o mensaje. Elige por ocasión o mira nuestros regalos destacados.",
+    listTitle: "Regalos destacados",
   },
   cumpleanos: {
     label: "Cumpleaños",
@@ -34,6 +49,11 @@ export const OCCASIONS: Record<
     heroImg: "/box-chocolate-oso-hb-cumple.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver opciones de regalos para Cumpleaños. ¿Me ayudas?",
+    h1: "Regalos de cumpleaños",
+    h1Accent: "personalizados.",
+    intro:
+      "Chocolates con su nombre, brownies con mensaje y osos 3D para sorprender en su día.",
+    listTitle: "Regalos de cumpleaños",
   },
   aniversario: {
     label: "Aniversario",
@@ -41,6 +61,11 @@ export const OCCASIONS: Record<
     heroImg: "/caja-miski-chocolates-te-amo-aniversario.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver opciones para Aniversario y personalizar un regalo.",
+    h1: "Regalos de aniversario",
+    h1Accent: "personalizados.",
+    intro:
+      "Para celebrar meses o años juntos: chocolates con foto, cajas con su fecha y combos con rosas.",
+    listTitle: "Regalos de aniversario",
   },
   ocasion_especial: {
     label: "Ocasión especial",
@@ -48,6 +73,11 @@ export const OCCASIONS: Record<
     heroImg: "/box-chocolate-peluche-llamita.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, busco un regalo para una ocasión especial. ¿Qué opciones tienes?",
+    h1: "Regalos para graduaciones,",
+    h1Accent: "agradecimientos y fechas especiales.",
+    intro:
+      "Detalles con tu mensaje para decir felicidades, gracias o “te pienso”.",
+    listTitle: "Regalos para ocasiones especiales",
   },
     san_valentin: {
     label: "San Valentín",
@@ -55,6 +85,11 @@ export const OCCASIONS: Record<
     heroImg: "/correo-postal-chocolate-san-valentin.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de San Valentín y personalizar un regalo.",
+    h1: "Regalos de San Valentín",
+    h1Accent: "personalizados.",
+    intro:
+      "Chocolates, rosas y brownies con foto y mensaje para el 14 de febrero. Reserva con anticipación.",
+    listTitle: "Regalos de San Valentín",
   },
     mama: {
     label: "Mamá",
@@ -62,6 +97,11 @@ export const OCCASIONS: Record<
     heroImg: "/regalos-para-mama-1.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de Día de la Madre y personalizar un regalo.",
+    h1: "Regalos para mamá",
+    h1Accent: "personalizados.",
+    intro:
+      "Chocolates con su foto, correos postales y tabletas con dedicatoria para la mujer más importante.",
+    listTitle: "Regalos para mamá",
   },
   papa: {
     label: "Papá",
@@ -69,6 +109,11 @@ export const OCCASIONS: Record<
     heroImg: "/caja-miski-chocolate-yo-amo-papa.jpg",
     ctaText: "Pedir por WhatsApp",
     waText: "Hola, quiero ver el catálogo de Día del Padre y personalizar un regalo.",
+    h1: "Regalos para papá",
+    h1Accent: "personalizados.",
+    intro:
+      "Chocolates temáticos, retratos y correos postales para el héroe de la casa.",
+    listTitle: "Regalos para papá",
   },
 };
 
@@ -157,12 +202,12 @@ export const productos: Product[] = [
     id: "LLA-001",
     slug: "caja-miski-feliz-14",
     title: 'Caja Miski “Feliz 14 ❤️”',
-    subtitle: "Letras de chocolate personalizadas · Ideal para aniversarios",
+    subtitle: "Letras de chocolate personalizadas · Ideal para San Valentín",
     price: "S/60",
     tags: ["premium", "chocolate", "romántico"],
     image: "/caja-miski-feliz-14-san-valentin.jpg",
     waText: 'Hola, quiero info del regalo "Caja Miski Feliz 14❤️". ¿Opciones y precio?',
-    occasions: ["san_valentin", "aniversario"],
+    occasions: ["san_valentin"],
     priority: { san_valentin: 95 },
   },
   {
@@ -193,7 +238,7 @@ export const productos: Product[] = [
     id: "LLA-004",
     slug: "caja-miski-te-amo",
     title: 'Caja Miski “❤️Te Amo❤️”',
-    subtitle: "Letras de chocolate personalizadas · Ideal para aniversarios",
+    subtitle: "Letras de chocolate personalizadas con tu mensaje",
     price: "S/60",
     tags: ["top ventas", "chocolate", "premium"],
     image: "/caja-miski-chocolate-te-amo.jpg",
@@ -304,7 +349,7 @@ export const productos: Product[] = [
     id: "LLA-014",
     slug: "caja-miski-te-amo-oso-corazon",
     title: "Caja Miski “Te Amo ❤️🧸”",
-    subtitle: "Letras de chocolate personalizadas · Ideal para aniversarios",
+    subtitle: "Letras de chocolate personalizadas con tu mensaje",
     price: "S/60",
     tags: ["premium", "chocolate", "romántico"],
     image: "/caja-miski-chocolate-te-amo-corazon-oso.jpg",
@@ -786,7 +831,7 @@ export const productos: Product[] = [
     slug: "box-video-mama",
     title: "Box Recuerdos de Mamá",
     subtitle: "Tableta de chocolate rellena de manjar. La foto o imagen se imprime con tinta comestible en el chocolate",
-    price: "S/.320",
+    price: "S/320",
     tags: ["premium", "video", "experiencia"],
     image: "/box-recuerdos-de-mama.jpg",
     waText: 'Hola, quiero info del regalo "Box Recuerdos de Mamá". ¿Detalles y precio?',
@@ -848,7 +893,7 @@ export const productos: Product[] = [
     price: "S/65",
     tags: ["top ventas", "premium", "brownie"],
     image: "/choco-brownie-papa-super-heroe.jpg",
-    waText: "Hola, quiero info del Choco brownie 'Súper Héreo'. ¿Detalles y precio?",
+    waText: "Hola, quiero info del Choco brownie 'Súper Héroe'. ¿Detalles y precio?",
     occasions: ["papa"],
     priority: { papa: 19},
   },
@@ -878,12 +923,12 @@ export const productos: Product[] = [
       {
     id: "LLA-063",
     slug: "correo-postal-chocolate-papa-padre-heroe",
-    title: "Correo Postal de Chocolate - Papá Eres Mi Héreo",
+    title: "Correo Postal de Chocolate - Papá Eres Mi Héroe",
     subtitle: "Caja con mensaje en chocolate. Personaliza la tapa interna con una foto y texto",
     price: "S/85",
     tags: ["foto", "chocolate", "dedicatoria"],
     image: "/correo-postal-chocolate-papa-padre-heroe.jpg",
-    waText: "Hola, quiero el Correo Postal 'Papá Eres Mi Héreo'. ¿Me das más detalle del producto?",
+    waText: "Hola, quiero el Correo Postal 'Papá Eres Mi Héroe'. ¿Me das más detalle del producto?",
     occasions: ["papa"],
     priority: { papa: 18},
   },

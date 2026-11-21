@@ -2,8 +2,8 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useMemo } from "react";
 import type { OccasionKey } from "@/lib/types";
 
 import {
@@ -20,62 +20,62 @@ function waLink(text: string) {
   return `${WA_BASE}?text=${encodeURIComponent(text)}`;
 }
 
-function waProductText(p: Pick<Product, "id" | "title" | "slug">) {
-  return `Hola!
-Quiero el producto ${p.id} – ${p.title}
-
-Detalle del producto:
-Presupuesto:
-¿Se puede personalizar?:
-¿Qué incluye el producto?:`;
+// "S/60" -> "de S/60" · "Desde S/65" -> "desde S/65"
+function pricePhrase(price: string) {
+  const p = price.trim();
+  return /^desde/i.test(p) ? `desde ${p.replace(/^desde\s*/i, "")}` : `de ${p}`;
 }
+
+function waProductText(p: Pick<Product, "id" | "title" | "price">) {
+  return `Hola, me interesa el regalo ${p.title} (${p.id}) ${pricePhrase(
+    p.price
+  )}. ¿Está disponible para el día ___?`;
+}
+
+const PASOS_COMPRA = [
+  {
+    titulo: "Elige tu regalo",
+    texto: "Escríbenos por WhatsApp con el código del producto.",
+  },
+  {
+    titulo: "Personalízalo",
+    texto: "Nombre, mensaje, foto o colores. Te confirmamos el diseño antes de producir.",
+  },
+  {
+    titulo: "Reserva con el 50%",
+    texto: "El otro 50% se paga cuando tu regalo está listo, antes del envío.",
+  },
+  {
+    titulo: "Recibe o recoge",
+    texto: "Delivery a tu distrito o recojo en Miraflores, previa coordinación.",
+  },
+];
 
 export default function PageClient({
   initialOccasion,
 }: {
   initialOccasion: OccasionKey;
 }) {
-  const router = useRouter();
-
-  const [occasion, setOccasion] = useState<OccasionKey>(initialOccasion);
-  const [visible, setVisible] = useState(12);
-
-  const onSelectOccasion = (key: OccasionKey) => {
-    setOccasion(key);
-    setVisible(12);
-    router.push(`/${key}`);
-  };
-
+  // Cada ocasión es su propia página (/cumpleanos, /mama, ...), así que la
+  // ocasión viene fija desde el servidor.
+  const occasion = initialOccasion;
   const current = OCCASIONS[occasion];
+  // En /inicio no se menciona la ocasión en los mensajes de WhatsApp
+  const paraOcasion = occasion === "inicio" ? "" : ` para ${current.label}`;
 
-  const productosMostrar = useMemo(() => {
-    const filtered = productos
-      .filter((p) => p.occasions.includes(occasion))
-      .slice()
-      .sort((a, b) => sortByOccasionPriority(a, b, occasion));
-
-    // Si quieres “sin fallback”, déjalo en 0
-    const MIN_ITEMS = 0;
-    if (filtered.length >= MIN_ITEMS) return filtered;
-
-    const extras = productos
-      .filter((p) => !filtered.some((f) => f.id === p.id))
-      .slice()
-      .sort((a, b) => sortByOccasionPriority(a, b, occasion))
-      .slice(0, MIN_ITEMS - filtered.length);
-
-    return [...filtered, ...extras];
-  }, [occasion]);
-
-  const productosVisibles = useMemo(
-    () => productosMostrar.slice(0, visible),
-    [productosMostrar, visible]
+  // Se muestran todos los productos de la ocasión (sin "Ver más"), para que
+  // Google y el cliente vean el catálogo completo. Las imágenes después de las
+  // 3 primeras se cargan a medida que se hace scroll.
+  const productosMostrar = useMemo(
+    () =>
+      productos
+        .filter((p) => p.occasions.includes(occasion))
+        .slice()
+        .sort((a, b) => sortByOccasionPriority(a, b, occasion)),
+    [occasion]
   );
 
-  const chips = useMemo(
-    () => Object.keys(OCCASIONS) as OccasionKey[],
-    []
-  );
+  const chips = Object.keys(OCCASIONS) as OccasionKey[];
 
   return (
     <main className="min-h-screen">
@@ -107,7 +107,7 @@ export default function PageClient({
           <a
             className="btn-secondary gold-border shrink-0 hidden sm:inline-flex"
             href={waLink(
-              `Hola, quiero hacer un pedido para ${current.label}. ¿Me ayudas a elegir un regalo?`
+              `Hola, quiero hacer un pedido${paraOcasion}. ¿Me ayudas a elegir un regalo?`
             )}
             target="_blank"
             rel="noreferrer"
@@ -119,7 +119,7 @@ export default function PageClient({
         <a
           className="btn-secondary gold-border mt-4 w-full sm:hidden"
           href={waLink(
-            `Hola, quiero hacer un pedido para ${current.label}. ¿Me ayudas a elegir un regalo?`
+            `Hola, quiero hacer un pedido${paraOcasion}. ¿Me ayudas a elegir un regalo?`
           )}
           target="_blank"
           rel="noreferrer"
@@ -133,29 +133,29 @@ export default function PageClient({
         <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Regalos personalizados{" "}
-              <span className="block text-llama-muted">para todo el año.</span>
+              {current.h1}{" "}
+              <span className="block text-llama-muted">{current.h1Accent}</span>
             </h1>
 
             <p className="mt-4 max-w-xl text-llama-muted">
-              Chocolates, brownies y detalles premium para cumpleaños,
-              aniversarios y ocasiones especiales. Compra rápida por WhatsApp.
-              Entrega en Lima.
+              {current.intro} Compra rápida por WhatsApp. Entrega en Lima.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            {/* Enlaces reales entre ocasiones (Google puede seguirlos) */}
+            <nav aria-label="Ocasiones" className="mt-6 flex flex-wrap gap-3">
               {chips.map((key) => (
-                <button
+                <Link
                   key={key}
-                  onClick={() => onSelectOccasion(key)}
+                  href={`/${key}`}
+                  aria-current={occasion === key ? "page" : undefined}
                   className={`pill transition ${
                     occasion === key ? "gold-bg text-black" : ""
                   }`}
                 >
                   {OCCASIONS[key].chip}
-                </button>
+                </Link>
               ))}
-            </div>
+            </nav>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a className="btn-primary w-full sm:w-auto" href="#catalogo">
@@ -177,7 +177,7 @@ export default function PageClient({
             <div className="relative w-full overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
               <Image
                 src={current.heroImg}
-                alt={`Regalo ${current.label} - La Llama del Amor`}
+                alt={current.listTitle}
                 fill
                 className="object-contain"
                 sizes="(max-width: 1024px) 100vw, 520px"
@@ -192,19 +192,16 @@ export default function PageClient({
       <section id="catalogo" className="mx-auto max-w-6xl px-6 pb-14">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="section-title gold-text">
-              Catálogo de {current.label}
-            </h2>
+            <h2 className="section-title gold-text">{current.listTitle}</h2>
             <p className="mt-1 text-llama-muted">
-              Regalos seleccionados especialmente para{" "}
-              {current.label.toLowerCase()}.
+              Todos se personalizan con nombre, mensaje o foto.
             </p>
           </div>
 
           <a
             className="btn-secondary gold-border w-full sm:w-auto"
             href={waLink(
-              `Hola, quiero cotizar un regalo para ${current.label}. ¿Me ayudas con precios y opciones?`
+              `Hola, quiero cotizar un regalo${paraOcasion}. ¿Me ayudas con precios y opciones?`
             )}
             target="_blank"
             rel="noreferrer"
@@ -214,7 +211,7 @@ export default function PageClient({
         </div>
 
         <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {productosVisibles.map((p, idx) => (
+          {productosMostrar.map((p, idx) => (
             <article key={p.id} className="card p-4">
               <div className="relative overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
                 <Image
@@ -263,27 +260,57 @@ export default function PageClient({
             </article>
           ))}
         </div>
+      </section>
 
-        {visible < productosMostrar.length && (
-          <div className="mt-8">
-            <button
-              className="btn-secondary gold-border w-full"
-              onClick={() => setVisible((v) => v + 12)}
-            >
-              Ver más
-            </button>
-            <div className="mt-2 text-center text-xs text-white/60">
-              Mostrando {Math.min(visible, productosMostrar.length)} de{" "}
-              {productosMostrar.length}
-            </div>
+      {/* Cómo comprar */}
+      <section
+        id="como-comprar"
+        className="mx-auto max-w-6xl px-6 pb-24"
+        aria-labelledby="como-comprar-titulo"
+      >
+        <h2 id="como-comprar-titulo" className="section-title gold-text">
+          Cómo comprar
+        </h2>
+
+        <ol className="mt-6 grid gap-4 md:grid-cols-4">
+          {PASOS_COMPRA.map((paso, i) => (
+            <li key={paso.titulo} className="card p-4">
+              <div className="text-xs tracking-[0.18em] uppercase text-llama-muted">
+                Paso {i + 1}
+              </div>
+              <h3 className="mt-1 text-lg font-semibold leading-snug">
+                {paso.titulo}
+              </h3>
+              <p className="mt-1 text-sm text-white/70 leading-snug">
+                {paso.texto}
+              </p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="card p-4">
+            <h3 className="text-base font-semibold">Plazos</h3>
+            <p className="mt-1 text-sm text-white/70 leading-snug">
+              Pide con al menos 1 día de anticipación. ¿Lo necesitas hoy?
+              Escríbenos: hacemos entregas el mismo día según disponibilidad.
+            </p>
           </div>
-        )}
+          <div className="card p-4">
+            <h3 className="text-base font-semibold">Medios de pago</h3>
+            <p className="mt-1 text-sm text-white/70 leading-snug">
+              Yape, Plin, transferencia bancaria o tarjeta de crédito (te
+              enviamos un link seguro de Mercado Pago). No trabajamos con pago
+              contra entrega. El costo de envío depende del distrito.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Botón flotante */}
       <a
         href={waLink(
-          `Hola, quiero hacer un pedido para ${current.label}. ¿Qué me recomiendas?`
+          `Hola, quiero hacer un pedido${paraOcasion}. ¿Qué me recomiendas?`
         )}
         target="_blank"
         rel="noreferrer"

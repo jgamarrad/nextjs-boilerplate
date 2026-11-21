@@ -8,7 +8,7 @@ const SITE_URL = "https://sv.lallamadelamor.pe";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: "Regalos de San Valentín | La Llama del Amor",
+  title: "Regalos de San Valentín",
   description: "Chocolates, rosas y brownies personalizados para San Valentín. Combos románticos con foto y mensaje. Entrega en Lima el 14 de febrero.",
 
   alternates: {

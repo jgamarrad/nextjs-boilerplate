@@ -8,7 +8,7 @@ const SITE_URL = "https://sv.lallamadelamor.pe";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: "Regalos para Mamá | La Llama del Amor",
+  title: "Regalos para Mamá",
   description: "Detalles personalizados para mamá: chocolates con foto, correos postales y tabletas con dedicatoria. Sorpréndela con delivery en Lima.",
 
   alternates: {
