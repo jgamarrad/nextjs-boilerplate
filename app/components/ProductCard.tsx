@@ -7,9 +7,12 @@ import { ENVIO_DESDE, waLink, waProductText } from "@/lib/site";
 export default function ProductCard({
   p,
   eager = false,
+  origin = "catalogo",
 }: {
   p: Product;
   eager?: boolean;
+  // De dónde vino el clic, para GA4: catalogo | relacionado | seleccion
+  origin?: string;
 }) {
   return (
     <article className="card p-4">
@@ -60,6 +63,8 @@ export default function ProductCard({
         href={waLink(waProductText(p))}
         target="_blank"
         rel="noreferrer"
+        data-product={p.id}
+        data-origin={origin}
       >
         Pedir este regalo
       </a>

@@ -215,6 +215,8 @@ export default async function ProductPage({
                 href={waLink(waProductText(p))}
                 target="_blank"
                 rel="noreferrer"
+                data-product={p.id}
+                data-origin="ficha"
               >
                 Pedir este regalo por WhatsApp
               </a>
@@ -223,6 +225,8 @@ export default async function ProductPage({
                 href={waLink(WA_CONSULTA_ENVIO)}
                 target="_blank"
                 rel="noreferrer"
+                data-product={p.id}
+                data-origin="ficha-envio"
               >
                 Consultar envío a mi distrito
               </a>
@@ -242,7 +246,7 @@ export default async function ProductPage({
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {related.map((r) => (
-              <ProductCard key={r.id} p={r} />
+              <ProductCard key={r.id} p={r} origin="relacionado" />
             ))}
           </div>
         </section>
@@ -256,6 +260,8 @@ export default async function ProductPage({
         href={waLink(waProductText(p))}
         target="_blank"
         rel="noreferrer"
+        data-product={p.id}
+        data-origin="ficha-flotante"
         className="fixed bottom-6 right-6 z-50 btn-primary gold-bg text-black shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"
       >
         Pedir por WhatsApp

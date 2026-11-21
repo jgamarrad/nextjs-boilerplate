@@ -60,7 +60,7 @@ export default async function SeleccionPage({
         {elegidos.length > 0 ? (
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {elegidos.map((prod, idx) => (
-              <ProductCard key={prod.id} p={prod} eager={idx < 3} />
+              <ProductCard key={prod.id} p={prod} eager={idx < 3} origin="seleccion" />
             ))}
           </div>
         ) : (
@@ -92,6 +92,8 @@ export default async function SeleccionPage({
         )}
         target="_blank"
         rel="noreferrer"
+        data-product={codigos || undefined}
+        data-origin="seleccion-responder"
         className="fixed bottom-6 right-6 z-50 btn-primary gold-bg text-black shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"
       >
         Responder por WhatsApp
