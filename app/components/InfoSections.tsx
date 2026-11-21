@@ -1,12 +1,48 @@
 // app/components/InfoSections.tsx
 // Bloques informativos compartidos: Cómo comprar, Preguntas frecuentes y pie de página.
 import {
+  ENVIOS,
   FAQS,
   INSTAGRAM_URL,
   LANDING_URL,
   PASOS_COMPRA,
+  WA_CONSULTA_ENVIO,
   buildFaqJsonLd,
+  waLink,
 } from "@/lib/site";
+
+export function ShippingCard() {
+  return (
+    <div className="card p-4">
+      <h3 className="text-base font-semibold">Costo de envío</h3>
+      <ul className="mt-2 space-y-2 text-sm text-white/70 leading-snug">
+        {ENVIOS.map((e) => (
+          <li key={e.precio} className="flex gap-3">
+            <span className="shrink-0 font-semibold text-white/90">{e.precio}</span>
+            <span>{e.distritos.join(", ")}</span>
+          </li>
+        ))}
+        <li className="flex gap-3">
+          <span className="shrink-0 font-semibold text-white/90">Otros</span>
+          <span>
+            Te cotizamos según la dirección exacta.{" "}
+            <a
+              className="underline text-white/90"
+              href={waLink(WA_CONSULTA_ENVIO)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Consultar mi distrito
+            </a>
+          </span>
+        </li>
+        <li className="text-xs text-white/60">
+          También puedes recoger tu pedido en Miraflores, previa coordinación.
+        </li>
+      </ul>
+    </div>
+  );
+}
 
 export function HowToBuy() {
   return (
@@ -31,7 +67,7 @@ export function HowToBuy() {
         ))}
       </ol>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+      <div className="mt-4 grid gap-4 md:grid-cols-3">
         <div className="card p-4">
           <h3 className="text-base font-semibold">Plazos</h3>
           <p className="mt-1 text-sm text-white/70 leading-snug">
@@ -43,10 +79,10 @@ export function HowToBuy() {
           <h3 className="text-base font-semibold">Medios de pago</h3>
           <p className="mt-1 text-sm text-white/70 leading-snug">
             Yape, Plin, transferencia bancaria o tarjeta de crédito (te enviamos un
-            link seguro de Mercado Pago). No trabajamos con pago contra entrega. El
-            costo de envío depende del distrito.
+            link seguro de Mercado Pago). No trabajamos con pago contra entrega.
           </p>
         </div>
+        <ShippingCard />
       </div>
     </section>
   );

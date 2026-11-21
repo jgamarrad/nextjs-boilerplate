@@ -152,6 +152,25 @@ export function getProductsForOccasion(occ: OccasionKey): Product[] {
     .sort((a, b) => sortByOccasionPriority(a, b, occ));
 }
 
+export function getProductBySlug(slug: string): Product | undefined {
+  return productos.find((p) => p.slug === slug);
+}
+
+// Ocasión principal de un producto (la de mayor prioridad, sin contar "inicio")
+export function mainOccasion(p: Product): OccasionKey {
+  const occs = p.occasions.filter((o) => o !== "inicio");
+  if (occs.length === 0) return "inicio";
+  return occs.slice().sort((a, b) => getPriority(p, b) - getPriority(p, a))[0];
+}
+
+// Productos relacionados: misma ocasión principal, ordenados por prioridad
+export function getRelated(p: Product, limit = 3): Product[] {
+  const occ = mainOccasion(p);
+  return getProductsForOccasion(occ)
+    .filter((x) => x.id !== p.id)
+    .slice(0, limit);
+}
+
 // Extrae el precio numérico de strings como "S/60" o "Desde S/65"
 function parsePrice(price: string): string | null {
   const match = price.match(/(\d+(?:[.,]\d+)?)/);
@@ -173,7 +192,8 @@ export function buildProductListJsonLd(occ: OccasionKey, siteUrl: string) {
         position: idx + 1,
         item: {
           "@type": "Product",
-          "@id": `${siteUrl}/${occ}#${encodeURIComponent(p.slug)}`,
+          "@id": `${siteUrl}/regalo/${p.slug}`,
+          url: `${siteUrl}/regalo/${p.slug}`,
           name: p.title,
           description: p.subtitle ?? p.title,
           image: `${siteUrl}${p.image}`,
@@ -185,7 +205,7 @@ export function buildProductListJsonLd(occ: OccasionKey, siteUrl: string) {
                   price: numericPrice,
                   priceCurrency: "PEN",
                   availability: "https://schema.org/InStock",
-                  url: `${siteUrl}/${occ}`,
+                  url: `${siteUrl}/regalo/${p.slug}`,
                 },
               }
             : {}),
@@ -369,7 +389,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-016",
-    slug: "choco-brownie-cumpleaños",
+    slug: "choco-brownie-cumpleanos",
     title: "Choco brownie Cumpleañero",
     subtitle: "Caja con cuatro porciones de brownie, cubierta por tabletas de chocolate personalizadas",
     price: "S/65",
@@ -475,7 +495,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-025",
-    slug: "caja-miski-chocolate-aniversario-4-años",
+    slug: "caja-miski-chocolate-aniversario-4-anos",
     title: "Caja Miski Aniversario Año",
     subtitle: "Letras de chocolate personalizadas",
     price: "S/60",
@@ -651,7 +671,7 @@ export const productos: Product[] = [
   },
   {
     id: "LLA-040",
-    slug: "caja-miski-chocolate-anivesario-meses",
+    slug: "caja-miski-chocolate-aniversario-meses",
     title: "Caja Miski Mesario",
     subtitle: "Letras de chocolate personalizadas",
     price: "S/60",
@@ -1038,7 +1058,7 @@ export const productos: Product[] = [
   },
     {
     id: "LLA-073",
-    slug: "correo-postal-chocolate-felices-6-meses-mesario-anivesario-regalo-lima",
+    slug: "correo-postal-chocolate-felices-6-meses-mesario-aniversario-regalo-lima",
     title: "Correo Postal de Chocolate - Mesario",
     subtitle: "Caja con mensaje en chocolate. Personaliza la tapa interna con una foto y texto",
     price: "S/85",
@@ -1074,6 +1094,12 @@ if (process.env.NODE_ENV !== "production") {
     ids.add(p.id);
 
     if (slugs.has(p.slug)) dupSlugs.push(p.slug);
+
+    // El slug forma la URL de la ficha: solo minúsculas, números y guiones (sin ñ ni tildes)
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.slug)) {
+      // eslint-disable-next-line no-console
+      console.warn(`[catalog] Slug inválido para URL: ${p.id} -> "${p.slug}" (usa solo a-z, 0-9 y guiones)`);
+    }
     slugs.add(p.slug);
 
     // Recomendación: evita espacios/mayúsculas en rutas

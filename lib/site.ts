@@ -40,6 +40,18 @@ export const PRICE_FILTERS: { key: PriceFilterKey; label: string; test: (n: numb
   { key: "premium", label: "Premium (más de S/120)", test: (n) => n > 120 },
 ];
 
+// ===== Costos de envío =====
+export const ENVIOS: { precio: string; distritos: string[] }[] = [
+  { precio: "S/12", distritos: ["Miraflores", "San Isidro"] },
+  {
+    precio: "S/15",
+    distritos: ["Jesús María", "Pueblo Libre", "San Miguel", "San Borja", "Surco", "Surquillo", "Barranco"],
+  },
+];
+export const ENVIO_DESDE = "S/12";
+export const WA_CONSULTA_ENVIO =
+  "Hola, ¿cuánto cuesta el envío a mi distrito? Es a: ___";
+
 // ===== Cómo comprar =====
 export const PASOS_COMPRA = [
   {
@@ -75,8 +87,8 @@ export const FAQS: { q: string; a: string }[] = [
     a: "Yape, Plin, transferencia bancaria y tarjeta de crédito (te enviamos un link seguro de Mercado Pago). No trabajamos con pago contra entrega.",
   },
   {
-    q: "¿Hacen delivery a todo Lima?",
-    a: "Entregamos en Lima Metropolitana. El costo de envío depende del distrito y te lo confirmamos al cotizar por WhatsApp.",
+    q: "¿Cuánto cuesta el envío?",
+    a: "Miraflores y San Isidro: S/12. Jesús María, Pueblo Libre, San Miguel, San Borja, Surco, Surquillo y Barranco: S/15. Para otros distritos de Lima te cotizamos por WhatsApp según la dirección exacta.",
   },
   {
     q: "¿En qué horario entregan?",

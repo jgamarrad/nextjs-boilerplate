@@ -1,7 +1,8 @@
 // app/components/ProductCard.tsx
 import Image from "next/image";
+import Link from "next/link";
 import type { Product } from "@/lib/catalog";
-import { waLink, waProductText } from "@/lib/site";
+import { ENVIO_DESDE, waLink, waProductText } from "@/lib/site";
 
 export default function ProductCard({
   p,
@@ -12,7 +13,11 @@ export default function ProductCard({
 }) {
   return (
     <article className="card p-4">
-      <div className="relative overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
+      <Link
+        href={`/regalo/${p.slug}`}
+        className="relative block overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]"
+        aria-label={`Ver detalle de ${p.title}`}
+      >
         <Image
           src={p.image}
           alt={p.title}
@@ -23,17 +28,21 @@ export default function ProductCard({
           loading={eager ? "eager" : "lazy"}
           priority={eager}
         />
-      </div>
+      </Link>
 
       <div className="mt-4">
-        <h3 className="text-lg font-semibold leading-snug">{p.title}</h3>
+        <h3 className="text-lg font-semibold leading-snug">
+          <Link href={`/regalo/${p.slug}`} className="hover:underline">
+            {p.title}
+          </Link>
+        </h3>
         {p.subtitle && (
           <p className="mt-1 text-sm text-white/70 leading-snug">{p.subtitle}</p>
         )}
         <div className="mt-1">
           <div className="text-base font-semibold">{p.price}</div>
           <div className="text-xs text-white/70">
-            Incluye personalización · Delivery según zona
+            {`Incluye personalización · Envío desde ${ENVIO_DESDE}`}
           </div>
         </div>
       </div>
