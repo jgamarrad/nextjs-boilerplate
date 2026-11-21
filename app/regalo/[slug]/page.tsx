@@ -22,6 +22,7 @@ import {
   waProductText,
 } from "@/lib/site";
 import ProductCard from "@/app/components/ProductCard";
+import { MetaViewContent } from "@/app/components/MetaPixelRouteEvents";
 import { Faq, HowToBuy, SiteFooter } from "@/app/components/InfoSections";
 
 export const dynamicParams = false;
@@ -128,6 +129,7 @@ export default async function ProductPage({
 
   return (
     <main className="min-h-screen">
+      <MetaViewContent id={p.id} name={name} value={price} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
