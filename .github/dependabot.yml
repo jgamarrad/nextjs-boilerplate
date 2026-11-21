@@ -1,0 +1,16 @@
+# Revisa cada semana si hay versiones nuevas de las dependencias (Next.js, React...)
+# y abre un pull request para actualizarlas. Vercel genera una vista previa de cada uno.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Lima"
+    open-pull-requests-limit: 3
+    groups:
+      dependencias:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
