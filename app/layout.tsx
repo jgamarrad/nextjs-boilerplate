@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import MetaPixelRouteEvents from "@/app/components/MetaPixelRouteEvents";
 
 const siteUrl = "https://sv.lallamadelamor.pe";
 
 // ID de medición de Google Analytics 4 (flujo "Catálogo")
 const GA_MEASUREMENT_ID = "G-7CEPYFRF30";
+
+// ID del Píxel de Meta ("Píxel de La llama del amor"), conectado al catálogo de Meta
+const META_PIXEL_ID = "282420846070621";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -53,6 +57,39 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             });
           `}
         </Script>
+        {/* Píxel de Meta (Píxel de La llama del amor) */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '${META_PIXEL_ID}');
+            fbq('track', 'PageView');
+
+            // Clic en WhatsApp = evento "Contact". Si el botón es de un producto,
+            // se envía su código (LLA-xxx), que coincide con el id del catálogo de Meta.
+            document.addEventListener('click', function (e) {
+              var link = e.target.closest('a[href*="api.whatsapp.com"], a[href*="wa.me"]');
+              if (!link || !window.fbq) return;
+              var ids = (link.dataset.product || '').split(/,\\s*/).filter(function (x) {
+                return /^LLA-\\d+$/.test(x);
+              });
+              if (ids.length) {
+                fbq('track', 'Contact', { content_ids: ids, content_type: 'product' });
+              } else {
+                fbq('track', 'Contact');
+              }
+            });
+          `}
+        </Script>
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img height="1" width="1" style={{ display: "none" }} alt=""
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`} />
+        </noscript>
+        <MetaPixelRouteEvents />
       </body>
     </html>
   );
