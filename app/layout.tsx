@@ -44,6 +44,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 gtag('event', 'whatsapp_click', {
                   link_url: link.href,
                   page_path: window.location.pathname,
+                  // Código del producto (ej. LLA-029) y de dónde vino el clic
+                  // (catalogo, ficha, relacionado, seleccion...). Sin producto: "general".
+                  product_id: link.dataset.product || 'general',
+                  click_origin: link.dataset.origin || 'general',
                 });
               }
             });
