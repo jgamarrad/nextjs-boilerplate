@@ -8,7 +8,7 @@ const SITE_URL = "https://sv.lallamadelamor.pe";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: "Regalos de Ocasión Especial | La Llama del Amor",
+  title: "Regalos de Ocasión Especial",
   description: "Regalos personalizados para graduaciones, agradecimientos y momentos únicos. Chocolate y brownies con tu mensaje. Delivery en Lima.",
 
   alternates: {
