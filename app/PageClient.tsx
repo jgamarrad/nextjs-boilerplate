@@ -165,7 +165,7 @@ export default function PageClient({
                 alt={current.listTitle}
                 fill
                 className="object-contain"
-                sizes="(max-width: 1024px) 100vw, 520px"
+                sizes="(max-width: 768px) calc(100vw - 80px), 520px"
                 priority
               />
             </div>
