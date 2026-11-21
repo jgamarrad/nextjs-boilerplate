@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { productos } from "@/lib/catalog";
 
 const siteUrl = "https://sv.lallamadelamor.pe";
 
@@ -15,10 +16,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/ocasion_especial", priority: 0.8 },
   ];
 
-  return occasionPages.map(({ path, priority }) => ({
+  const occasionEntries = occasionPages.map(({ path, priority }) => ({
     url: `${siteUrl}${path}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
     priority,
   }));
+
+  // Una URL por producto (fichas /regalo/[slug])
+  const productEntries = productos.map((p) => ({
+    url: `${siteUrl}/regalo/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...occasionEntries, ...productEntries];
 }

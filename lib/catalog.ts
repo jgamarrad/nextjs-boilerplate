@@ -152,6 +152,25 @@ export function getProductsForOccasion(occ: OccasionKey): Product[] {
     .sort((a, b) => sortByOccasionPriority(a, b, occ));
 }
 
+export function getProductBySlug(slug: string): Product | undefined {
+  return productos.find((p) => p.slug === slug);
+}
+
+// Ocasión principal de un producto (la de mayor prioridad, sin contar "inicio")
+export function mainOccasion(p: Product): OccasionKey {
+  const occs = p.occasions.filter((o) => o !== "inicio");
+  if (occs.length === 0) return "inicio";
+  return occs.slice().sort((a, b) => getPriority(p, b) - getPriority(p, a))[0];
+}
+
+// Productos relacionados: misma ocasión principal, ordenados por prioridad
+export function getRelated(p: Product, limit = 3): Product[] {
+  const occ = mainOccasion(p);
+  return getProductsForOccasion(occ)
+    .filter((x) => x.id !== p.id)
+    .slice(0, limit);
+}
+
 // Extrae el precio numérico de strings como "S/60" o "Desde S/65"
 function parsePrice(price: string): string | null {
   const match = price.match(/(\d+(?:[.,]\d+)?)/);
@@ -173,7 +192,8 @@ export function buildProductListJsonLd(occ: OccasionKey, siteUrl: string) {
         position: idx + 1,
         item: {
           "@type": "Product",
-          "@id": `${siteUrl}/${occ}#${encodeURIComponent(p.slug)}`,
+          "@id": `${siteUrl}/regalo/${p.slug}`,
+          url: `${siteUrl}/regalo/${p.slug}`,
           name: p.title,
           description: p.subtitle ?? p.title,
           image: `${siteUrl}${p.image}`,
@@ -185,7 +205,7 @@ export function buildProductListJsonLd(occ: OccasionKey, siteUrl: string) {
                   price: numericPrice,
                   priceCurrency: "PEN",
                   availability: "https://schema.org/InStock",
-                  url: `${siteUrl}/${occ}`,
+                  url: `${siteUrl}/regalo/${p.slug}`,
                 },
               }
             : {}),
