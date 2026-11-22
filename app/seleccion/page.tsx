@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { productos } from "@/lib/catalog";
-import { waLink } from "@/lib/site";
+import { waLink, waSeleccionText } from "@/lib/site";
 import ProductCard from "@/app/components/ProductCard";
 import { HowToBuy, SiteFooter } from "@/app/components/InfoSections";
 
@@ -85,11 +85,7 @@ export default async function SeleccionPage({
       <SiteFooter />
 
       <a
-        href={waLink(
-          elegidos.length > 0
-            ? `Hola, vi las opciones que me enviaron (${codigos}). Me interesa…`
-            : "Hola, quiero ver opciones de regalo. ¿Me ayudas a elegir?"
-        )}
+        href={waLink(waSeleccionText(codigos))}
         target="_blank"
         rel="noreferrer"
         data-product={codigos || undefined}

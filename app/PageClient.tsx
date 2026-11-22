@@ -10,9 +10,12 @@ import { OCCASIONS, productos, sortByOccasionPriority } from "@/lib/catalog";
 import {
   PRICE_FILTERS,
   priceNumber,
+  waCotizarText,
+  waGeneralText,
   waLink,
   type PriceFilterKey,
 } from "@/lib/site";
+import ReminderBlock from "@/app/components/ReminderBlock";
 import ProductCard from "@/app/components/ProductCard";
 import { Faq, HowToBuy, SiteFooter } from "@/app/components/InfoSections";
 
@@ -26,7 +29,16 @@ export default function PageClient({
   const occasion = initialOccasion;
   const current = OCCASIONS[occasion];
   // En /inicio no se menciona la ocasión en los mensajes de WhatsApp
-  const paraOcasion = occasion === "inicio" ? "" : ` para ${current.label}`;
+  const OCASION_MSG: Record<OccasionKey, string | null> = {
+    inicio: null,
+    cumpleanos: "de cumpleaños",
+    aniversario: "de aniversario",
+    ocasion_especial: "para una ocasión especial",
+    san_valentin: "de San Valentín",
+    mama: "para mamá",
+    papa: "para papá",
+  };
+  const ocasionMsg = OCASION_MSG[occasion];
 
   const [priceFilter, setPriceFilter] = useState<PriceFilterKey>("todos");
 
@@ -91,9 +103,7 @@ export default function PageClient({
 
           <a
             className="btn-secondary gold-border shrink-0 hidden sm:inline-flex"
-            href={waLink(
-              `Hola, quiero hacer un pedido${paraOcasion}. ¿Me ayudas a elegir un regalo?`
-            )}
+            href={waLink(waGeneralText(ocasionMsg))}
             target="_blank"
             rel="noreferrer"
           >
@@ -103,9 +113,7 @@ export default function PageClient({
 
         <a
           className="btn-secondary gold-border mt-4 w-full sm:hidden"
-          href={waLink(
-            `Hola, quiero hacer un pedido${paraOcasion}. ¿Me ayudas a elegir un regalo?`
-          )}
+          href={waLink(waGeneralText(ocasionMsg))}
           target="_blank"
           rel="noreferrer"
         >
@@ -149,7 +157,7 @@ export default function PageClient({
 
               <a
                 className="btn-secondary gold-border w-full sm:w-auto"
-                href={waLink(current.waText)}
+                href={waLink(waGeneralText(ocasionMsg))}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -185,9 +193,7 @@ export default function PageClient({
 
           <a
             className="btn-secondary gold-border w-full sm:w-auto"
-            href={waLink(
-              `Hola, quiero cotizar un regalo${paraOcasion}. ¿Me ayudas con precios y opciones?`
-            )}
+            href={waLink(waCotizarText(ocasionMsg))}
             target="_blank"
             rel="noreferrer"
           >
@@ -238,13 +244,14 @@ export default function PageClient({
         )}
       </section>
 
+      <ReminderBlock />
       <HowToBuy />
       <Faq />
       <SiteFooter />
 
       {/* Botón flotante */}
       <a
-        href={waLink(`Hola, quiero hacer un pedido${paraOcasion}. ¿Qué me recomiendas?`)}
+        href={waLink(waGeneralText(ocasionMsg))}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 btn-primary gold-bg text-black shadow-[0_14px_40px_rgba(0,0,0,0.45)] hover:opacity-95"
