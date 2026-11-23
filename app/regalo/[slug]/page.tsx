@@ -25,6 +25,10 @@ import ProductCard from "@/app/components/ProductCard";
 import { MetaViewContent } from "@/app/components/MetaPixelRouteEvents";
 import ReminderBlock from "@/app/components/ReminderBlock";
 import { getDetalle } from "@/lib/detalles";
+import { getFotosExtra } from "@/lib/fotos";
+import ProductGallery from "@/app/components/ProductGallery";
+import ComplementosSelector from "@/app/components/ComplementosSelector";
+import { getComplementosPara } from "@/lib/complementos";
 import { Faq, HowToBuy, SiteFooter } from "@/app/components/InfoSections";
 
 export const dynamicParams = false;
@@ -97,6 +101,7 @@ export default async function ProductPage({
   const ocasiones = p.occasions.filter((o) => o !== "inicio");
   const price = priceNumber(p.price);
   const detalle = getDetalle(p.id);
+  const fotosExtra = getFotosExtra(p.id);
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -104,7 +109,7 @@ export default async function ProductPage({
     "@id": `${SITE_URL}/regalo/${p.slug}`,
     name,
     description: p.subtitle ?? name,
-    image: `${SITE_URL}${p.image}`,
+    image: [p.image, ...fotosExtra.map((f) => f.src)].map((src) => `${SITE_URL}${src}`),
     sku: p.id,
     brand: { "@type": "Brand", name: "La Llama del Amor" },
     ...(price
@@ -167,18 +172,7 @@ export default async function ProductPage({
       {/* Ficha */}
       <section className="mx-auto max-w-6xl px-6 pb-14 pt-6">
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="card p-4">
-            <div className="relative overflow-hidden rounded-xl border border-llama-line bg-black/20 aspect-[4/5]">
-              <Image
-                src={p.image}
-                alt={name}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 560px"
-                priority
-              />
-            </div>
-          </div>
+          <ProductGallery fotos={[{ src: p.image, alt: name }, ...fotosExtra]} />
 
           <div>
             <div className="text-xs tracking-[0.18em] uppercase text-llama-muted">
@@ -276,12 +270,17 @@ export default async function ProductPage({
               </div>
             )}
 
+            {(detalle.medidas || (detalle.adicionales && detalle.adicionales.length > 0)) && (
             <div className="card p-5">
-              <h3 className="text-base font-semibold">Medidas</h3>
-              <p className="mt-3 text-sm text-white/75 leading-snug">{detalle.medidas}</p>
+              {detalle.medidas && (
+                <>
+                  <h3 className="text-base font-semibold">Medidas</h3>
+                  <p className="mt-3 text-sm text-white/75 leading-snug">{detalle.medidas}</p>
+                </>
+              )}
               {detalle.adicionales && detalle.adicionales.length > 0 && (
                 <>
-                  <h3 className="mt-5 text-base font-semibold">Adicionales</h3>
+                  <h3 className={`${detalle.medidas ? "mt-5 " : ""}text-base font-semibold`}>Adicionales</h3>
                   <ul className="mt-3 space-y-2 text-sm text-white/75 leading-snug">
                     {detalle.adicionales.map((x) => (
                       <li key={x} className="flex gap-2">
@@ -293,9 +292,15 @@ export default async function ProductPage({
                 </>
               )}
             </div>
+            )}
           </div>
         </section>
       )}
+
+      <ComplementosSelector
+        producto={{ id: p.id, title: p.title, price: p.price, slug: p.slug }}
+        complementos={getComplementosPara(detalle?.incluye ?? [])}
+      />
 
       {/* Relacionados */}
       {related.length > 0 && (

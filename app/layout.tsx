@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               var link = e.target.closest('a[href*="api.whatsapp.com"], a[href*="wa.me"]');
               if (!link || !window.fbq) return;
               var ids = (link.dataset.product || '').split(/,\\s*/).filter(function (x) {
-                return /^LLA-\\d+$/.test(x);
+                return /^(LLA|COMP)-\\d+$/.test(x);
               });
               if (ids.length) {
                 fbq('track', 'Contact', { content_ids: ids, content_type: 'product' });

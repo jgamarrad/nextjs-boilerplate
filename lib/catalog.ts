@@ -1079,6 +1079,17 @@ export const productos: Product[] = [
     waText: "Hola, quiero el Correo Postal 'Feliz Día Bebé'. ¿Me das más detalle del producto?",
     occasions: ["aniversario"],
   },
+  {
+    id: "LLA-075",
+    slug: "caja-de-rosas",
+    title: "Caja de rosas 🌹",
+    subtitle: "Entre 20 y 24 rosas frescas en caja redonda con nuestro logo",
+    price: "S/170",
+    tags: ["rosas", "premium"],
+    image: "/complementos/caja-rosas-blanca-v2.jpg",
+    waText: "Hola, quiero la Caja de rosas. ¿Me das más detalle del producto?",
+    occasions: ["aniversario", "san_valentin", "mama", "ocasion_especial"],
+  },
 ];
 
 // ===== SANITY CHECK (solo en DEV) =====

@@ -142,6 +142,9 @@ export function SiteFooter() {
         </div>
 
         <nav aria-label="Enlaces" className="flex flex-col gap-1">
+          <a className="hover:underline" href="/complementos">
+            Complementos: peluches, rosas y más
+          </a>
           <a className="hover:underline" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
             Instagram @lallamadelamor.pe
           </a>
