@@ -6,7 +6,7 @@
 export type Foto = { src: string; alt: string };
 
 const EMPAQUE_CORREO: Foto = {
-  src: "/caja-empaque-correo-de-chocolate.jpg",
+  src: "/caja-empaque-correo-de-chocolate-v2.jpg",
   alt: "Empaque del correo postal de chocolate: caja con tapa y sobre estilo correo antiguo",
 };
 
@@ -19,7 +19,7 @@ export const FOTOS_EXTRA: Record<string, Foto[]> = {
   ...Object.fromEntries(CORREOS_POSTALES.map((id) => [id, [EMPAQUE_CORREO]])),
   "LLA-003": [
     {
-      src: "/tarjeta-amor-pulseras-rojas-corazones.jpg",
+      src: "/tarjeta-amor-pulseras-rojas-corazones-v2.jpg",
       alt: "Tarjeta de amor con dos pulseras rojas con corazón dorado",
     },
   ],

@@ -22,7 +22,7 @@ export const COMPLEMENTOS: Complemento[] = [
     nombre: "Peluche de llamita",
     precio: 70,
     descripcion: "Llamita de peluche de 30 cm de alto, suave y con detalles de colores.",
-    fotos: [{ src: "/complementos/peluche-llamita.jpg", alt: "Peluche de llamita blanca con detalles de colores" }],
+    fotos: [{ src: "/complementos/peluche-llamita-v2.jpg", alt: "Peluche de llamita blanca con detalles de colores" }],
     yaIncluidoSi: /llamita/i,
   },
   {
@@ -31,7 +31,7 @@ export const COMPLEMENTOS: Complemento[] = [
     nombre: "Peluche de osito Happy Birthday",
     precio: 60,
     descripcion: "Osito de peluche de 22 cm con gorrito de cumpleaños y torta.",
-    fotos: [{ src: "/complementos/peluche-osito-cumpleanos.jpg", alt: "Osito de peluche con gorro Happy Birthday y torta" }],
+    fotos: [{ src: "/complementos/peluche-osito-cumpleanos-v2.jpg", alt: "Osito de peluche con gorro Happy Birthday y torta" }],
     yaIncluidoSi: /osito/i,
   },
   {
@@ -40,7 +40,7 @@ export const COMPLEMENTOS: Complemento[] = [
     nombre: "Peluche de osito Love Everyday",
     precio: 60,
     descripcion: "Osito de peluche de 22 cm con gorrito de corazón y flor.",
-    fotos: [{ src: "/complementos/peluche-osito-aniversario.jpg", alt: "Osito de peluche con gorro Love Everyday y flor roja" }],
+    fotos: [{ src: "/complementos/peluche-osito-aniversario-v2.jpg", alt: "Osito de peluche con gorro Love Everyday y flor roja" }],
     yaIncluidoSi: /osito/i,
   },
   {
@@ -49,10 +49,10 @@ export const COMPLEMENTOS: Complemento[] = [
     nombre: "Caja de rosas",
     precio: 170,
     descripcion:
-      "Rosas frescas en caja redonda con nuestro logo. Caja blanca o negra; rosas rojas, rosadas, blush, blancas o amarillas.",
+      "Entre 20 y 24 rosas frescas (según su tamaño) en caja redonda con nuestro logo. Caja blanca o negra; rosas rojas, rosadas, blush, blancas o amarillas.",
     fotos: [
-      { src: "/complementos/caja-rosas-blanca.jpg", alt: "Caja blanca con rosas rosadas" },
-      { src: "/complementos/caja-rosas-negra.jpg", alt: "Caja negra con rosas blush" },
+      { src: "/complementos/caja-rosas-blanca-v2.jpg", alt: "Caja blanca con rosas rosadas" },
+      { src: "/complementos/caja-rosas-negra-v2.jpg", alt: "Caja negra con rosas blush" },
     ],
     yaIncluidoSi: /rosas/i,
   },
@@ -62,7 +62,7 @@ export const COMPLEMENTOS: Complemento[] = [
     nombre: "Pulseras rojas",
     precio: 20,
     descripcion: "Dos pulseras rojas con corazón dorado, en tarjeta de amor.",
-    fotos: [{ src: "/tarjeta-amor-pulseras-rojas-corazones.jpg", alt: "Tarjeta de amor con dos pulseras rojas" }],
+    fotos: [{ src: "/tarjeta-amor-pulseras-rojas-corazones-v2.jpg", alt: "Tarjeta de amor con dos pulseras rojas" }],
     yaIncluidoSi: /pulsera/i,
   },
 ];

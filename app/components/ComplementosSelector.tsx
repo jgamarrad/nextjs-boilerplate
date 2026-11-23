@@ -66,7 +66,7 @@ export default function ComplementosSelector({
                 activo ? "ring-2 ring-[var(--gold)]" : "hover:opacity-100 opacity-90"
               }`}
             >
-              <div className="relative aspect-square overflow-hidden rounded-lg bg-black/20">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-black/20">
                 <Image
                   src={c.fotos[0].src}
                   alt={c.fotos[0].alt}
