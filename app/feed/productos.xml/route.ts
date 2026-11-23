@@ -6,6 +6,7 @@
 import { OCCASIONS, mainOccasion, productos } from "@/lib/catalog";
 import { SITE_URL, priceNumber } from "@/lib/site";
 import { getDetalle } from "@/lib/detalles";
+import { getFotosExtra } from "@/lib/fotos";
 
 export const dynamic = "force-static";
 
@@ -48,7 +49,9 @@ export function GET() {
       <g:title>${esc(title)}</g:title>
       <g:description>${esc(desc)}</g:description>
       <g:link>${SITE_URL}/regalo/${p.slug}</g:link>
-      <g:image_link>${SITE_URL}${encodeURI(p.image)}</g:image_link>
+      <g:image_link>${SITE_URL}${encodeURI(p.image)}</g:image_link>${getFotosExtra(p.id)
+        .map((f) => `\n      <g:additional_image_link>${SITE_URL}${encodeURI(f.src)}</g:additional_image_link>`)
+        .join("")}
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:price>${price.toFixed(2)} PEN</g:price>
