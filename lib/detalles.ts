@@ -13,16 +13,18 @@ export type Detalle = {
 };
 
 const TARJETA = "Tarjeta, bolsa de regalo y globo";
-const RELLENO = "trocitos de Oreo, pecanas o almendras";
+// El cliente elige 1 opción de relleno por producto
+const RELLENO_ELEGIR = "Relleno: trocitos de Oreo, pecanas o almendras (eliges 1)";
 
 const MISKI: Detalle = {
   incluye: [
-    `Letras o números de chocolate rellenos de ${RELLENO}`,
+    "Letras o números de chocolate rellenos",
     "Corazones de chocolate rellenos de manjar",
     TARJETA,
   ],
   personaliza: [
     "Tu mensaje: hasta 7 letras o números",
+    RELLENO_ELEGIR,
     "Color de la caja: blanca o negra",
   ],
   medidas: "Caja de chocolates: 30 × 8 × 3.5 cm aprox.",
@@ -30,13 +32,14 @@ const MISKI: Detalle = {
 
 const CORREO: Detalle = {
   incluye: [
-    "36 cuadraditos de chocolate que forman tu mensaje (4 filas de 9)",
-    `Chocolates con ${RELLENO} y otros rellenos de manjar`,
+    "36 cuadraditos de chocolate (4 filas de 9) con tu mensaje y adornos",
+    "Chocolates rellenos y otros rellenos de manjar",
     "Caja de tapa dura con empaque estilo correo postal antiguo",
     "Bolsa de regalo y globo",
   ],
   personaliza: [
-    "Tu mensaje en chocolate: 4 filas de hasta 9 letras",
+    "Tu mensaje en chocolate: cada cuadradito es una letra o un adorno (torta, globo, rosa y más, según la ocasión); los adornos separan las palabras",
+    RELLENO_ELEGIR,
     "Tapa interna con texto y/o foto",
   ],
   medidas: "Caja: 25 × 13 × 2.5 cm aprox.",
@@ -57,13 +60,14 @@ const BROWNIE: Detalle = {
 
 const RETRATO: Detalle = {
   incluye: [
-    `Letras o números de chocolate rellenos de ${RELLENO}`,
+    "Letras o números de chocolate rellenos",
     "Tableta de chocolate con tu foto",
     "Porción de brownie",
     TARJETA,
   ],
   personaliza: [
     "Tu mensaje: hasta 5 letras o números",
+    RELLENO_ELEGIR,
     "La foto o imagen, impresa con tinta comestible",
     "Color de la caja: blanca o negra",
   ],
@@ -72,12 +76,13 @@ const RETRATO: Detalle = {
 
 const SWEET_LOVE: Detalle = {
   incluye: [
-    `Caja de chocolates: letras o números rellenos de ${RELLENO} y corazones rellenos de manjar`,
+    "Caja de chocolates: letras o números rellenos y corazones rellenos de manjar",
     "Caja con al menos 20 rosas",
     TARJETA,
   ],
   personaliza: [
     "Tu mensaje: hasta 7 letras o números",
+    RELLENO_ELEGIR,
     "Color de la caja de chocolates: blanca o negra",
     "Color de la caja de rosas: blanca o negra",
     "Color de las rosas: rojas, rosadas, blush, blancas o amarillas",
@@ -87,32 +92,35 @@ const SWEET_LOVE: Detalle = {
 
 const OSO: Detalle = {
   incluye: [
-    `Oso 3D de chocolate relleno de manjar y ${RELLENO}`,
+    "Oso 3D de chocolate relleno de manjar",
     "Caja acrílica",
     TARJETA,
   ],
-  personaliza: ["Las letras del cuello del oso"],
+  personaliza: ["Las letras del cuello del oso", RELLENO_ELEGIR],
   medidas: "Caja acrílica: base de 11 × 11 cm y 9 cm de alto",
 };
 
 const TABLETA: Detalle = {
   incluye: [
-    `Tableta de chocolate blanco rellena de manjar, con base de ${RELLENO}`,
+    "Tableta de chocolate blanco rellena de manjar",
     "Caja blanca de presentación",
     TARJETA,
   ],
-  personaliza: ["La foto o imagen, impresa con tinta comestible sobre la tableta"],
+  personaliza: [
+    "La foto o imagen, impresa con tinta comestible sobre la tableta",
+    "Base de la tableta: trocitos de Oreo, pecanas o almendras (eliges 1)",
+  ],
   medidas: "Tableta: 16 × 11.4 cm",
 };
 
 const LETRAS_PELUCHE = (peluche: string): Detalle => ({
   incluye: [
-    `Letras o números de chocolate rellenos de ${RELLENO}`,
+    "Letras o números de chocolate rellenos",
     "Corazones de chocolate rellenos de manjar",
     peluche,
     TARJETA,
   ],
-  personaliza: ["Tu mensaje: hasta 7 letras o números"],
+  personaliza: ["Tu mensaje: hasta 7 letras o números", RELLENO_ELEGIR],
   medidas: "Caja de chocolates: 25 × 13 × 2.5 cm aprox.",
 });
 
@@ -181,7 +189,7 @@ export const DETALLES_PRODUCTO: Record<string, Detalle> = {
   },
   "LLA-012": {
     incluye: ["9 rosas de chocolate rellenas", "Caja de presentación", TARJETA],
-    personaliza: [],
+    personaliza: ["Mensaje de la tarjeta: hasta 25 palabras aprox."],
     medidas: "Caja: 29 × 21 × 2 cm",
   },
 
