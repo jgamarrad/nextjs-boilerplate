@@ -66,7 +66,8 @@ export function GET() {
     })
     .filter(Boolean)
     .concat(
-      COMPLEMENTOS.map(
+      // COMP-04 (caja de rosas) ya está en el catálogo como LLA-075
+      COMPLEMENTOS.filter((c) => c.id !== "COMP-04").map(
         (c) => `    <item>
       <g:id>${esc(c.id)}</g:id>
       <g:title>${esc(c.nombre)}</g:title>

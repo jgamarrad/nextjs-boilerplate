@@ -270,12 +270,17 @@ export default async function ProductPage({
               </div>
             )}
 
+            {(detalle.medidas || (detalle.adicionales && detalle.adicionales.length > 0)) && (
             <div className="card p-5">
-              <h3 className="text-base font-semibold">Medidas</h3>
-              <p className="mt-3 text-sm text-white/75 leading-snug">{detalle.medidas}</p>
+              {detalle.medidas && (
+                <>
+                  <h3 className="text-base font-semibold">Medidas</h3>
+                  <p className="mt-3 text-sm text-white/75 leading-snug">{detalle.medidas}</p>
+                </>
+              )}
               {detalle.adicionales && detalle.adicionales.length > 0 && (
                 <>
-                  <h3 className="mt-5 text-base font-semibold">Adicionales</h3>
+                  <h3 className={`${detalle.medidas ? "mt-5 " : ""}text-base font-semibold`}>Adicionales</h3>
                   <ul className="mt-3 space-y-2 text-sm text-white/75 leading-snug">
                     {detalle.adicionales.map((x) => (
                       <li key={x} className="flex gap-2">
@@ -287,6 +292,7 @@ export default async function ProductPage({
                 </>
               )}
             </div>
+            )}
           </div>
         </section>
       )}

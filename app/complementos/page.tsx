@@ -92,9 +92,6 @@ export default function ComplementosPage() {
               {OCCASIONS[key].chip}
             </Link>
           ))}
-          <Link href="/complementos" aria-current="page" className="pill transition gold-bg text-black">
-            🎁 Complementos
-          </Link>
         </nav>
       </section>
 

@@ -17,6 +17,9 @@ const CORREOS_POSTALES = [
 
 export const FOTOS_EXTRA: Record<string, Foto[]> = {
   ...Object.fromEntries(CORREOS_POSTALES.map((id) => [id, [EMPAQUE_CORREO]])),
+  "LLA-075": [
+    { src: "/complementos/caja-rosas-negra-v2.jpg", alt: "Caja negra con rosas blush" },
+  ],
   "LLA-003": [
     {
       src: "/tarjeta-amor-pulseras-rojas-corazones-v2.jpg",

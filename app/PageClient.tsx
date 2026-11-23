@@ -148,9 +148,6 @@ export default function PageClient({
                   {OCCASIONS[key].chip}
                 </Link>
               ))}
-              <Link href="/complementos" className="pill transition">
-                🎁 Complementos
-              </Link>
             </nav>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

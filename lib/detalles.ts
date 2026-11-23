@@ -8,7 +8,7 @@
 export type Detalle = {
   incluye: string[];
   personaliza: string[];
-  medidas: string;
+  medidas?: string;
   adicionales?: string[]; // ej. "Ramo de flores secas: +S/25"
 };
 
@@ -205,6 +205,15 @@ export const DETALLES_PRODUCTO: Record<string, Detalle> = {
   "LLA-010": LETRAS_PELUCHE("Peluche de llamita de 30 cm de alto"),
   "LLA-042": LETRAS_PELUCHE("Peluche de osito de 22 cm de alto"),
   "LLA-067": LETRAS_PELUCHE("Peluche de osito de 22 cm de alto"),
+
+  // Caja de rosas (también es complemento COMP-04)
+  "LLA-075": {
+    incluye: ["Entre 20 y 24 rosas frescas, según su tamaño", "Caja redonda con nuestro logo"],
+    personaliza: [
+      "Color de la caja: blanca o negra",
+      "Color de las rosas: rojas, rosadas, blush, blancas o amarillas",
+    ],
+  },
 
   // Cajas con video
   "LLA-043": {
