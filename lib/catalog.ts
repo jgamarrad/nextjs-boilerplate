@@ -697,7 +697,7 @@ export const productos: Product[] = [
     slug: "pack-chocolates-personalizados-aniversario-5-anos-peluche",
     title: "Pack de aniversario - peluche y chocolates❤️",
     subtitle: "Chocolates personalizados y peluche",
-    price: "Desde S/60",
+    price: "S/115",
     tags: ["chocolate", "premium", "aniversario"],
     image: "/pack-chocolates-aniversario-5-anos-peluche.jpg",
     waText: "Hola, quiero info del 'Choco brownie San Valentín ❤️'. ¿Detalles y precio?",
