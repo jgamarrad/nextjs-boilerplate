@@ -203,8 +203,8 @@ export const DETALLES_PRODUCTO: Record<string, Detalle> = {
 
   // Letras + peluche
   "LLA-010": LETRAS_PELUCHE("Peluche de llamita de 30 cm de alto"),
-  "LLA-042": LETRAS_PELUCHE("Peluche de osito de 25 cm de alto"),
-  "LLA-067": LETRAS_PELUCHE("Peluche de osito de 25 cm de alto"),
+  "LLA-042": LETRAS_PELUCHE("Peluche de osito de 22 cm de alto"),
+  "LLA-067": LETRAS_PELUCHE("Peluche de osito de 22 cm de alto"),
 
   // Cajas con video
   "LLA-043": {

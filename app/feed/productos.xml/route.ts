@@ -7,6 +7,7 @@ import { OCCASIONS, mainOccasion, productos } from "@/lib/catalog";
 import { SITE_URL, priceNumber } from "@/lib/site";
 import { getDetalle } from "@/lib/detalles";
 import { getFotosExtra } from "@/lib/fotos";
+import { COMPLEMENTOS } from "@/lib/complementos";
 
 export const dynamic = "force-static";
 
@@ -64,6 +65,26 @@ export function GET() {
     </item>`;
     })
     .filter(Boolean)
+    .concat(
+      COMPLEMENTOS.map(
+        (c) => `    <item>
+      <g:id>${esc(c.id)}</g:id>
+      <g:title>${esc(c.nombre)}</g:title>
+      <g:description>${esc(c.descripcion + " Complemento para tu regalo. Delivery en Lima.")}</g:description>
+      <g:link>${SITE_URL}/complementos#${c.slug}</g:link>
+      <g:image_link>${SITE_URL}${encodeURI(c.fotos[0].src)}</g:image_link>${c.fotos
+        .slice(1)
+        .map((f) => `\n      <g:additional_image_link>${SITE_URL}${encodeURI(f.src)}</g:additional_image_link>`)
+        .join("")}
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:price>${c.precio.toFixed(2)} PEN</g:price>
+      <g:brand>La Llama del Amor</g:brand>
+      <g:product_type>Complementos</g:product_type>
+      <g:custom_label_0>Complementos</g:custom_label_0>
+    </item>`
+      )
+    )
     .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

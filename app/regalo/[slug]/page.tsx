@@ -27,6 +27,8 @@ import ReminderBlock from "@/app/components/ReminderBlock";
 import { getDetalle } from "@/lib/detalles";
 import { getFotosExtra } from "@/lib/fotos";
 import ProductGallery from "@/app/components/ProductGallery";
+import ComplementosSelector from "@/app/components/ComplementosSelector";
+import { getComplementosPara } from "@/lib/complementos";
 import { Faq, HowToBuy, SiteFooter } from "@/app/components/InfoSections";
 
 export const dynamicParams = false;
@@ -288,6 +290,11 @@ export default async function ProductPage({
           </div>
         </section>
       )}
+
+      <ComplementosSelector
+        producto={{ id: p.id, title: p.title, price: p.price, slug: p.slug }}
+        complementos={getComplementosPara(detalle?.incluye ?? [])}
+      />
 
       {/* Relacionados */}
       {related.length > 0 && (
