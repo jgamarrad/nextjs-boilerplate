@@ -24,6 +24,7 @@ import {
 import ProductCard from "@/app/components/ProductCard";
 import { MetaViewContent } from "@/app/components/MetaPixelRouteEvents";
 import ReminderBlock from "@/app/components/ReminderBlock";
+import { getDetalle } from "@/lib/detalles";
 import { Faq, HowToBuy, SiteFooter } from "@/app/components/InfoSections";
 
 export const dynamicParams = false;
@@ -95,6 +96,7 @@ export default async function ProductPage({
   const related = getRelated(p, 3);
   const ocasiones = p.occasions.filter((o) => o !== "inicio");
   const price = priceNumber(p.price);
+  const detalle = getDetalle(p.id);
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -237,6 +239,63 @@ export default async function ProductPage({
           </div>
         </div>
       </section>
+
+      {/* Detalle del producto */}
+      {detalle && (
+        <section
+          className="mx-auto max-w-6xl px-6 pb-14"
+          aria-labelledby="detalle-titulo"
+        >
+          <h2 id="detalle-titulo" className="section-title gold-text">
+            Detalle del regalo
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <div className="card p-5">
+              <h3 className="text-base font-semibold">Qué incluye</h3>
+              <ul className="mt-3 space-y-2 text-sm text-white/75 leading-snug">
+                {detalle.incluye.map((x) => (
+                  <li key={x} className="flex gap-2">
+                    <span aria-hidden="true">•</span>
+                    <span>{x}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {detalle.personaliza.length > 0 && (
+              <div className="card p-5">
+                <h3 className="text-base font-semibold">Qué puedes personalizar</h3>
+                <ul className="mt-3 space-y-2 text-sm text-white/75 leading-snug">
+                  {detalle.personaliza.map((x) => (
+                    <li key={x} className="flex gap-2">
+                      <span aria-hidden="true">•</span>
+                      <span>{x}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="card p-5">
+              <h3 className="text-base font-semibold">Medidas</h3>
+              <p className="mt-3 text-sm text-white/75 leading-snug">{detalle.medidas}</p>
+              {detalle.adicionales && detalle.adicionales.length > 0 && (
+                <>
+                  <h3 className="mt-5 text-base font-semibold">Adicionales</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-white/75 leading-snug">
+                    {detalle.adicionales.map((x) => (
+                      <li key={x} className="flex gap-2">
+                        <span aria-hidden="true">+</span>
+                        <span>{x}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Relacionados */}
       {related.length > 0 && (

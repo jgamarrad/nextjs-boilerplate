@@ -5,6 +5,7 @@
 // Se genera desde lib/catalog.ts, así que se actualiza solo con cada despliegue.
 import { OCCASIONS, mainOccasion, productos } from "@/lib/catalog";
 import { SITE_URL, priceNumber } from "@/lib/site";
+import { getDetalle } from "@/lib/detalles";
 
 export const dynamic = "force-static";
 
@@ -32,8 +33,10 @@ export function GET() {
       const price = priceNumber(p.price);
       if (!price) return "";
       const title = clean(p.title);
+      const det = getDetalle(p.id);
+      const incluye = det ? ` Incluye: ${det.incluye.map((x) => x.charAt(0).toLowerCase() + x.slice(1)).join(", ")}.` : "";
       const desc = clean(
-        `${p.subtitle ? p.subtitle.replace(/\.?$/, ".") : title + "."} Regalo personalizado con nombre, mensaje o foto. Delivery en Lima.`
+        `${p.subtitle ? p.subtitle.replace(/\.?$/, ".") : title + "."}${incluye} Regalo personalizado. Delivery en Lima.`
       );
       const occ = OCCASIONS[mainOccasion(p)].label;
       const ocasiones = p.occasions
